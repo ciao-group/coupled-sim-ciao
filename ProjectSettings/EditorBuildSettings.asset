@@ -14,15 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/MainScene-night.unity
     guid: a2e9c1d3aade74424a398f9e50c01625
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2ad2aca0f5aec9845885339a62629243,
+      type: 2}
+    Varjo.XR.Settings: {fileID: 11400000, guid: 8369e8951c672184db1b7aac682fbcfc,
+      type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 34c7304cfd1b02a428b0a47d08450c03,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a02dcf71a0d1284458fe930b57386262,
       type: 2}
