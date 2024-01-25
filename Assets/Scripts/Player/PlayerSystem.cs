@@ -53,6 +53,8 @@ public class PlayerSystem : MonoBehaviour
     PlayerAvatar[] Player2Avatar = new PlayerAvatar[UNetConfig.MaxPlayers];
     public PlayerAvatar GetAvatar(int player) => Player2Avatar[player];
 
+ 
+
     HMIManager _hmiManager;
     void Awake()
     {
@@ -153,6 +155,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _hmiManager.AddHMI(avatar.HMISlots.Spawn(HMISlot.Windshield, role.WindshieldHMI));
         }
+        GameObject.FindWithTag("UICam").SetActive(false);
         return avatar;
     }
 
@@ -196,6 +199,8 @@ public class PlayerSystem : MonoBehaviour
             {
                 PlayerInputMode = InputMode.Flat;
             }
+
+        
     }
 
     public void SelectMode(InputMode inputMode)
