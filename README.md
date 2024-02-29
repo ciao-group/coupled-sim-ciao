@@ -29,13 +29,16 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 **Hardware**:
   - A PC with Windows 10 or Windows 11,
   - GPU with two ports directly connected to it (e.g. 2 HDMI ports leading directly to the GPU). Some Laptops&PCs don't have this feauture. Check Varjo XR-3 Requirements.
+  - four SteamVR Basestations 2.0.
 
 **Software**:
   - Varjo Base
   - Varjo Lab Tools
   - Steam and SteamVR
   - Unity Hub
-  - Varjo SDK for Unity (pre-installed in the project) 
+  - Varjo SDK for Unity (pre-installed in the project)
+  - DirectX11
+  - Logitech GHub (for pedals and steering wheel, not for real world car) 
 
 ## Initial Setup 
 
@@ -46,10 +49,6 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 >
 >### Output
 >The simulator supports giving output to both a computer screen and a head-mounted display (HMD). It has been tested with Oculus Rift CV1, Varjo VR-2 Pro.
->
->
->
->
 >
 >### Installation
 >The simulator was tested on Windows 11 and macOS Ventura 13.5. All functionality is supported by both platforms. However, support for input and output devices was tested only on Windows 10.
@@ -83,7 +82,6 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 >6. Once connected, select one of control modes listed under `Mode` section.
 >7. Wait until host starts the simulation.
 >   
->
 >### Running simulation with multiple agents on one machine
 >1. Run host agent inside of Unity (as described above).
 >2. Note the IP address in the console of Unity.
@@ -97,42 +95,50 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 
 These applications are essential for managing the headset and configuring the mixed reality settings. 
 
-
 ### Steam and SteamVR
 
 1. Install Steam and SteamVR.
    SteamVR is necessary for utilizing the base stations, which enable motion tracking. Follow the internal instructions for installation and setup.
 
 ### Further tracking solutions  
-Motion and Hand Tracking can also be done with the Inside-Out-Tracking feauture of Varjo XR-3 (which is still in Beta). 
+Motion and Hand Tracking can also be done with the Inside-Out-Tracking feauture of Varjo XR-3 (which is still in Beta). <br> 
 For this go in Varjo Base to `System`, and enable `Inside-Out-Tracking with Varjo (Beta)`.
-
 
 ### Hardware Connections
 
-1. Connect the Varjo XR-3 headset to your PC, ensuring you use the correct HDMI ports or adapters specified for your hardware configuration.
+1. Connect the Varjo XR-3 headset to your PC7Laptop with the included connector, ensuring you use the correct ports or adapters specified for your hardware configuration.
 
 ### Varjo and Unity integration
-More info is to be found on the [Varjo developer page](https://developer.varjo.com/docs/get-started/get-started).
+More info is to be found on the [Varjo developer page](https://developer.varjo.com/docs/get-started/get-started).<br> 
 Make sure to check all Menu Elements, as navigation on Varjo page isn't very clear.
 
 ## Unity Project Configuration
 
 ### Varjo SDK installation
+Follow the instructions on [Varjo page](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) if Varjo SDK is not already pre-installed or corrupted in the project. You need to install [git](https://git-scm.com/downloads) for it to work. 
 
-### Varjo Plugin Integration
+Follow all the steps on Varjo Page until the segment about Converting the Main Camera to an XR-Rig.<br> 
 
-1. In your Unity project, navigate to `Project Settings > XR Plug-in Management` and select Varjo as the Plug-in Provider. This step is crucial for enabling Varjo-specific features within Unity.
+#### !Deviation from Varjo Tutorial!
+A one-click conversion of our scene is **not possible**, because we have multiple cameras in the scene. The cameras in question are the cameras rendering the GUI at the start, and also the Rear Mirrors in the car. <br> 
+Here is a detailed instruction how to setup an XR-Rig for Varjo XR-3 when having multiple cameras in the scene:
 
-### Camera Setup for Mixed Reality
+1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. This object is the car model. It is the modified to  integrating the real car model with the virtual car in the virtual driving environment.
+   
+2. Under `DrivableCommonObject`, navigate to `Driver Logic`, open it up, manually insert an `XR Origin` component by clicking `Right Click` on the mouse ➡️ `XR` ➡️ `XR Origin(Mobile AR)`.
 
-1. Locate the `DrivableCommonObject` in your Unity scene. This object will serve as the basis for integrating the real car model with the virtual driving environment.
-2. Manually insert an `XR Origin` component into the `Drivers Logic`. Due to the presence of multiple main cameras in the scene, an automated conversion is not feasible.
-3. Under the component responsible for aligning the camera with the car (name to be specified later), add the XR Origin. Then, make the existing Main Camera a child of the XR Origin. This setup allows the camera to move in sync with the car.
+3. Place `XR Origin`-Element under `CameraCounter` in `DriverLogic`.
 
-### Motion Tracking Configuration
+4. Place existing `Main Camera` and its children under the `XR Origin`. This step makes the Main Camera an XR Origin camera
 
-1. For head motion tracking, select a component (name to be specified later) and configure it to track a Generic XR Device. Initially, set it to track only the rotation. Position tracking may need to be added later, especially once the real car model is integrated, to ensure the virtual and real-world align accurately.
+### Head Tracking Configuration
+Now we after placing the Main Camera as a child of XR Origin, we need to implement the head tracking functionality, allowing us to look around and move in the scene. 
+
+1. Click on `Main Camera`, scroll down and click `Add Component`. Search for `Tracked Pose Driver` specifically. NOT `Tracked Pose Driver (Input System)`. As Device choose `Generic XR Device`. As Pose Source choose `Head` or `Center Eye - HMD Reference`.
+
+Initially, we set it to track only the rotation. The reason being, that the Inside-Out-Tracking from the Varjo headset didn't allow for really precise and repeatable starting position calculation, because each time the starting point in real world was defined after calibration.
+Position tracking will be added once the real car model is integrated, to ensure the virtual and real-world align accurately. This will be done using the SteamVR Basestation 2.0.
+
 2. Adjustments to the camera's position relative to the floor may be necessary to match the real-world setup.
 
 ### Scripting for Camera Management
