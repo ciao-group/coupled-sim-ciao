@@ -47,14 +47,11 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 >### Output
 >The simulator supports giving output to both a computer screen and a head-mounted display (HMD). It has been tested with Oculus Rift CV1, Varjo VR-2 Pro.
 >
->### Varjo Software Installation
->
->1. Install Varjo Base and Varjo Lab Tools from the Varjo website. These applications are essential for managing the headset and configuring the mixed reality settings.
->2. Ensure your graphics drivers are up to date to avoid compatibility issues.
 >
 >
 >
->## Installation
+>
+>### Installation
 >The simulator was tested on Windows 11 and macOS Ventura 13.5. All functionality is supported by both platforms. However, support for input and output devices was tested only on Windows 10.
 >
 >After checking out this project, launch Unity Hub to run the simulator with the correct version of Unity (currently **2022.3.5f1**).
@@ -94,16 +91,34 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 >
 >Providing input for multiple agents on one machine is not supported. Input is provided only to the agent, the window of which is selected. This mode is intended for testing/debugging.
 
+### Varjo Software Installation
+1. Install Varjo Base from [Varjo Website](https://developer.varjo.com/downloads#unity-developer-assets).  
+2. Download Varjo Lab Tools from Varjo Website.
+
+These applications are essential for managing the headset and configuring the mixed reality settings. 
+
 
 ### Steam and SteamVR
 
-1. Install Steam and SteamVR. SteamVR is necessary for utilizing the base stations, which enable motion tracking.
+1. Install Steam and SteamVR.
+   SteamVR is necessary for utilizing the base stations, which enable motion tracking. Follow the internal instructions for installation and setup.
+
+### Further tracking solutions  
+Motion and Hand Tracking can also be done with the Inside-Out-Tracking feauture of Varjo XR-3 (which is still in Beta). 
+For this go in Varjo Base to `System`, and enable `Inside-Out-Tracking with Varjo (Beta)`.
+
 
 ### Hardware Connections
 
 1. Connect the Varjo XR-3 headset to your PC, ensuring you use the correct HDMI ports or adapters specified for your hardware configuration.
 
+### Varjo and Unity integration
+More info is to be found on the [Varjo developer page](https://developer.varjo.com/docs/get-started/get-started).
+Make sure to check all Menu Elements, as navigation on Varjo page isn't very clear.
+
 ## Unity Project Configuration
+
+### Varjo SDK installation
 
 ### Varjo Plugin Integration
 
