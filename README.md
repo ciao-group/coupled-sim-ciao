@@ -27,7 +27,8 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 ## Requirements
 
 **Hardware**:
-  - A PC with Windows 10 or Windows 11,
+  - A PC with Windows 10 or Windows 11
+  - [Compatible PC](https://varjo.com/use-center/get-started/varjo-headsets/system-requirements/compatible-computers/) fulfilling Varjo requirements
   - GPU with two ports directly connected to it (e.g. 2 HDMI ports leading directly to the GPU). Some Laptops&PCs don't have this feauture. Check Varjo XR-3 Requirements.
   - four SteamVR Basestations 2.0.
 
@@ -106,7 +107,7 @@ For this go in Varjo Base to `System`, and enable `Inside-Out-Tracking with Varj
 
 ### Hardware Connections
 
-1. Connect the Varjo XR-3 headset to your PC7Laptop with the included connector, ensuring you use the correct ports or adapters specified for your hardware configuration.
+1. Connect the Varjo XR-3 headset to your PC/Laptop with the included connector, ensuring you use the correct ports or adapters specified for your hardware configuration.
 
 ### Varjo and Unity integration
 More info is to be found on the [Varjo developer page](https://developer.varjo.com/docs/get-started/get-started).<br> 
@@ -239,6 +240,12 @@ This guide explains the methodology behind integrating the Varjo XR-3 headset wi
 1. **Re-import the Car Model**: After making adjustments, import the simplified car model into Unity.
 2. **Assign Textures and Materials**: Apply the correct textures and materials to the car model. Use the MR material for the front panel to enable real-world video pass-through.
 
+
+## Eye tracking / Logging
+
+There is a possibility to extract the data from Unity, but that is a workaround. <br>
+There is a much better, easier and more visual implementation made directly by Varjo.
+On [Varjo's website](https://developer.varjo.com/docs/get-started/gaze-data-collection) you can find an extensive guide on it. 
 
 
 ## Acknowledgments
