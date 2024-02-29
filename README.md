@@ -2,55 +2,98 @@
 
 ## Introduction
 
-This project is a modified version of a Mixed Reality Driving Simulation originally developed by © 2024 Dr. Pavlo Bazilinskyy at TU Eindhoven. Our adaptation of this innovative simulation is conducted by the Junior Research Group CIAO (Computational Interaction and Mobility) at the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI), Leipzig University. Our work intersects machine learning, human-computer interaction, and mobility, focusing on simulating immersive driving experiences using the Varjo XR-3 headset. This adaptation allows for a unique integration of high-resolution virtual environments with real-world elements, providing a platform for in-depth research into driver-pedestrian interactions and user interface evaluation within a simulated driving context.
+This project is a modified version of a Coupled simulator for research on driver-pedestrian interactions made in Unity originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
 
-This project is open-source and aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. We encourage contributions, collaborations, and discussions to enhance the simulator's capabilities and applicability in various research domains.
+Our version builds on the original by combining a a real-world car model with the simulated driving environment into a Mixed-Reality solution with the Varjo XR-3 HMD.
+This adaptation provides a platform for in-depth research into driver-pedestrian interactions and user interface evaluation within a simulated driving context.
+
+We are the Junior Research Group CIAO (Computational Interaction and Mobility) and work at the intersection of machine learning, human-computer interaction, and mobility.
+We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) at Leipzig University. ScaDS.AI Dresden/Leipzig is one of five new AI centers in Germany funded under the federal government’s AI strategy.
+
+This project is open-source and aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. 
+We encourage contributions, collaborations, and discussions to enhance the simulator's capabilities and applicability in various research domains.
 
 ## Project Origin
 
 The original simulation was designed for academic research, offering insights into the interaction between pedestrians and (automated) vehicles. We have forked Dr. Bazilinskyy's project and tailored it to meet our specific research needs, adding new features and expanding its use cases.
 
-## Citation
 
-If you utilize this modified simulator for academic purposes, please cite the original work:
+# Tutorial on Setup and Documentation
 
-> Bazilinskyy, P., Kooijman, L., Dodou, D., & De Winter, J. C. F. (2020). Coupled simulator for research on the interaction between pedestrians and (automated) vehicles. 19th Driving Simulation Conference (DSC). Antibes, France. 
+## Integration of Varjo XR-3 for Mixed Reality Driving Simulation
 
-
-## Features and Contributions
-
-Our version builds on the original by incorporating:
-
-- Enhanced mixed reality integration for more immersive driving simulations.
-- Expanded vehicle models and environmental settings for comprehensive scenario testing.
-- Improved networking and data logging capabilities to support complex experimental designs.
-
-We welcome contributions from the broader research community, including feature enhancements, bug fixes, or documentation improvements. For collaboration inquiries, please contact us.
-
-## Acknowledgments
-
-This project is part of ScaDS.AI Dresden/Leipzig, supported under the federal government's AI strategy. It represents a collaborative effort to push the boundaries of research in machine learning, HCI, and mobility. Our team is committed to developing computational models that simulate human-like interaction behavior, contributing to a deeper understanding of user interfaces and interaction design.
-
-Join us in advancing the field of mixed reality and driving simulation for more insightful and impactful research.
-
-
-# Integration of Varjo XR-3 for Mixed Reality Driving Simulation
-
-## Overview
-
-This document provides step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model, which will be integrated into the system upon its arrival.
+We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model-
 
 ## Requirements
 
-- **Hardware**: A PC with Windows 10 or Windows 11, equipped with a GPU that supports the required number of HDMI ports for the Varjo XR-3. The exact number of ports will be specified later.
-- **Software**: Varjo Base, Varjo Lab Tools, Steam, and SteamVR.
+**Hardware**:
+  - A PC with Windows 10 or Windows 11,
+  - GPU with two ports directly connected to it (e.g. 2 HDMI ports leading directly to the GPU). Some Laptops&PCs don't have this feauture. Check Varjo XR-3 Requirements.
 
-## Initial Setup
+**Software**:
+  - Varjo Base
+  - Varjo Lab Tools
+  - Steam and SteamVR
+  - Unity Hub
+  - Varjo SDK for Unity (pre-installed in the project) 
 
-### Varjo Software Installation
+## Initial Setup 
 
-1. Install Varjo Base and Varjo Lab Tools from the Varjo website. These applications are essential for managing the headset and configuring the mixed reality settings.
-2. Ensure your graphics drivers are up to date to avoid compatibility issues.
+>*Taken from the [original project](https://github.com/bazilinskyy/coupled-sim)*
+>
+>### Input
+>The coupled simulator supports a keyboard and a gaming steering wheel as input sources for the driver of the manual car, a keyboard for the passenger of the AV to control the external human->machine interface, and a motion suit or a keyboard for the pedestrian. At the moment, supported motion suit is Xsens Motion Suit.
+>
+>### Output
+>The simulator supports giving output to both a computer screen and a head-mounted display (HMD). It has been tested with Oculus Rift CV1, Varjo VR-2 Pro.
+>
+>### Varjo Software Installation
+>
+>1. Install Varjo Base and Varjo Lab Tools from the Varjo website. These applications are essential for managing the headset and configuring the mixed reality settings.
+>2. Ensure your graphics drivers are up to date to avoid compatibility issues.
+>
+>
+>
+>## Installation
+>The simulator was tested on Windows 11 and macOS Ventura 13.5. All functionality is supported by both platforms. However, support for input and output devices was tested only on Windows 10.
+>
+>After checking out this project, launch Unity Hub to run the simulator with the correct version of Unity (currently **2022.3.5f1**).
+>
+>## Running a project
+> When opening this project for the first time, click `Add` and select your entire downloaded folder containing all the project files. In case you have already used this project before, select >the project from the Unity Hub projects list. Wait until the project loads in.
+>
+>Once the project is loaded into the Unity editor open StartScene scene. You do this by going to the project tab, and clicking on the StartScene icon in the Scenes folder. Now, we will explain >three different ways to run scenes, the locations for the first three steps for running as a host or client correlate with the numbers in the picture below. 
+>
+>![](ReadmeFiles/running.png)
+>
+>### Running simulation as a host
+>1. Make sure that all three checkboxes (`Hide GUI`, `Run Trial Sequence Automatically`, `Record Videos`) in `NetworkingManager` component on `Managers` game object are unchecked.
+>2. Press the Play button to run enter `Play Mode`.
+>3. Once in `Play Mode`, press `Start Host` button. 
+>4. If needed, wait for clients to join.
+>5. Once all clients have connected to the host or in case the host is handling the only participant, select one of the experiments listed under `Experiment` section.
+>6. Assign roles to participants in `Role binding` section. If no role is selected, the participant will run a "headless" mode.
+>7. Select one of control modes listed under `Mode` section.
+>8. Start an experiment with the `Initialise experiment` button - all clients will load selected experiment.
+>9. Once all connected clients are ready - the experiment scene is fully loaded on each client, press `Start simulation` button.
+>
+>### Running simulation as a client
+>1. Make sure that all three checkboxes - `Hide GUI`, `Run trial sequence automatically`, `Record videos` (`Managers` (game object) ➡️ `NetworkingManager` (component)), are unchecked.
+>2. Press the Play button to run enter `Play mode`.
+>3. Once in `Play Mode`, press `Start client` button.
+>4. Enter the host IP address. 
+>5. Press `Connect`.
+>6. Once connected, select one of control modes listed under `Mode` section.
+>7. Wait until host starts the simulation.
+>   
+>
+>### Running simulation with multiple agents on one machine
+>1. Run host agent inside of Unity (as described above).
+>2. Note the IP address in the console of Unity.
+>3. Run other  agents after building them `File` ➡️ `Build And Run`. Connect using the IP address from the (1).
+>
+>Providing input for multiple agents on one machine is not supported. Input is provided only to the agent, the window of which is selected. This mode is intended for testing/debugging.
+
 
 ### Steam and SteamVR
 
@@ -155,4 +198,18 @@ This guide explains the methodology behind integrating the Varjo XR-3 headset wi
 
 1. **Re-import the Car Model**: After making adjustments, import the simplified car model into Unity.
 2. **Assign Textures and Materials**: Apply the correct textures and materials to the car model. Use the MR material for the front panel to enable real-world video pass-through.
+
+
+
+## Acknowledgments
+
+This project is part of ScaDS.AI Dresden/Leipzig, supported under the federal government's AI strategy. 
+originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
+
+## Citation
+
+If you utilize this modified simulator for academic purposes, please cite the original work:
+
+> Bazilinskyy, P., Kooijman, L., Dodou, D., & De Winter, J. C. F. (2020). Coupled simulator for research on the interaction between pedestrians and (automated) vehicles. 19th Driving Simulation Conference (DSC). Antibes, France. 
+
 
