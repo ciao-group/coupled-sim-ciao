@@ -20,7 +20,7 @@ The original simulation was designed for academic research, offering insights in
 
 # Tutorial on Setup and Documentation
 
-## Integration of Varjo XR-3 for Mixed Reality Driving Simulation
+## Integration of Varjo XR-3 for Virtual Reality Driving Simulation
 
 We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model-
 
@@ -135,19 +135,38 @@ Here is a detailed instruction how to setup an XR-Rig for Varjo XR-3 when having
 Now we after placing the Main Camera as a child of XR Origin, we need to implement the head tracking functionality, allowing us to look around and move in the scene. 
 
 1. Click on `Main Camera`, scroll down and click `Add Component`. Search for `Tracked Pose Driver` specifically. NOT `Tracked Pose Driver (Input System)`. As Device choose `Generic XR Device`. As Pose Source choose `Head` or `Center Eye - HMD Reference`.
+2. For Tracking Type choose `Rotation only` or `Rotation and Position`. For update type we chose `Update And Before Render`. 
 
 Initially, we set it to track only the rotation. The reason being, that the Inside-Out-Tracking from the Varjo headset didn't allow for really precise and repeatable starting position calculation, because each time the starting point in real world was defined after calibration.
 Position tracking will be added once the real car model is integrated, to ensure the virtual and real-world align accurately. This will be done using the SteamVR Basestation 2.0.
+**This part will be updated soon...**
 
-2. Adjustments to the camera's position relative to the floor may be necessary to match the real-world setup.
+If you still decie to track the head position using the Inside-Out-Tracking, adjust the position of the `CameraPositionSet` in the scene. To see how the Camera is placed in the scene, press `#Scene`, left of the `Game` icon at the top middle-right.
+As the camera's position is measured relative to the floor it may be necessary to place the origin further down than expected. 
 
 ### Scripting for Camera Management
 
-1. Implement a script to disable the second main camera, which is typically used for rendering the game menu. This ensures that the simulation uses the XR camera exclusively for the MR experience.
+After updating our project to a different rendering pipeline, which will be discussed further down below, we have run into a problem, where the `Main Camera` responsible for showing the GUI at the beginning didn't turn off after starting the game. <br> 
+To solve this we implemented a short line `PlayerSystem.cs`:
 
-### Testing the Setup
+> GameObject.FindWithTag("UICam").SetActive(false);
 
-1. With the above configuration, the simulator should now be playable in full VR mode. Test the setup to ensure that the virtual environment is correctly rendered through the Varjo XR-3 headset and that motion tracking functions as expected.
+and then we tagged the starting Main Camera as `UICam`.
+This disabled the second main camera when the game loaded and ensures that the simulation uses the XR camera exclusively for the MR experience.
+
+### Post-Processing Bugs
+When using the Varjo XR-3 many Post-Processing settings can't be used, as they create visual artifacts in the players filed of view.
+Follow the instructions by [Varjo](https://developer.varjo.com/docs/get-started/Post-processing) and disable all the settings listed, which can't be used with Varjo XR-3.
+There is a [YouTube video](https://www.youtube.com/watch?v=wuPlruceIRc) by user "FowardX" which could help visualise the issues for ou.
+
+### Testing the Setup for VR
+
+With the above configuration, the simulator should now be playable in full VR mode. For it to work correctly run the programms in the following order: 
+1. Varjo Base
+2. Calibrate Inside-Out-Tracking in Varjo Base.
+3. Run the simulation in Unity.
+   
+Test the setup to ensure that the virtual environment is correctly rendered through the Varjo XR-3 headset and that motion tracking functions as expected.
 
 ## Next Steps for Mixed Reality Implementation
 
