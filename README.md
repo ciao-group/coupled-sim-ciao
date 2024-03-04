@@ -208,7 +208,27 @@ To achieve this, we have to model our front-panel, insert it into the virtual ca
 Sadly, this approach is only possible using the High Defenition Render Pipeline (HDRP) in Unity, which is not the original Render Pipeline of this driving simulator. 
 The reason for this, is that we have to use a shader for the Mixed-Reality material, which allows to export the alpha and write to the depth buffer. This only works with HDRP shaders.
 
-Thus we have to convert this project into HDRP. This will be discussed further below.
+Thus we have to convert this project into HDRP.
+
+### Switching Rendering pipeline to HDRP
+
+In this case we are switching from the Unity's Standard Rendering Pipeline to the High Definition Rendering Pipeline.
+As this is a longer processes, here is a [detailed video](https://www.youtube.com/watch?v=mSDD0eCR9Io) from the user "Dary Palasky" on how to do this. 
+Follow the HDRP wizard to resolve any further compatibility issues.
+
+### Material Conversion to HDRP
+
+- **Converting Materials**: Select faulty materials, change their shader to HDRP’s standard shader. Use `Window > Rendering > HDRP Wizard > Convert Selected Built-In Materials to HDRP` for conversion.
+
+### Model and Scene Adjustments
+
+- **3D Model Preparation**: Simplify the real-life car model in Blender by reducing vertex count and removing unnecessary parts. Integrate this model with your Unity project, ensuring the front panel is set up for MR with the camera feed.
+
+- **Lighting Adjustments in HDRP**: Reduce the maximum allowed reflections to address lighting issues.
+
+
+
+
 
 ### Setting Up Varjo XR Plugin for Unity
 
@@ -291,28 +311,7 @@ We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D
  
 **INSERT IMAGE**
 
-5. **Assign to Mesh**: Now navigate to the `DrivableCommonObject` ➡️ `CarModelCorrect` ➡️ find the 3D model of the fixed-based driving simulator.
-
-## Project Adaptations for MR
-
-### Switching to HDRP
-
-- **Update Project for HDRP**: Follow the HDRP wizard to resolve compatibility issues. Address any materials that turn pink by updating their shaders.
-
-### Material Conversion to HDRP
-
-- **Converting Materials**: Select faulty materials, change their shader to HDRP’s standard shader. Use `Window > Rendering > HDRP Wizard > Convert Selected Built-In Materials to HDRP` for conversion.
-
-### Model and Scene Adjustments
-
-- **3D Model Preparation**: Simplify the real-life car model in Blender by reducing vertex count and removing unnecessary parts. Integrate this model with your Unity project, ensuring the front panel is set up for MR with the camera feed.
-
-- **Lighting Adjustments in HDRP**: Reduce the maximum allowed reflections to address lighting issues.
-
-## Final Steps
-
-1. **Re-import the Car Model**: After making adjustments, import the simplified car model into Unity.
-2. **Assign Textures and Materials**: Apply the correct textures and materials to the car model. Use the MR material for the front panel to enable real-world video pass-through.
+5. **Assign to Mesh**: Now navigate to the `DrivableCommonObject` ➡️ `CarModelCorrect` ➡️ find the 3D model of the fixed-based driving simulator. Drag and Drop the `MRMaterial` onto the fixed-based driving simulator. This will turn it full-black. When starting the simulation with the Varjo XR-3 headset, this black surface will render from the real-world camera feed.
 
 
 ## Eye tracking / Logging
