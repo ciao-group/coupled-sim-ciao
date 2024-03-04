@@ -38,6 +38,7 @@ We provide step-by-step instructions for setting up and developing a mixed reali
   - Steam and SteamVR
   - Unity Hub
   - Varjo SDK for Unity (pre-installed in the project)
+  - Blender 4.0
   - DirectX11
   - Logitech GHub (for pedals and steering wheel, not for real world car) 
 
@@ -192,6 +193,17 @@ In the following section, detailed instructions will be provided on achieving mi
 This segment explains the methodology behind integrating the Varjo XR-3 headset with Unity for mixed reality (MR) applications, specifically using the High Definition Render Pipeline (HDRP). <br>
 There are tutorials on the Varjo page, on how to [create a MR-scene](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin), but these lack to provide all-encompassing explanations on how to intergrate a real-world view into the virtual reality world and why we take the steps as shown.
 
+### General approach
+When using Unity with Varjo XR-3 one can create Mixed-Reality settings by rendering certain parts of the world from the VR view, and other parts from the built-in camera of the headset. 
+When `Varjo Video Pass-through` is enabled, you will see the image from the video pass-through cameras when your application renders 0 in the color buffer. 
+That means if an object has RGB(0,0,0) and Alpha-Channel (0), then the surface of the object will be rendered with the view from the real-world cameras. 
+
+We can either make the camera clear, that means make the skies RGBA(0,0,0,0), to make or VR-world appear inside the real-world **OR** we can put a stencil mask on a VR-ingame Object and make it show us the real-world. The pass-through video will be rendered inside the shape of the object.
+
+In our case, we want to have a simulated VR-car and VR-environment in which we drive in, but we want to see our hand and the real-world car front panel, with which we are interacting.
+
+To achieve this, we have to model our front-panel, insert it into the virtual car and put the stencil mask onto the front panel. This way we combine the VR-World with our real-world car front panel.
+
 ### Setting Up Varjo XR Plugin for Unity
 
 1. **Install Varjo XR Plugin**: Follow the instructions in the ["Getting Started with Varjo XR plugin for Unity"](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) documentation.
@@ -205,25 +217,22 @@ You will need to write a C#-Script and attach this script to your camera, to act
 Go to `Project` ➡️ `Assets` ➡️ Right click on a free space ➡️ `Create` ➡️ `C#-Script`.
 
 Delete everything and paste this in:
->using System.Collections;
->using System.Collections.Generic;
->using UnityEngine;
->using Varjo.XR;
->
->public class StartMR : MonoBehaviour
->{
->    // Start is called before the first frame update
->    void Start()
->    {
->        VarjoMixedReality.StartRender();
->    }
->
->    // Update is called once per frame
->    void Update()
->    {
->        
->    }
->}
+
+>using System.Collections; <br>
+>using System.Collections.Generic; <br>
+>using UnityEngine; <br>
+>using Varjo.XR; <br>
+> <br>
+>public class StartMR : MonoBehaviour <br>
+>{ <br>
+>    // Start is called before the first frame update <br>
+>    void Start() <br>
+>    {<br>
+>        VarjoMixedReality.StartRender(); <br>
+>    } <br>
+>    // Update is called once per frame <br>
+>    void Update() <br>
+>    {  } } 
 >
 
 This starts the rendering before the first frame update.
@@ -237,17 +246,30 @@ Now, save this code, as e.g. "StartMR.cs".
 
 4. Pull the `StartMR.cs` script onto the `Main Camera`. This add the script to the GameObject.
 
-### Setting the Camera
+### Using HDRP for Mixed Reality
 
-- To render the image from the video pass-through cameras, ensure your application renders 0 in the color buffer. This can be achieved using a stencil mask or setting the camera's Clear Flags to Solid Color with RGBA(0,0,0,0).
+**Configure HDRP Settings**: Ensure you're using a color buffer format with an alpha channel. In `Project Settings > Quality`, under `HDRP`, select your HD Render Pipeline Asset and set the `Color Buffer Format` to R16G16B16A16.
 
-## Using HDRP for Mixed Reality
+  **!!INSERT PICTURE!!** 
 
-1. **Configure HDRP Settings**: Ensure you're using a color buffer format with an alpha channel. In `Project Settings > Quality`, under HDRP settings, select your HD Render Pipeline Asset and set the Color Buffer Format to R16G16B16A16.
+## Configuring 3D-Model of the Mixed-Reality Car 
 
-2. **Camera Background**: Set the camera’s Background Type to Color with RGBA(0,0,0,0).
+As described above, we want to render fixed-based driving simulator inside of the virtual car, aligning the window views of the real-world and the virtual reality, so that when looking inside the car we see the fixed-based driving simulator, and when looking outside we see the virtual driving environment.
 
-## Creating the MR Material
+For this we have to take the 3D-Model of the fixed-based driving simulator, insert and connect it to the virtual car, and then create a stencil mask / material, that we will assign to it, which will render the fixed-based simulator from the Varjo XR-3 built in cameras.
+
+### Combining Fixed-Based driving simulator with VR Car
+
+1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. 
+   
+2. Under `DrivableCommonObject`, navigate to `CarModelCorrect` ➡️ `Group03`. This is the VR Car model.
+
+3. Right Click on `Group03`, press `Export to FBX...`
+
+This file can be imported in Blender 4.0. Import the 
+
+
+### Creating the MR-Material / Stencil Mask
 
 1. **Material Setup**: Varjo Compositor blends images based on the alpha value. Create a new material with a shader that supports alpha export and depth writing. Use HDRP’s Unlit shader, set Surface Type to Opaque, and Color to RGBA(0,0,0,0). Enable Alpha Clipping if necessary.
 
