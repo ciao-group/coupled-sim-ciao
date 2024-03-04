@@ -204,6 +204,12 @@ In our case, we want to have a simulated VR-car and VR-environment in which we d
 
 To achieve this, we have to model our front-panel, insert it into the virtual car and put the stencil mask onto the front panel. This way we combine the VR-World with our real-world car front panel.
 
+**DRAWBACK:**
+Sadly, this approach is only possible using the High Defenition Render Pipeline (HDRP) in Unity, which is not the original Render Pipeline of this driving simulator. 
+The reason for this, is that we have to use a shader for the Mixed-Reality material, which allows to export the alpha and write to the depth buffer. This only works with HDRP shaders.
+
+Thus we have to convert this project into HDRP. This will be discussed further below.
+
 ### Setting Up Varjo XR Plugin for Unity
 
 1. **Install Varjo XR Plugin**: Follow the instructions in the ["Getting Started with Varjo XR plugin for Unity"](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) documentation.
@@ -266,14 +272,26 @@ For this we have to take the 3D-Model of the fixed-based driving simulator, inse
 
 3. Right Click on `Group03`, press `Export to FBX...`
 
-This file can be imported in Blender 4.0. Import the 
+This file can be imported in Blender 4.0. Import the 3D Model of the fixed-based driving simulator.
+We aligned these models to eachother and deleted every part that is redundant. Now the fixed based driving simulator is acting as the front panel of the VR-Car.
+
+After aligning the parts, we export the 3D-model as an FBX-file and import them back into the project under `Unity` ➡️ `Project` ➡️ `Assets`. 
+
+We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D-Model, open up, delete everything except the car model itself (like `Camera` or `Light`). Press right click on the 3D-Model, navigate to `Prefab` ➡️ `Unpack Completely`. Now you can delete the original `Group03` under `CarModelCorrect` and replace it with the new updated `Group03` from the newly imported 3D-model. 
 
 
 ### Creating the MR-Material / Stencil Mask
 
-1. **Material Setup**: Varjo Compositor blends images based on the alpha value. Create a new material with a shader that supports alpha export and depth writing. Use HDRP’s Unlit shader, set Surface Type to Opaque, and Color to RGBA(0,0,0,0). Enable Alpha Clipping if necessary.
+**Material Setup**: Varjo Compositor blends images based on the alpha value. Create a new material with a shader that supports alpha export and depth writing. Use HDRP’s Unlit shader, set Surface Type to Opaque, and Color to RGBA(0,0,0,0). Enable Alpha Clipping if necessary.
 
-2. **Assign to Mesh**: Apply this material to a mesh that will act as a VST (video see-through) mask, such as a Quad in a doorway.
+1.  `Unity` ➡️ `Project` ➡️ `Assets`, choose `Create` ➡️ click on `Material`. Call it e.g. "MRMaterial"
+2. Press on the newly created material,  `Shader` select `HDRP/Unlit`
+3. under `Surface Type` select Opaque
+4. Enable Alpha Clipping <br>
+ 
+**INSERT IMAGE**
+
+5. **Assign to Mesh**: Now navigate to the `DrivableCommonObject` ➡️ `CarModelCorrect` ➡️ find the 3D model of the fixed-based driving simulator.
 
 ## Project Adaptations for MR
 
