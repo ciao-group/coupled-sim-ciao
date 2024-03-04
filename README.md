@@ -22,7 +22,7 @@ The original simulation was designed for academic research, offering insights in
 
 ## Integration of Varjo XR-3 for Virtual Reality Driving Simulation
 
-We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model-
+We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model.
 
 ## Requirements
 
@@ -49,7 +49,7 @@ We provide step-by-step instructions for setting up and developing a mixed reali
 >The coupled simulator supports a keyboard and a gaming steering wheel as input sources for the driver of the manual car, a keyboard for the passenger of the AV to control the external human->machine interface, and a motion suit or a keyboard for the pedestrian. At the moment, supported motion suit is Xsens Motion Suit.
 >
 >### Output
->The simulator supports giving output to both a computer screen and a head-mounted display (HMD). It has been tested with Oculus Rift CV1, Varjo VR-2 Pro.
+>The simulator supports giving output to both a computer screen and a head-mounted display (HMD).
 >
 >### Installation
 >The simulator was tested on Windows 11 and macOS Ventura 13.5. All functionality is supported by both platforms. However, support for input and output devices was tested only on Windows 10.
@@ -189,19 +189,53 @@ In the following section, detailed instructions will be provided on achieving mi
 # Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
 ## Overview
-
-This guide explains the methodology behind integrating the Varjo XR-3 headset with Unity for mixed reality (MR) applications, specifically leveraging the High Definition Render Pipeline (HDRP) to render real-world video camera feeds onto Unity materials. This allows for the seamless blending of real and virtual worlds, enabling mixed reality experiences.
-
-## Initial Steps
+This segment explains the methodology behind integrating the Varjo XR-3 headset with Unity for mixed reality (MR) applications, specifically using the High Definition Render Pipeline (HDRP). <br>
+There are tutorials on the Varjo page, on how to [create a MR-scene](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin), but these lack to provide all-encompassing explanations on how to intergrate a real-world view into the virtual reality world and why we take the steps as shown.
 
 ### Setting Up Varjo XR Plugin for Unity
 
-1. **Install Varjo XR Plugin**: Follow the instructions in the "Getting Started with Varjo XR plugin for Unity" documentation.
-2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings > XR Plug-in Management`, select Varjo, and disable the Opaque option. You can automate this with a script using runtime functions provided by Varjo.
+1. **Install Varjo XR Plugin**: Follow the instructions in the ["Getting Started with Varjo XR plugin for Unity"](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) documentation.
+2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings` ➡️ `XR Plug-in Management`, select `Varjo`, and disable the `Opaque` option. Here is a [visual explanation by Varjo](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin). <br>
+Follow this explaination only until "Using HDRP for Mixed Reality".
 
 ### Enabling Video Pass-Through
 
-- **Start/Stop Rendering**: Use `VarjoMixedReality.StartRender()` to begin and `VarjoMixedReality.StopRender()` to cease rendering the video see-through image from the cameras.
+You will need to write a C#-Script and attach this script to your camera, to activate Video-Pass Through. This is described broadly [here](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin).
+
+Go to `Project` ➡️ `Assets` ➡️ Right click on a free space ➡️ `Create` ➡️ `C#-Script`.
+
+Delete everything and paste this in:
+>using System.Collections;
+>using System.Collections.Generic;
+>using UnityEngine;
+>using Varjo.XR;
+>
+>public class StartMR : MonoBehaviour
+>{
+>    // Start is called before the first frame update
+>    void Start()
+>    {
+>        VarjoMixedReality.StartRender();
+>    }
+>
+>    // Update is called once per frame
+>    void Update()
+>    {
+>        
+>    }
+>}
+>
+
+This starts the rendering before the first frame update.
+Now, save this code, as e.g. "StartMR.cs".
+
+1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. 
+   
+2. Under `DrivableCommonObject`, navigate to `Driver Logic` ➡️ `CameraPositionSet` ➡️ `CameraCounter` ➡️ `XR Origin` ➡️ `Camera Offset` ➡️ **`Main Camera`**
+
+3. Stay at `Main Camera` and locate your script like in step one searching by name, e.g. `StartMR.cs` 
+
+4. Pull the `StartMR.cs` script onto the `Main Camera`. This add the script to the GameObject.
 
 ### Setting the Camera
 
