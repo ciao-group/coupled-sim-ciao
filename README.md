@@ -353,10 +353,10 @@ We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D
 1. Start Varjo Lab Tools before starting Unity
 2. Press `Edit Mode`
 3. In `Video depth testing` ➡️ `Mode` choose `Limited Range` or `Forced Range`
-4. Set `Near` to 0,01m ; `Far` to 0,5-0,6m
+4. Set `Near` to 0,01m ; `Far` to 0,5-0,6m <br>
 ![](ReadmeFiles/17.png)
 5. Now start everything as usual. The hands are now overlayed over the VR-Image in the chosen range. <br>
-Make your environment monotone in color and light for better tracking.
+Make your environment monotone in color and light for better tracking. <br>
 
 ![](ReadmeFiles/16.png)
 
@@ -366,7 +366,7 @@ We want to track the point on which the eyes of the user focus, projected on the
 For this there is a possibility to extract the data from Unity, but that is a non-efficient workaround. <br>
 There is a much better, easier and more visual implementation made directly by Varjo.
 On [Varjo's website](https://developer.varjo.com/docs/get-started/gaze-data-collection) you can find an extensive guide on it.
-This implementation uses **Varjo Base** Software to record the view from the HMD. The output is a video with the view from the HMD and a point showing where the eyes of the user are looking at. We also get an extensive eye tracking file with multiple variables ranging from  gaze coordinates to quality of eye tracking.
+This implementation uses **Varjo Base** Software to record the view from the HMD. The output is a video with the view from the HMD and a point showing where the eyes of the user are looking at. We also get an extensive eye tracking file with multiple variables ranging from  gaze coordinates to quality of eye tracking. <br>
 
 ![](ReadmeFiles/15.png)
 
