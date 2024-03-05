@@ -4,25 +4,48 @@
 
 This project is a modified version of a Coupled simulator for research on driver-pedestrian interactions made in Unity originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
 
-Our version builds on the original by combining a a real-world car model with the simulated driving environment into a Mixed-Reality solution with the Varjo XR-3 HMD.
-This adaptation provides a platform for in-depth research into driver-pedestrian interactions and user interface evaluation within a simulated driving context.
+Our version builds on the original by combining a fixed-based driving simulator with a simulated driving environment into a Mixed-Reality solution powered by Varjo XR-3 HMD.
+This adaptation provides a platform for in-depth research into driver-interface interaction within a simulated driving context.
 
-We are the Junior Research Group CIAO (Computational Interaction and Mobility) and work at the intersection of machine learning, human-computer interaction, and mobility.
-We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) at Leipzig University. ScaDS.AI Dresden/Leipzig is one of five new AI centers in Germany funded under the federal government’s AI strategy.
+We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) and work at the intersection of machine learning, human-computer interaction, and mobility.
+We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) at Leipzig University. <br>
+ScaDS.AI Dresden/Leipzig is one of five new AI centers in Germany funded under the federal government’s AI strategy.
 
 This project is open-source and aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. 
 We encourage contributions, collaborations, and discussions to enhance the simulator's capabilities and applicability in various research domains.
 
 ## Project Origin
 
-The original simulation was designed for academic research, offering insights into the interaction between pedestrians and (automated) vehicles. We have forked Dr. Bazilinskyy's project and tailored it to meet our specific research needs, adding new features and expanding its use cases.
+The original simulation was designed for academic research, offering insights into the interaction between pedestrians and (automated) vehicles. <br>
+We have forked Dr. Bazilinskyy's project and tailored it to meet our specific research needs, adding new features and expanding its use cases.
+
+>## Short overview taken from Dr. Bazilinskyy project on [GitHub](https://github.com/bazilinskyy/coupled-sim/tree/master).
+>📺 These days, a video is worth more than a million words. The image below points to a YouTube video of the recording of a demo of the simulator with 3 agents:
+>
+>[![demo video](ReadmeFiles/thumbnail_demo_video.png)](https://www.youtube.com/watch?v=W2VWLYnTYrM)
+>
+>## Environment
+>![](ReadmeFiles/night_mode_view.png)
+>
+>The coupled simulator supports both day and night-time settings. Figure above shows a view of the night mode. Figures below shows the top view of the environment. It is a model of a US-like city containing:
+>- Network of 2-lane roads.
+>- Loop of 4-lane road (partially surrounded by buildings).
+>- Loop of 6-lane road (partially surrounded by buildings).
+>- Half-clover interchange for the motorway.
+>- 10 intersections with traffic lights that can be turned on and off before the experiment or programmatically in real-time.
+>- 34 zebra crossings.
+>- Static objects (buildings, parked cars, trees).
+>
+><!-- ![](ReadmeFiles/world_top_view.png) -->
+>![](ReadmeFiles/world_all.png)
+>![](ReadmeFiles/world_centre.png)
 
 
 # Tutorial on Setup and Documentation
 
 ## Integration of Varjo XR-3 for Virtual Reality Driving Simulation
 
-We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality capabilities, combining high-resolution visuals and real-world pass-through to create immersive experiences. Our model leverages these features to simulate driving in a virtual environment while sitting in a real car model.
+We provide step-by-step instructions for setting up and developing a mixed reality driving simulation using the Varjo XR-3 headset. The Varjo XR-3 offers cutting-edge mixed reality (MR) capabilities, combining high-resolution VR-visuals and real-world pass-through view to create immersive MR experiences. Our model leverages these features to simulate driving in a virtual environment while the user is sitting in a real-world fixed-based driving simulator.
 
 ## Requirements
 
@@ -31,6 +54,7 @@ We provide step-by-step instructions for setting up and developing a mixed reali
   - [Compatible PC](https://varjo.com/use-center/get-started/varjo-headsets/system-requirements/compatible-computers/) fulfilling Varjo requirements
   - GPU with two ports directly connected to it (e.g. 2 HDMI ports leading directly to the GPU). Some Laptops&PCs don't have this feauture. Check Varjo XR-3 Requirements.
   - four SteamVR Basestations 2.0.
+  - Fixed-Based Driving Simulator from Ergoneers
 
 **Software**:
   - Varjo Base
@@ -105,10 +129,11 @@ These applications are essential for managing the headset and configuring the mi
 ### Further tracking solutions  
 Motion and Hand Tracking can also be done with the Inside-Out-Tracking feauture of Varjo XR-3 (which is still in Beta). <br> 
 For this go in Varjo Base to `System`, and enable `Inside-Out-Tracking with Varjo (Beta)`.
+**INSERT PICTURES**
 
 ### Hardware Connections
 
-1. Connect the Varjo XR-3 headset to your PC/Laptop with the included connector, ensuring you use the correct ports or adapters specified for your hardware configuration.
+1. Connect the Varjo XR-3 headset to your PC/Laptop with the included connector, ensuring you use the [correct ports or adapters](https://varjo.com/use-center/get-started/varjo-headsets/setting-up-your-headset/setting-up-xr-3/) specified for your hardware configuration.
 
 ### Varjo and Unity integration
 More info is to be found on the [Varjo developer page](https://developer.varjo.com/docs/get-started/get-started).<br> 
@@ -128,24 +153,26 @@ Here is a detailed instruction how to setup an XR-Rig for Varjo XR-3 when having
 1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. This object is the car model. It is the modified to  integrating the real car model with the virtual car in the virtual driving environment.
    
 2. Under `DrivableCommonObject`, navigate to `Driver Logic`, open it up, manually insert an `XR Origin` component by clicking `Right Click` on the mouse ➡️ `XR` ➡️ `XR Origin(Mobile AR)`.
-
+**INSERT PICTURES**
 3. Place `XR Origin`-Element under `CameraCounter` in `DriverLogic`.
 
 4. Place existing `Main Camera` and its children under the `XR Origin`. This step makes the Main Camera an XR Origin camera
+
+**INSERT PICTURES**
 
 ### Head Tracking Configuration
 Now we after placing the Main Camera as a child of XR Origin, we need to implement the head tracking functionality, allowing us to look around and move in the scene. 
 
 1. Click on `Main Camera`, scroll down and click `Add Component`. Search for `Tracked Pose Driver` specifically. NOT `Tracked Pose Driver (Input System)`. As Device choose `Generic XR Device`. As Pose Source choose `Head` or `Center Eye - HMD Reference`.
 2. For Tracking Type choose `Rotation only` or `Rotation and Position`. For update type we chose `Update And Before Render`. 
-
+**INSERT PICTURES**
 Initially, we set it to track only the rotation. The reason being, that the Inside-Out-Tracking from the Varjo headset didn't allow for really precise and repeatable starting position calculation, because each time the starting point in real world was defined after calibration.
 Position tracking will be added once the real car model is integrated, to ensure the virtual and real-world align accurately. This will be done using the SteamVR Basestation 2.0.
 **This part will be updated soon...**
 
 If you still decie to track the head position using the Inside-Out-Tracking, adjust the position of the `CameraPositionSet` in the scene. To see how the Camera is placed in the scene, press `#Scene`, left of the `Game` icon at the top middle-right.
 As the camera's position is measured relative to the floor it may be necessary to place the origin further down than expected. 
-
+**INSERT PICTURES**
 ### Scripting for Camera Management
 
 After updating our project to a different rendering pipeline, which will be discussed further down below, we have run into a problem, where the `Main Camera` responsible for showing the GUI at the beginning didn't turn off after starting the game. <br> 
@@ -159,7 +186,7 @@ This disabled the second main camera when the game loaded and ensures that the s
 ### Post-Processing Bugs
 When using the Varjo XR-3 many Post-Processing settings can't be used, as they create visual artifacts in the players filed of view.
 Follow the instructions by [Varjo](https://developer.varjo.com/docs/get-started/Post-processing) and disable all the settings listed, which can't be used with Varjo XR-3.
-There is a [YouTube video](https://www.youtube.com/watch?v=wuPlruceIRc) by user "FowardX" which could help visualise the issues for ou.
+There is a [YouTube video](https://www.youtube.com/watch?v=wuPlruceIRc) by user "FowardX" which could help visualise the issues for our use-case.
 
 ### Testing the Setup for VR
 
@@ -200,11 +227,12 @@ That means if an object has RGB(0,0,0) and Alpha-Channel (0), then the surface o
 
 We can either make the camera clear, that means make the skies RGBA(0,0,0,0), to make or VR-world appear inside the real-world **OR** we can put a stencil mask on a VR-ingame Object and make it show us the real-world. The pass-through video will be rendered inside the shape of the object.
 
-In our case, we want to have a simulated VR-car and VR-environment in which we drive in, but we want to see our hand and the real-world car front panel, with which we are interacting.
+In our case, we want to have a simulated VR-car and VR-environment in which we drive in, but we want to see our body(especially hands) and the fixed-based driving simulator, with which the user is interacting in the real world.
 
-To achieve this, we have to model our front-panel, insert it into the virtual car and put the stencil mask onto the front panel. This way we combine the VR-World with our real-world car front panel.
+To achieve this, we have to model our fixed-based driving simulator, insert it into the virtual car and put the stencil mask onto the 3D model of the fixed-based driving simulator. <br> 
+This way we combine the VR-World with our fixed-based driving simulator.
 
-**DRAWBACK:**
+**ATTENTION: DRAWBACK:**
 Sadly, this approach is only possible using the High Defenition Render Pipeline (HDRP) in Unity, which is not the original Render Pipeline of this driving simulator. 
 The reason for this, is that we have to use a shader for the Mixed-Reality material, which allows to export the alpha and write to the depth buffer. This only works with HDRP shaders.
 
@@ -216,24 +244,15 @@ In this case we are switching from the Unity's Standard Rendering Pipeline to th
 As this is a longer processes, here is a [detailed video](https://www.youtube.com/watch?v=mSDD0eCR9Io) from the user "Dary Palasky" on how to do this. 
 Follow the HDRP wizard to resolve any further compatibility issues.
 
-### Material Conversion to HDRP
+General explanation for converting pink textures into normal state: Select faulty materials, change their shader to HDRP’s standard shader. Use `Window` ➡️ `Rendering` ➡️ `HDRP Wizard` ➡️ `Convert Selected Built-In Materials to HDRP` for conversion.
 
-- **Converting Materials**: Select faulty materials, change their shader to HDRP’s standard shader. Use `Window > Rendering > HDRP Wizard > Convert Selected Built-In Materials to HDRP` for conversion.
-
-### Model and Scene Adjustments
-
-- **3D Model Preparation**: Simplify the real-life car model in Blender by reducing vertex count and removing unnecessary parts. Integrate this model with your Unity project, ensuring the front panel is set up for MR with the camera feed.
-
-- **Lighting Adjustments in HDRP**: Reduce the maximum allowed reflections to address lighting issues.
-
-
-
+- **Lighting Adjustments in HDRP**: Reduce the maximum allowed reflections to 128/256 to address lighting issues.
 
 
 ### Setting Up Varjo XR Plugin for Unity
 
 1. **Install Varjo XR Plugin**: Follow the instructions in the ["Getting Started with Varjo XR plugin for Unity"](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) documentation.
-2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings` ➡️ `XR Plug-in Management`, select `Varjo`, and disable the `Opaque` option. Here is a [visual explanation by Varjo](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin). <br>
+2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings` ➡️ `XR Plug-in Management`, select `Varjo`, and disable the `Opaque` option. Here is a [visual explanation by Varjo](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin).  **INSERT PICTURES** <br>
 Follow this explaination only until "Using HDRP for Mixed Reality".
 
 ### Enabling Video Pass-Through
@@ -241,7 +260,7 @@ Follow this explaination only until "Using HDRP for Mixed Reality".
 You will need to write a C#-Script and attach this script to your camera, to activate Video-Pass Through. This is described broadly [here](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin).
 
 Go to `Project` ➡️ `Assets` ➡️ Right click on a free space ➡️ `Create` ➡️ `C#-Script`.
-
+**INSERT PICTURES**
 Delete everything and paste this in:
 
 >using System.Collections; <br>
@@ -284,6 +303,7 @@ As described above, we want to render fixed-based driving simulator inside of th
 
 For this we have to take the 3D-Model of the fixed-based driving simulator, insert and connect it to the virtual car, and then create a stencil mask / material, that we will assign to it, which will render the fixed-based simulator from the Varjo XR-3 built in cameras.
 
+
 ### Combining Fixed-Based driving simulator with VR Car
 
 1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. 
@@ -294,6 +314,8 @@ For this we have to take the 3D-Model of the fixed-based driving simulator, inse
 
 This file can be imported in Blender 4.0. Import the 3D Model of the fixed-based driving simulator.
 We aligned these models to eachother and deleted every part that is redundant. Now the fixed based driving simulator is acting as the front panel of the VR-Car.
+
+**INSERT PICTURES**
 
 After aligning the parts, we export the 3D-model as an FBX-file and import them back into the project under `Unity` ➡️ `Project` ➡️ `Assets`. 
 
@@ -312,13 +334,26 @@ We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D
 **INSERT IMAGE**
 
 5. **Assign to Mesh**: Now navigate to the `DrivableCommonObject` ➡️ `CarModelCorrect` ➡️ find the 3D model of the fixed-based driving simulator. Drag and Drop the `MRMaterial` onto the fixed-based driving simulator. This will turn it full-black. When starting the simulation with the Varjo XR-3 headset, this black surface will render from the real-world camera feed.
+   
+**INSERT PICTURES**
 
+### Overlay Hands over VR-View
+
+1. Start Varjo Lab Tools before starting Unity
+2. Press `Edit Mode`
+3. In `Video depth testing` ➡️ `Mode` choose `Limited Range` or `Forced Range`
+4. Set `Near` to 0,01m ; `Far` to 0,5-0,6m
+5. Now start everything as usual. The hands are now overlayed over the VR-Image in the chosen range. <br>
+Make your environment monotone in color and light for better tracking.
+
+**INSERT PICTURE**
 
 ## Eye tracking / Logging
-
-There is a possibility to extract the data from Unity, but that is a workaround. <br>
+We want to track the point on which the eyes of the user focus, projected on their view of the Mixed-Reality environment.
+For this there is a possibility to extract the data from Unity, but that is a non-efficient workaround. <br>
 There is a much better, easier and more visual implementation made directly by Varjo.
-On [Varjo's website](https://developer.varjo.com/docs/get-started/gaze-data-collection) you can find an extensive guide on it. 
+On [Varjo's website](https://developer.varjo.com/docs/get-started/gaze-data-collection) you can find an extensive guide on it.
+This implementation uses **Varjo Base** Software to record the view from the HMD. The output is a video with the view from the HMD and a point showing where the eyes of the user are looking at. We also get an extensive eye tracking file with multiple variables ranging from  gaze coordinates to quality of eye tracking.
 
 
 ## Acknowledgments
