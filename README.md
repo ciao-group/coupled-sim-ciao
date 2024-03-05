@@ -374,7 +374,7 @@ This implementation uses **Varjo Base** Software to record the view from the HMD
 ## Acknowledgments
 
 This project is part of ScaDS.AI Dresden/Leipzig, supported under the federal government's AI strategy. 
-originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
+Originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
 
 ## Citation
 
