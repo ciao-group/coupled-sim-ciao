@@ -323,8 +323,8 @@ For this we have to take the 3D-Model of the fixed-based driving simulator, inse
 This file can be imported in Blender 4.0. Import the 3D Model of the fixed-based driving simulator.
 We aligned these models to eachother and deleted every part that is redundant. Now the fixed based driving simulator is acting as the front panel of the VR-Car.
 
-![](ReadmeFiles/18.png)
-![](ReadmeFiles/19.png)
+![](ReadmeFiles/18.PNG)
+![](ReadmeFiles/19.PNG)
 
 After aligning the parts, we export the 3D-model as an FBX-file and import them back into the project under `Unity` ➡️ `Project` ➡️ `Assets`. 
 
