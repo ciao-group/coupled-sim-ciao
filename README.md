@@ -248,6 +248,19 @@ General explanation for converting pink textures into normal state: Select fault
 
 - **Lighting Adjustments in HDRP**: Reduce the maximum allowed reflections to 128/256 to address lighting issues.
 
+As the LightingData.asset is over 1GB, we can't push it to the GitHub repo, thus is has to be created by yourself. <br>
+Here is how to do that: 
+
+1. in Unity ➡️ `Project` ➡️ `Assets` ➡️ `_Scenes` ➡️ Click on `MainScene` (Scene Asset) and load it. On top right, press `#Scene`. You now see the main scene.
+2. In top Menu go to `Window` ➡️ `Rendering` ➡️ `Lighting` ➡️ inside there go to `Scene`
+3. Under `Mixed Lighting` turn on `Baked Global Illumination`. `Lighting Mode` should be `Shadowmask`
+4. Choose appropriate amount of `Direct Samples`, `Indirect Samples and the `Max Lightmap Size`. We choose 512 for each.
+5. Press Generate Lighting.
+6. Save the scene.
+Now, going back to StartScene you will have your own LightingData.asset and will have baked lighting and shadows.
+
+![](ReadmeFiles/20.png)
+
 
 ### Setting Up Varjo XR Plugin for Unity
 
@@ -359,7 +372,7 @@ This implementation uses **Varjo Base** Software to record the view from the HMD
 ## Acknowledgments
 
 This project is part of ScaDS.AI Dresden/Leipzig, supported under the federal government's AI strategy. 
-originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
+Originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven. 
 
 ## Citation
 
