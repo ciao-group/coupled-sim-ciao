@@ -123,13 +123,13 @@ These applications are essential for managing the headset and configuring the mi
 
 ### Steam and SteamVR
 
-1. Install Steam and SteamVR. <br>
-SteamVR is necessary for utilizing the base stations, which enable motion tracking. Follow the internal instructions for installation and setup.
+1. Install Steam and SteamVR.
+   SteamVR is necessary for utilizing the base stations, which enable motion tracking. Follow the internal instructions for installation and setup.
 
 ### Further tracking solutions  
 Motion and Hand Tracking can also be done with the Inside-Out-Tracking feauture of Varjo XR-3 (which is still in Beta). <br> 
 For this go in Varjo Base to `System`, and enable `Inside-Out-Tracking with Varjo (Beta)`.
-![](ReadmeFiles/14.png)
+**INSERT PICTURES**
 
 ### Hardware Connections
 
@@ -151,31 +151,28 @@ A one-click conversion of our scene is **not possible**, because we have multipl
 Here is a detailed instruction how to setup an XR-Rig for Varjo XR-3 when having multiple cameras in the scene:
 
 1. in Unity ➡️ (located at left bottom) `Project` ➡️ `Assets` ➡️ Assets ➡️ Locate the `DrivableCommonObject` using search function. This object is the car model. It is the modified to  integrating the real car model with the virtual car in the virtual driving environment.
-![](ReadmeFiles/1.png)
+   
 2. Under `DrivableCommonObject`, navigate to `Driver Logic`, open it up, manually insert an `XR Origin` component by clicking `Right Click` on the mouse ➡️ `XR` ➡️ `XR Origin(Mobile AR)`.
-
+**INSERT PICTURES**
 3. Place `XR Origin`-Element under `CameraCounter` in `DriverLogic`.
 
 4. Place existing `Main Camera` and its children under the `XR Origin`. This step makes the Main Camera an XR Origin camera
 
-![](ReadmeFiles/2.png)
+**INSERT PICTURES**
 
 ### Head Tracking Configuration
 Now we after placing the Main Camera as a child of XR Origin, we need to implement the head tracking functionality, allowing us to look around and move in the scene. 
 
 1. Click on `Main Camera`, scroll down and click `Add Component`. Search for `Tracked Pose Driver` specifically. NOT `Tracked Pose Driver (Input System)`. As Device choose `Generic XR Device`. As Pose Source choose `Head` or `Center Eye - HMD Reference`.
-2. For Tracking Type choose `Rotation only` or `Rotation and Position`. For update type we chose `Update And Before Render`.
-   
-![](ReadmeFiles/3.png)
-
+2. For Tracking Type choose `Rotation only` or `Rotation and Position`. For update type we chose `Update And Before Render`. 
+**INSERT PICTURES**
 Initially, we set it to track only the rotation. The reason being, that the Inside-Out-Tracking from the Varjo headset didn't allow for really precise and repeatable starting position calculation, because each time the starting point in real world was defined after calibration.
 Position tracking will be added once the real car model is integrated, to ensure the virtual and real-world align accurately. This will be done using the SteamVR Basestation 2.0.
 **This part will be updated soon...**
 
 If you still decie to track the head position using the Inside-Out-Tracking, adjust the position of the `CameraPositionSet` in the scene. To see how the Camera is placed in the scene, press `#Scene`, left of the `Game` icon at the top middle-right.
-![](ReadmeFiles/4.png)
 As the camera's position is measured relative to the floor it may be necessary to place the origin further down than expected. 
-
+**INSERT PICTURES**
 ### Scripting for Camera Management
 
 After updating our project to a different rendering pipeline, which will be discussed further down below, we have run into a problem, where the `Main Camera` responsible for showing the GUI at the beginning didn't turn off after starting the game. <br> 
@@ -255,18 +252,15 @@ General explanation for converting pink textures into normal state: Select fault
 ### Setting Up Varjo XR Plugin for Unity
 
 1. **Install Varjo XR Plugin**: Follow the instructions in the ["Getting Started with Varjo XR plugin for Unity"](https://developer.varjo.com/docs/unity-xr-sdk/getting-started-with-varjo-xr-plugin-for-unity) documentation.
-2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings` ➡️ `XR Plug-in Management`, select `Varjo`, and disable the `Opaque` option. Here is a [visual explanation by Varjo](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin). <br>
-
-![](ReadmeFiles/5.png)
-![](ReadmeFiles/6.png)
-Follow this explanation only until "Using HDRP for Mixed Reality".
+2. **Configure Varjo XR Plugin Settings**: In Unity, go to `Project Settings` ➡️ `XR Plug-in Management`, select `Varjo`, and disable the `Opaque` option. Here is a [visual explanation by Varjo](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin).  **INSERT PICTURES** <br>
+Follow this explaination only until "Using HDRP for Mixed Reality".
 
 ### Enabling Video Pass-Through
 
 You will need to write a C#-Script and attach this script to your camera, to activate Video-Pass Through. This is described broadly [here](https://developer.varjo.com/docs/unity-xr-sdk/mixed-reality-with-varjo-xr-plugin).
 
 Go to `Project` ➡️ `Assets` ➡️ Right click on a free space ➡️ `Create` ➡️ `C#-Script`.
-![](ReadmeFiles/8.png)
+**INSERT PICTURES**
 Delete everything and paste this in:
 
 >using System.Collections; <br>
@@ -297,13 +291,11 @@ Now, save this code, as e.g. "StartMR.cs".
 
 4. Pull the `StartMR.cs` script onto the `Main Camera`. This add the script to the GameObject.
 
-![](ReadmeFiles/9.png)
-
 ### Using HDRP for Mixed Reality
 
 **Configure HDRP Settings**: Ensure you're using a color buffer format with an alpha channel. In `Project Settings > Quality`, under `HDRP`, select your HD Render Pipeline Asset and set the `Color Buffer Format` to R16G16B16A16.
 
-![](ReadmeFiles/7.png)
+  **!!INSERT PICTURE!!** 
 
 ## Configuring 3D-Model of the Mixed-Reality Car 
 
@@ -323,14 +315,12 @@ For this we have to take the 3D-Model of the fixed-based driving simulator, inse
 This file can be imported in Blender 4.0. Import the 3D Model of the fixed-based driving simulator.
 We aligned these models to eachother and deleted every part that is redundant. Now the fixed based driving simulator is acting as the front panel of the VR-Car.
 
-![](ReadmeFiles/18.PNG)
-![](ReadmeFiles/19.PNG)
+**INSERT PICTURES**
 
 After aligning the parts, we export the 3D-model as an FBX-file and import them back into the project under `Unity` ➡️ `Project` ➡️ `Assets`. 
 
 We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D-Model, open up, delete everything except the car model itself (like `Camera` or `Light`). Press right click on the 3D-Model, navigate to `Prefab` ➡️ `Unpack Completely`. Now you can delete the original `Group03` under `CarModelCorrect` and replace it with the new updated `Group03` from the newly imported 3D-model. 
 
-![](ReadmeFiles/13.png)
 
 ### Creating the MR-Material / Stencil Mask
 
@@ -341,34 +331,29 @@ We insert the 3D-Model under `DrivableCommonObject`. Navigate to the inserted 3D
 3. under `Surface Type` select Opaque
 4. Enable Alpha Clipping <br>
  
-![](ReadmeFiles/11.png)
+**INSERT IMAGE**
 
 5. **Assign to Mesh**: Now navigate to the `DrivableCommonObject` ➡️ `CarModelCorrect` ➡️ find the 3D model of the fixed-based driving simulator. Drag and Drop the `MRMaterial` onto the fixed-based driving simulator. This will turn it full-black. When starting the simulation with the Varjo XR-3 headset, this black surface will render from the real-world camera feed.
    
-![](ReadmeFiles/12.png)
-
+**INSERT PICTURES**
 
 ### Overlay Hands over VR-View
 
 1. Start Varjo Lab Tools before starting Unity
 2. Press `Edit Mode`
 3. In `Video depth testing` ➡️ `Mode` choose `Limited Range` or `Forced Range`
-4. Set `Near` to 0,01m ; `Far` to 0,5-0,6m <br>
-![](ReadmeFiles/17.png)
+4. Set `Near` to 0,01m ; `Far` to 0,5-0,6m
 5. Now start everything as usual. The hands are now overlayed over the VR-Image in the chosen range. <br>
-Make your environment monotone in color and light for better tracking. <br>
+Make your environment monotone in color and light for better tracking.
 
-![](ReadmeFiles/16.png)
-
+**INSERT PICTURE**
 
 ## Eye tracking / Logging
 We want to track the point on which the eyes of the user focus, projected on their view of the Mixed-Reality environment.
 For this there is a possibility to extract the data from Unity, but that is a non-efficient workaround. <br>
 There is a much better, easier and more visual implementation made directly by Varjo.
 On [Varjo's website](https://developer.varjo.com/docs/get-started/gaze-data-collection) you can find an extensive guide on it.
-This implementation uses **Varjo Base** Software to record the view from the HMD. The output is a video with the view from the HMD and a point showing where the eyes of the user are looking at. We also get an extensive eye tracking file with multiple variables ranging from  gaze coordinates to quality of eye tracking. <br>
-
-![](ReadmeFiles/15.png)
+This implementation uses **Varjo Base** Software to record the view from the HMD. The output is a video with the view from the HMD and a point showing where the eyes of the user are looking at. We also get an extensive eye tracking file with multiple variables ranging from  gaze coordinates to quality of eye tracking.
 
 
 ## Acknowledgments
