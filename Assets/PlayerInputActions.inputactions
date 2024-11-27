@@ -1,0 +1,234 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Virtual Controller (vJoy)",
+            "id": "718e8d3f-21a7-4345-9934-407a80abb751",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "d87df36f-8955-4a5e-8f2f-58ca95918441",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Bremse",
+                    "type": "Value",
+                    "id": "94eb5d3f-ac96-4e7a-8166-df465ef8d2eb",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Gang Reverse",
+                    "type": "Value",
+                    "id": "4db93435-8e93-4814-87e4-7a6ad8f86181",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Gang Neutral",
+                    "type": "Value",
+                    "id": "9e3456aa-5719-497c-a04f-9a1d7ce1616f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Gang Drive",
+                    "type": "Value",
+                    "id": "74e520a8-54c1-48c2-ac29-042ba539bd00",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "rechter Blinker",
+                    "type": "Button",
+                    "id": "77740a9d-e53c-4da0-9b0a-97813b543cce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "linker Blinker",
+                    "type": "Button",
+                    "id": "dc5160a8-8daf-4675-91e6-840f6b68ec5f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Lenkrad",
+                    "type": "Value",
+                    "id": "e9e3f696-419b-431f-a41d-c30e74ededc5",
+                    "expectedControlType": "Axis",
+                    "processors": "AxisDeadzone(min=0.025,max=0.925)",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Scheinwerfer Option 1",
+                    "type": "Button",
+                    "id": "73dc11ba-eb84-4de2-b1df-b2f830fabe2e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Scheinwerfer Option 2",
+                    "type": "Button",
+                    "id": "f2c67300-5f20-45fd-81b3-827180da76ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Scheinwerfer Option 3",
+                    "type": "Button",
+                    "id": "ac2e63ed-86ce-482f-8471-9d9151339a04",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0573ac39-71b5-46ea-a232-de24fa84c408",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/ry",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01bd935a-5b80-4c5f-ae70-b541494c4c27",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bremse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1be792c-7af6-4b63-8e53-485bca3c9518",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gang Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6d25074-8677-4c3f-9955-f3428a3222cf",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gang Neutral",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e53cd785-a855-446b-81ce-5b2a921b5e4e",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gang Drive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6cad28c-1c53-43da-80aa-2d20712a4f43",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button18",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "rechter Blinker",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72fb025d-901e-4395-b71b-cda83672072b",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "linker Blinker",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc03bd70-dffe-4f10-9e0d-b3d6b2953e63",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/stick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lenkrad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6585d826-f8e1-4e4d-b12e-d84e3399b8f6",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button20",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scheinwerfer Option 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f27c5c8e-cfaf-4b62-a60f-5423e8a0d8e2",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button21",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scheinwerfer Option 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dda78377-d33d-4de7-9500-2db8101bcaf7",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button22",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scheinwerfer Option 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
