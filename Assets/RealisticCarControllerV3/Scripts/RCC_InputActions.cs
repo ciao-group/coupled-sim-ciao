@@ -242,6 +242,42 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Drive"",
+                    ""type"": ""Button"",
+                    ""id"": ""7851b519-6161-4c8e-a61e-bd3a54e24f90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reverse"",
+                    ""type"": ""Button"",
+                    ""id"": ""2a876e0d-8e60-47c5-a131-081710bdbe61"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Neutral"",
+                    ""type"": ""Button"",
+                    ""id"": ""ada338d7-ba1a-4828-853a-9d5f68aab02d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Park"",
+                    ""type"": ""Button"",
+                    ""id"": ""51a8162c-0616-42a1-ac12-7fc6d62b0201"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1270,17 +1306,6 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f28cedbd-5d4e-4109-a83f-6034beeb1786"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""G920"",
-                    ""action"": ""N Gear"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c67d3a53-1242-4c81-ade5-2b57f7d4bd18"",
                     ""path"": ""<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button13"",
                     ""interactions"": """",
@@ -1375,6 +1400,50 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard Mouse"",
                     ""action"": ""Interior Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f2b9236-2878-4353-aea6-5e3e9a822d02"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bffa261-0420-4c18-b41c-c91a01067345"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f05eb56-33a4-4558-bf0a-8c42551426f4"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Neutral"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e4d90aa-9cba-40f8-95fa-328d319c35d8"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Park"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1724,6 +1793,10 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         m_Vehicle__6thGear = m_Vehicle.FindAction("6thGear", throwIfNotFound: true);
         m_Vehicle_RGear = m_Vehicle.FindAction("RGear", throwIfNotFound: true);
         m_Vehicle_Clutch = m_Vehicle.FindAction("Clutch", throwIfNotFound: true);
+        m_Vehicle_Drive = m_Vehicle.FindAction("Drive", throwIfNotFound: true);
+        m_Vehicle_Reverse = m_Vehicle.FindAction("Reverse", throwIfNotFound: true);
+        m_Vehicle_Neutral = m_Vehicle.FindAction("Neutral", throwIfNotFound: true);
+        m_Vehicle_Park = m_Vehicle.FindAction("Park", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Orbit = m_Camera.FindAction("Orbit", throwIfNotFound: true);
@@ -1820,6 +1893,10 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Vehicle__6thGear;
     private readonly InputAction m_Vehicle_RGear;
     private readonly InputAction m_Vehicle_Clutch;
+    private readonly InputAction m_Vehicle_Drive;
+    private readonly InputAction m_Vehicle_Reverse;
+    private readonly InputAction m_Vehicle_Neutral;
+    private readonly InputAction m_Vehicle_Park;
     public struct VehicleActions
     {
         private @RCC_InputActions m_Wrapper;
@@ -1848,6 +1925,10 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         public InputAction @_6thGear => m_Wrapper.m_Vehicle__6thGear;
         public InputAction @RGear => m_Wrapper.m_Vehicle_RGear;
         public InputAction @Clutch => m_Wrapper.m_Vehicle_Clutch;
+        public InputAction @Drive => m_Wrapper.m_Vehicle_Drive;
+        public InputAction @Reverse => m_Wrapper.m_Vehicle_Reverse;
+        public InputAction @Neutral => m_Wrapper.m_Vehicle_Neutral;
+        public InputAction @Park => m_Wrapper.m_Vehicle_Park;
         public InputActionMap Get() { return m_Wrapper.m_Vehicle; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1929,6 +2010,18 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
             @Clutch.started += instance.OnClutch;
             @Clutch.performed += instance.OnClutch;
             @Clutch.canceled += instance.OnClutch;
+            @Drive.started += instance.OnDrive;
+            @Drive.performed += instance.OnDrive;
+            @Drive.canceled += instance.OnDrive;
+            @Reverse.started += instance.OnReverse;
+            @Reverse.performed += instance.OnReverse;
+            @Reverse.canceled += instance.OnReverse;
+            @Neutral.started += instance.OnNeutral;
+            @Neutral.performed += instance.OnNeutral;
+            @Neutral.canceled += instance.OnNeutral;
+            @Park.started += instance.OnPark;
+            @Park.performed += instance.OnPark;
+            @Park.canceled += instance.OnPark;
         }
 
         private void UnregisterCallbacks(IVehicleActions instance)
@@ -2005,6 +2098,18 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
             @Clutch.started -= instance.OnClutch;
             @Clutch.performed -= instance.OnClutch;
             @Clutch.canceled -= instance.OnClutch;
+            @Drive.started -= instance.OnDrive;
+            @Drive.performed -= instance.OnDrive;
+            @Drive.canceled -= instance.OnDrive;
+            @Reverse.started -= instance.OnReverse;
+            @Reverse.performed -= instance.OnReverse;
+            @Reverse.canceled -= instance.OnReverse;
+            @Neutral.started -= instance.OnNeutral;
+            @Neutral.performed -= instance.OnNeutral;
+            @Neutral.canceled -= instance.OnNeutral;
+            @Park.started -= instance.OnPark;
+            @Park.performed -= instance.OnPark;
+            @Park.canceled -= instance.OnPark;
         }
 
         public void RemoveCallbacks(IVehicleActions instance)
@@ -2216,6 +2321,10 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         void On_6thGear(InputAction.CallbackContext context);
         void OnRGear(InputAction.CallbackContext context);
         void OnClutch(InputAction.CallbackContext context);
+        void OnDrive(InputAction.CallbackContext context);
+        void OnReverse(InputAction.CallbackContext context);
+        void OnNeutral(InputAction.CallbackContext context);
+        void OnPark(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

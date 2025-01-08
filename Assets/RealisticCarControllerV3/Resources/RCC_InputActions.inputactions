@@ -220,6 +220,42 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Drive",
+                    "type": "Button",
+                    "id": "7851b519-6161-4c8e-a61e-bd3a54e24f90",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reverse",
+                    "type": "Button",
+                    "id": "2a876e0d-8e60-47c5-a131-081710bdbe61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Neutral",
+                    "type": "Button",
+                    "id": "ada338d7-ba1a-4828-853a-9d5f68aab02d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Park",
+                    "type": "Button",
+                    "id": "51a8162c-0616-42a1-ac12-7fc6d62b0201",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1248,17 +1284,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f28cedbd-5d4e-4109-a83f-6034beeb1786",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "G920",
-                    "action": "N Gear",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c67d3a53-1242-4c81-ade5-2b57f7d4bd18",
                     "path": "<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button13",
                     "interactions": "",
@@ -1353,6 +1378,50 @@
                     "processors": "",
                     "groups": "Keyboard Mouse",
                     "action": "Interior Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f2b9236-2878-4353-aea6-5e3e9a822d02",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bffa261-0420-4c18-b41c-c91a01067345",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f05eb56-33a4-4558-bf0a-8c42551426f4",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Neutral",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e4d90aa-9cba-40f8-95fa-328d319c35d8",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Park",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

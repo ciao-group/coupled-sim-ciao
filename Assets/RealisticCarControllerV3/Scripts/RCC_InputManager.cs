@@ -26,6 +26,10 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
     public bool logitechHShifterUsed = false;
     public int logitechGear = -2;
 
+    // gear mode
+    public string GearMode = "Drive";
+    public bool GearModeUsed = true;
+
     public delegate void onStartStopEngine();
     public static event onStartStopEngine OnStartStopEngine;
 
@@ -143,7 +147,11 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
             inputActions.Vehicle._6thGear.canceled += _Gear_canceled;
             inputActions.Vehicle.RGear.canceled += _Gear_canceled;
 #endif
-
+            // gear mode
+            inputActions.Vehicle.Drive.performed += _DriveGear_performed;
+            inputActions.Vehicle.Reverse.performed += _ReverseGear_performed;
+            inputActions.Vehicle.Park.performed += _ParkGear_performed;
+            inputActions.Vehicle.Neutral.performed += _NeutralGear_performed;
         }
 
         if (!RCC_Settings.Instance.mobileControllerEnabled) {
@@ -228,6 +236,37 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
 
     }
 #endif
+
+    // fixedbaseSim Gear input
+
+    private void _DriveGear_performed(InputAction.CallbackContext obj)
+    {
+        GearModeUsed = true;
+        GearMode = "Drive";
+
+    }
+    private void _ReverseGear_performed(InputAction.CallbackContext obj)
+    {
+        GearModeUsed = true;
+        GearMode = "Reverse";
+
+    }
+    private void _ParkGear_performed(InputAction.CallbackContext obj)
+    {
+        GearModeUsed = true;
+        GearMode = "Park";
+
+    }
+
+    private void _NeutralGear_performed(InputAction.CallbackContext obj)
+    {
+        GearModeUsed = true;
+        GearMode = "Neutral";
+
+    }
+
+    //
+
     private void StartStopEngine_performed(InputAction.CallbackContext obj) {
 
         if (OnStartStopEngine != null)
