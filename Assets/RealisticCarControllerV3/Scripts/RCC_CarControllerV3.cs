@@ -280,7 +280,6 @@ public class RCC_CarControllerV3 : RCC_Core {
     public int totalGears = 6;          //	Total count of gears.
     public int currentGear = 0;     // Current gear of the vehicle.
     public bool NGear = false;          // N gear.
-    public bool R_Gear = false;
 
     public float finalRatio = 3.23f;                                                //	Final drive gear ratio. 
     [Range(0f, .5f)] public float gearShiftingDelay = .35f;             //	Gear shifting delay with time.
@@ -1127,25 +1126,16 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 boostInput = inputs.boostInput;
                 handbrakeInput = inputs.handbrakeInput;
-                Debug.Log("Gear Mode: " + RCC_InputManager.Instance.GearMode);
-                if (RCC_InputManager.Instance.GearModeUsed)
-                {
+
+
+                if (RCC_InputManager.Instance.GearModeUsed || RCC_InputManager.Instance.logitechHShifterUsed) {
+
                     if (RCC_InputManager.Instance.GearMode == "Reverse")
-                    {
+                        currentGear = -1;
+                    else if (RCC_InputManager.Instance.GearMode == "Drive")
                         currentGear = 0;
-                        direction = -1;
-                        Debug.Log("Reverse");
-                    }
                     else
-                    {
-                        direction = 1;
-                        Debug.Log("Drive");
-                    }
-                }
-
-                if (RCC_InputManager.Instance.logitechHShifterUsed) {
-
-                    currentGear = inputs.gearInput;
+                        currentGear = -2;
 
                     if (currentGear == -1) {
 
@@ -1228,13 +1218,10 @@ public class RCC_CarControllerV3 : RCC_Core {
         } else {
 
             if (brakeInput < .5f && speed < 5)
-                canGoReverseNow = false; //was true but we don't want the brake to ever go in reverse w/o the R Gear engaged
+                canGoReverseNow = true;
             else if (brakeInput > 0 && transform.InverseTransformDirection(Rigid.velocity).z > 1f)
                 canGoReverseNow = false;
 
-            else if (RCC_InputManager.Instance.GearMode == "Reverse" && speed < 5)
-                canGoReverseNow = true;
-            
         }
 
         if (AutomaticGear && !semiAutomaticGear && !changingGear && !RCC_InputManager.Instance.logitechHShifterUsed) {
@@ -1245,7 +1232,6 @@ public class RCC_CarControllerV3 : RCC_Core {
                 StartCoroutine(ChangeGear(-1));
             else if (throttleInput < .1f && transform.InverseTransformDirection(Rigid.velocity).z > -1f && direction == -1)
                 StartCoroutine(ChangeGear(0));
-
         }
 
     }
@@ -2420,16 +2406,6 @@ public class RCC_CarControllerV3 : RCC_Core {
             return;
 
         NGear = state;
-
-    }
-
-    private void RCC_InputManager_OnR_Gear(bool state)
-    {
-
-        if (!canControl || externalController)
-            return;
-
-        R_Gear = state;
 
     }
 
