@@ -2,75 +2,147 @@ using System.Collections.Generic;
 using UnityEngine;
 using Varjo.XR;
 
+/// <summary>
+/// Marker-based alignment for an RCC car
+/// 
+/// Usage:
+/// 1) Attach this script to the same GameObject that has RCC_CarControllerV3 + Rigidbody.
+/// 2) Provide marker IDs & offsets in 'trackedObjects'.
+/// </summary>
 public class VarjoMarkerManager : MonoBehaviour
 {
     [System.Serializable]
     public struct TrackedObject
     {
-        public long[] ids;
-        public GameObject gameObject;
-        public bool dynamicTracking;
-        public Vector3[] positionOffsets;
-        public Vector3[] rotationOffsets;
-        public Vector3[] scaleOffsets;
+        public long[] ids;                  // Marker IDs
+        public Vector3[] positionOffsets;   // Position offset per marker ID
+        public Vector3[] rotationOffsets;   // Euler offset per marker ID
+        public Vector3[] scaleOffsets;      // Scale offset per marker ID
     }
 
+    [Header("RCC & Markers")]
+    [Tooltip("The RCC Car Controller for your vehicle.")]
+    public RCC_CarControllerV3 rccCar;
+
+    [Tooltip("Marker configurations for alignment during calibration.")]
     public TrackedObject[] trackedObjects;
-    private List<VarjoMarker> markers = new List<VarjoMarker>();
-    private List<long> removedMarkerIds = new List<long>();
-    public float transitionSpeed = 0.1f;
-    public long adjustableMarkerId;
+
+    [Header("Calibration Settings")]
+    [Tooltip("Seconds to keep the car kinematic, aligning to markers.")]
+    public float calibrationDuration = 10f;
+
+    [Tooltip("Lerp/slerp speed while aligning to the marker.")]
+    public float alignmentLerpSpeed = 5f;
+
+    // Internal calibration state
+    private float calibrationTimer = 0f;
+    private bool isCalibrating = false;
+
+    // For marker detection
+    private List<VarjoMarker> currentMarkers = new List<VarjoMarker>();
+    private List<long> removedMarkers = new List<long>();
 
     private void OnEnable()
     {
+        // Enable Varjo marker tracking
         VarjoMarkers.EnableVarjoMarkers(true);
+
+        // (Optional) Start calibration automatically
+       StartCalibration();
     }
 
     private void OnDisable()
     {
+        // Disable Varjo marker tracking
         VarjoMarkers.EnableVarjoMarkers(false);
     }
 
-    void Update()
-    {
-        if (VarjoMarkers.IsVarjoMarkersEnabled())
-        {
-            VarjoMarkers.GetVarjoMarkers(out markers);
-            VarjoMarkers.GetRemovedVarjoMarkerIds(out removedMarkerIds);
-            foreach (var tracked in trackedObjects)
-            {
-                foreach (var marker in markers)
-                {
-                    int index = System.Array.IndexOf(tracked.ids, marker.id);
-                    if (index != -1)
-                    {
-                        Vector3 adjustedPosition = marker.pose.position + tracked.positionOffsets[index];
-                        Quaternion adjustedRotation = ApplyCustomRotation(marker.pose.rotation, tracked.rotationOffsets[index]);
-                        Vector3 adjustedScale = tracked.scaleOffsets[index];
+    /// <summary>
+    /// Begins the marker-based calibration by setting the car rigidbody to kinematic
+    /// and resetting the calibration timer.
+    /// </summary>
 
-                        tracked.gameObject.SetActive(true);
-                        tracked.gameObject.transform.localPosition = Vector3.Lerp(tracked.gameObject.transform.localPosition, adjustedPosition, Time.deltaTime * transitionSpeed);
-                        tracked.gameObject.transform.localRotation = Quaternion.Slerp(tracked.gameObject.transform.localRotation, adjustedRotation, Time.deltaTime * transitionSpeed);
-                        tracked.gameObject.transform.localScale = Vector3.Lerp(tracked.gameObject.transform.localScale, adjustedScale, Time.deltaTime * transitionSpeed);
-                        break;
-                    }
-                }
-            }
-        }
+    public void StartCalibration()
+    {
+        if (rccCar && rccCar.Rigid)
+            rccCar.Rigid.isKinematic = true;
+
+        calibrationTimer = calibrationDuration;
+        isCalibrating = true;
     }
 
-    Quaternion ApplyCustomRotation(Quaternion originalRotation, Vector3 eulerAngleOffset)
+    /// <summary>
+    /// Ends the calibration:
+    ///   - Re-enables RCC physics,
+    ///   - Re-parents the camera so it doesn't teleport in world space
+    ///     (stays exactly where it is if the car hasn't moved).
+    /// </summary>
+    public void EndCalibration()
     {
-        // Decompose the original rotation to its axes
-        originalRotation.ToAngleAxis(out float angle, out Vector3 axis);
-        Quaternion baseRotation = Quaternion.AngleAxis(angle, axis);
+        isCalibrating = false;
 
-        // Apply Euler angle offsets correctly to avoid unintended axis interactions
-        Quaternion rotationX = Quaternion.AngleAxis(eulerAngleOffset.x, Vector3.right);
-        Quaternion rotationY = Quaternion.AngleAxis(eulerAngleOffset.y, Vector3.up);
-        Quaternion rotationZ = Quaternion.AngleAxis(eulerAngleOffset.z, Vector3.forward);
+        // Re-enable normal RCC physics
+        if (rccCar && rccCar.Rigid)
+            rccCar.Rigid.isKinematic = false;
+        
+        // (Optional) If no more marker alignment is needed:
+        // this.enabled = false;
+    }
 
-        // Compound the rotations, prioritizing the Z axis roll
-        return baseRotation * rotationZ * rotationY * rotationX;
+    private void Update()
+    {
+        
+        if (!isCalibrating)
+            return;
+
+        calibrationTimer -= Time.deltaTime;
+        if (calibrationTimer <= 0f)
+        {
+            EndCalibration();
+            return;
+        }
+        
+        AlignCarToMarkers();
+    }
+
+    /// <summary>
+    /// During calibration, smoothly align the car to the marker's pose.
+    /// </summary>
+    private void AlignCarToMarkers()
+    {
+        if (!VarjoMarkers.IsVarjoMarkersEnabled())
+            return;
+
+        VarjoMarkers.GetVarjoMarkers(out currentMarkers);
+        VarjoMarkers.GetRemovedVarjoMarkerIds(out removedMarkers);
+
+        // For each configured marker group
+        foreach (TrackedObject tracked in trackedObjects)
+        {
+            // For each detected marker
+            foreach (VarjoMarker marker in currentMarkers)
+            {
+                int idx = System.Array.IndexOf(tracked.ids, marker.id);
+                if (idx < 0)
+                    continue;  // not found
+
+                // Found matching marker
+                Vector3 realPos = marker.pose.position;
+                Quaternion realRot = marker.pose.rotation;
+
+                // Offsets
+                Vector3 desiredPos = realPos + tracked.positionOffsets[idx];
+                Quaternion desiredRot = realRot * Quaternion.Euler(tracked.rotationOffsets[idx]);
+                Vector3 desiredScale = tracked.scaleOffsets[idx];
+
+                // Lerp this transform (the RCC object)
+                transform.position = Vector3.Lerp(transform.position, desiredPos, Time.deltaTime * alignmentLerpSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRot, Time.deltaTime * alignmentLerpSpeed);
+                transform.localScale = Vector3.Lerp(transform.localScale, desiredScale, Time.deltaTime * alignmentLerpSpeed);
+
+                // Only use first valid marker
+                break;
+            }
+        }
     }
 }

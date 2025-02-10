@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
-
-public class MarkerAdjustmentUI : MonoBehaviour
+/** public class MarkerAdjustmentUI : MonoBehaviour
 {
-    public VarjoMarkerManager varjoMarkerManager;
+    public CarMarkerAlignmentFullExample varjoMarkerManager;
     public TextMeshProUGUI positionText;
     public TextMeshProUGUI rotationText;
     public TextMeshProUGUI scaleText;
@@ -60,3 +59,4 @@ public class MarkerAdjustmentUI : MonoBehaviour
         scaleText.text = "Scale: " + varjoMarkerManager.trackedObjects[activeMarkerIndex].scaleOffsets[0].ToString();
     }
 }
+ **/

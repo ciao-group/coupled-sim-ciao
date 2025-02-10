@@ -9,12 +9,12 @@ public class StartMR : MonoBehaviour
     void Start()
     {
         VarjoMixedReality.StartRender();
-        
-    }
+}
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }
+
