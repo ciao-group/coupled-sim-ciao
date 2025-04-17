@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1890fe0f0b9c09e4fa4d4bb3d31d19af, type: 3}
+  m_Name: ClusterGlass
+  m_EditorClassIdentifier: 
+  MultiplyStartColor: {r: 0.38425595, g: 0.5024599, b: 0.5188679, a: 1}
+  MultiplyEndColor: {r: 0.34531865, g: 0.63835704, b: 0.754717, a: 1}
+  AddStartColor: {r: 0.04472231, g: 0.1235859, b: 0.14150941, a: 1}
+  AddEndColor: {r: 0.06808472, g: 0.07079764, b: 0.09433961, a: 1}
