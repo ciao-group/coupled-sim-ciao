@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a64e529262e884d901cb3b55a74bce, type: 3}
-  m_Name: LE_EnergyTexts
-  m_EditorClassIdentifier: 
-  TextColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
-  Material: {fileID: 0}
+version https://git-lfs.github.com/spec/v1
+oid sha256:65be923518c51acb84e54c560f340cbc9b0f21b3f16b28db24073bd8ba656de4
+size 505
