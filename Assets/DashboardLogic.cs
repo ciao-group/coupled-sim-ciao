@@ -54,14 +54,6 @@ public class DashboardGUI : MonoBehaviour
             lastPosition = car.transform.position;
         }
 
-        foreach (var icon in iconFaders)
-        {
-            // TODO logic to check if icon should fade out
-            if (true)
-            {
-                icon.FadeOut();
-            }
-        }
     }
 
     void Update()
