@@ -106,7 +106,7 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Indicator Left"",
@@ -115,7 +115,7 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Indicator Hazard"",
@@ -1009,6 +1009,17 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""469e5f03-7bf8-45f7-abec-1d29229e3dae"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button18"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Indicator Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2694c28d-039d-4942-b81b-e63b965420f4"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -1042,6 +1053,17 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d945c76e-ac50-43f2-98f5-31338c7a7fc0"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button19"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Indicator Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""45686879-95ca-4111-a1a0-8a51bd6face3"",
                     ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
@@ -1069,6 +1091,17 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""G920"",
+                    ""action"": ""Indicator Hazard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f12d230e-9183-4b0d-bbc0-a33b5834332b"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button17"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Indicator Hazard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

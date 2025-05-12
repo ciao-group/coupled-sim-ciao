@@ -362,6 +362,7 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
 
         if (OnIndicatorRight != null)
             OnIndicatorRight();
+            Debug.Log("Blinking RIGHT");
 
     }
 
@@ -369,6 +370,7 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
 
         if (OnIndicatorLeft != null)
             OnIndicatorLeft();
+            Debug.Log("Blinking LEFT");
 
     }
 

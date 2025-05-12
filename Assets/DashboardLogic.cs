@@ -86,7 +86,7 @@ public class DashboardGUI : MonoBehaviour
             else
                 timeElapsedText.text = $"{minutes} <font=\"DinLight_Glow\"><size=60%>min</size></font>";
 
-            DistanceText.text = (distanceTravelled / 1000f).ToString("F2") + " <font=\"DinLight_Glow\"><size=60%>km/h</size></font>"; // 2 decimal points
+            DistanceText.text = (distanceTravelled / 1000f).ToString("F2") + " <font=\"DinLight_Glow\"><size=60%>km</size></font>"; // 2 decimal points
         }
 
 

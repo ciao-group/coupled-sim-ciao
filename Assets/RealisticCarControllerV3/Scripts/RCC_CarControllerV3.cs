@@ -2409,15 +2409,18 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
+    // CC: indicator hazard ist die Hebelstellung zwischen Links und Rechts, und damit jetzt einfach der Aus-Button anstatt dem Hazard Licht
     private void RCC_InputManager_OnIndicatorHazard() {
 
         if (!canControl || externalController)
             return;
 
-        if (indicatorsOn != IndicatorsOn.All)
-            indicatorsOn = IndicatorsOn.All;
-        else
-            indicatorsOn = IndicatorsOn.Off;
+        // if (indicatorsOn != IndicatorsOn.All)
+        //    indicatorsOn = IndicatorsOn.All;
+        //else
+        //    indicatorsOn = IndicatorsOn.Off;
+
+        indicatorsOn = IndicatorsOn.Off;
 
     }
 
