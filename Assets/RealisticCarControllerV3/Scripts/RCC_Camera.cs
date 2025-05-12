@@ -236,7 +236,7 @@ public class RCC_Camera : MonoBehaviour {
     public delegate void onBCGCameraSpawned(GameObject BCGCamera);
     public static event onBCGCameraSpawned OnBCGCameraSpawned;
 
-    float refV = 0f;
+    //float refV = 0f;
 
     private void Awake() {
 

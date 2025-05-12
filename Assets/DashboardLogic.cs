@@ -8,8 +8,6 @@ using System.Globalization;
 
 public class DashboardGUI : MonoBehaviour
 {
-    public IconFader[] iconFaders;
-
     public RCC_CarControllerV3 car;
 
     [Header("Leftside Elements")]
