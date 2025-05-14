@@ -51,18 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Low Beam Lights",
+                    "name": "Interior Lights",
                     "type": "Button",
-                    "id": "372f474d-e084-434c-8671-5dde678119fc",
+                    "id": "824b9e50-4e4f-45c8-ab0b-d979354e8d3a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interior Lights",
+                    "name": "Low Beam Lights",
                     "type": "Button",
-                    "id": "824b9e50-4e4f-45c8-ab0b-d979354e8d3a",
+                    "id": "372f474d-e084-434c-8671-5dde678119fc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
@@ -888,39 +888,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5684f55e-081f-4c1b-907a-f29c3e57b7ae",
-                    "path": "<Keyboard>/l",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Mouse",
-                    "action": "Low Beam Lights",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2dd929da-4b2b-4b95-afc6-dc90a1a9a8d9",
-                    "path": "<Gamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Low Beam Lights",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "68049a6d-7f4b-4ac6-ae57-134a916a4a11",
-                    "path": "<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button10",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "G920",
-                    "action": "Low Beam Lights",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cb6ea6f1-37fa-4b63-8727-dbb03c52bc9e",
                     "path": "<Keyboard>/k",
                     "interactions": "",
@@ -948,6 +915,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "G920",
+                    "action": "High Beam Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15d6068c-9641-44c9-9b2d-fd4ea60f075c",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button20",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "High Beam Lights",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1455,6 +1433,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Park",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5684f55e-081f-4c1b-907a-f29c3e57b7ae",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Mouse",
+                    "action": "Low Beam Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dd929da-4b2b-4b95-afc6-dc90a1a9a8d9",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Low Beam Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68049a6d-7f4b-4ac6-ae57-134a916a4a11",
+                    "path": "<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "G920",
+                    "action": "Low Beam Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efd2098e-14f0-4ed1-ab05-c51dfde1d15d",
+                    "path": "<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button21",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Low Beam Lights",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

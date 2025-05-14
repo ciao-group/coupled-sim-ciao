@@ -73,18 +73,18 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Low Beam Lights"",
+                    ""name"": ""Interior Lights"",
                     ""type"": ""Button"",
-                    ""id"": ""372f474d-e084-434c-8671-5dde678119fc"",
+                    ""id"": ""824b9e50-4e4f-45c8-ab0b-d979354e8d3a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interior Lights"",
+                    ""name"": ""Low Beam Lights"",
                     ""type"": ""Button"",
-                    ""id"": ""824b9e50-4e4f-45c8-ab0b-d979354e8d3a"",
+                    ""id"": ""372f474d-e084-434c-8671-5dde678119fc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
@@ -910,39 +910,6 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5684f55e-081f-4c1b-907a-f29c3e57b7ae"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard Mouse"",
-                    ""action"": ""Low Beam Lights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2dd929da-4b2b-4b95-afc6-dc90a1a9a8d9"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Low Beam Lights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""68049a6d-7f4b-4ac6-ae57-134a916a4a11"",
-                    ""path"": ""<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button10"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""G920"",
-                    ""action"": ""Low Beam Lights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cb6ea6f1-37fa-4b63-8727-dbb03c52bc9e"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
@@ -970,6 +937,17 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""G920"",
+                    ""action"": ""High Beam Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15d6068c-9641-44c9-9b2d-fd4ea60f075c"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button20"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""High Beam Lights"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1479,6 +1457,50 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Park"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5684f55e-081f-4c1b-907a-f29c3e57b7ae"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Mouse"",
+                    ""action"": ""Low Beam Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2dd929da-4b2b-4b95-afc6-dc90a1a9a8d9"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Low Beam Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68049a6d-7f4b-4ac6-ae57-134a916a4a11"",
+                    ""path"": ""<HID::Logitech G920 Driving Force Racing Wheel for Xbox One>/button10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""G920"",
+                    ""action"": ""Low Beam Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efd2098e-14f0-4ed1-ab05-c51dfde1d15d"",
+                    ""path"": ""<HID::Shaul Eizikovich vJoy - Virtual Joystick>/button21"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Low Beam Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1807,8 +1829,8 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         m_Vehicle_Steering = m_Vehicle.FindAction("Steering", throwIfNotFound: true);
         m_Vehicle_Handbrake = m_Vehicle.FindAction("Handbrake", throwIfNotFound: true);
         m_Vehicle_StartStopEngine = m_Vehicle.FindAction("Start/Stop Engine", throwIfNotFound: true);
-        m_Vehicle_LowBeamLights = m_Vehicle.FindAction("Low Beam Lights", throwIfNotFound: true);
         m_Vehicle_InteriorLights = m_Vehicle.FindAction("Interior Lights", throwIfNotFound: true);
+        m_Vehicle_LowBeamLights = m_Vehicle.FindAction("Low Beam Lights", throwIfNotFound: true);
         m_Vehicle_HighBeamLights = m_Vehicle.FindAction("High Beam Lights", throwIfNotFound: true);
         m_Vehicle_IndicatorRight = m_Vehicle.FindAction("Indicator Right", throwIfNotFound: true);
         m_Vehicle_IndicatorLeft = m_Vehicle.FindAction("Indicator Left", throwIfNotFound: true);
@@ -1907,8 +1929,8 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Vehicle_Steering;
     private readonly InputAction m_Vehicle_Handbrake;
     private readonly InputAction m_Vehicle_StartStopEngine;
-    private readonly InputAction m_Vehicle_LowBeamLights;
     private readonly InputAction m_Vehicle_InteriorLights;
+    private readonly InputAction m_Vehicle_LowBeamLights;
     private readonly InputAction m_Vehicle_HighBeamLights;
     private readonly InputAction m_Vehicle_IndicatorRight;
     private readonly InputAction m_Vehicle_IndicatorLeft;
@@ -1939,8 +1961,8 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         public InputAction @Steering => m_Wrapper.m_Vehicle_Steering;
         public InputAction @Handbrake => m_Wrapper.m_Vehicle_Handbrake;
         public InputAction @StartStopEngine => m_Wrapper.m_Vehicle_StartStopEngine;
-        public InputAction @LowBeamLights => m_Wrapper.m_Vehicle_LowBeamLights;
         public InputAction @InteriorLights => m_Wrapper.m_Vehicle_InteriorLights;
+        public InputAction @LowBeamLights => m_Wrapper.m_Vehicle_LowBeamLights;
         public InputAction @HighBeamLights => m_Wrapper.m_Vehicle_HighBeamLights;
         public InputAction @IndicatorRight => m_Wrapper.m_Vehicle_IndicatorRight;
         public InputAction @IndicatorLeft => m_Wrapper.m_Vehicle_IndicatorLeft;
@@ -1986,12 +2008,12 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
             @StartStopEngine.started += instance.OnStartStopEngine;
             @StartStopEngine.performed += instance.OnStartStopEngine;
             @StartStopEngine.canceled += instance.OnStartStopEngine;
-            @LowBeamLights.started += instance.OnLowBeamLights;
-            @LowBeamLights.performed += instance.OnLowBeamLights;
-            @LowBeamLights.canceled += instance.OnLowBeamLights;
             @InteriorLights.started += instance.OnInteriorLights;
             @InteriorLights.performed += instance.OnInteriorLights;
             @InteriorLights.canceled += instance.OnInteriorLights;
+            @LowBeamLights.started += instance.OnLowBeamLights;
+            @LowBeamLights.performed += instance.OnLowBeamLights;
+            @LowBeamLights.canceled += instance.OnLowBeamLights;
             @HighBeamLights.started += instance.OnHighBeamLights;
             @HighBeamLights.performed += instance.OnHighBeamLights;
             @HighBeamLights.canceled += instance.OnHighBeamLights;
@@ -2074,12 +2096,12 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
             @StartStopEngine.started -= instance.OnStartStopEngine;
             @StartStopEngine.performed -= instance.OnStartStopEngine;
             @StartStopEngine.canceled -= instance.OnStartStopEngine;
-            @LowBeamLights.started -= instance.OnLowBeamLights;
-            @LowBeamLights.performed -= instance.OnLowBeamLights;
-            @LowBeamLights.canceled -= instance.OnLowBeamLights;
             @InteriorLights.started -= instance.OnInteriorLights;
             @InteriorLights.performed -= instance.OnInteriorLights;
             @InteriorLights.canceled -= instance.OnInteriorLights;
+            @LowBeamLights.started -= instance.OnLowBeamLights;
+            @LowBeamLights.performed -= instance.OnLowBeamLights;
+            @LowBeamLights.canceled -= instance.OnLowBeamLights;
             @HighBeamLights.started -= instance.OnHighBeamLights;
             @HighBeamLights.performed -= instance.OnHighBeamLights;
             @HighBeamLights.canceled -= instance.OnHighBeamLights;
@@ -2335,8 +2357,8 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
         void OnSteering(InputAction.CallbackContext context);
         void OnHandbrake(InputAction.CallbackContext context);
         void OnStartStopEngine(InputAction.CallbackContext context);
-        void OnLowBeamLights(InputAction.CallbackContext context);
         void OnInteriorLights(InputAction.CallbackContext context);
+        void OnLowBeamLights(InputAction.CallbackContext context);
         void OnHighBeamLights(InputAction.CallbackContext context);
         void OnIndicatorRight(InputAction.CallbackContext context);
         void OnIndicatorLeft(InputAction.CallbackContext context);

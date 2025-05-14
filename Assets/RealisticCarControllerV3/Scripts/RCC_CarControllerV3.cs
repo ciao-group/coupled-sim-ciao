@@ -2448,23 +2448,34 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnHighBeamHeadlights() {
-
+    private void RCC_InputManager_OnHighBeamHeadlights()
+    {
         if (!canControl || externalController)
             return;
 
         highBeamHeadLightsOn = !highBeamHeadLightsOn;
 
+        if (highBeamHeadLightsOn)
+        {
+            // Turn off low beams if high beams are turned on
+            lowBeamHeadLightsOn = false;
+        }
     }
 
-    private void RCC_InputManager_OnLowBeamHeadlights() {
-
+    private void RCC_InputManager_OnLowBeamHeadlights()
+    {
         if (!canControl || externalController)
             return;
 
         lowBeamHeadLightsOn = !lowBeamHeadLightsOn;
 
+        if (lowBeamHeadLightsOn)
+        {
+            // Turn off high beams if low beams are turned on
+            highBeamHeadLightsOn = false;
+        }
     }
+
 
     private void RCC_InputManager_OnInteriorLights() {
 

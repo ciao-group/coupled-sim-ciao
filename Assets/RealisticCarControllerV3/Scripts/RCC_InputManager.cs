@@ -355,7 +355,6 @@ public class RCC_InputManager : RCC_Singleton<RCC_InputManager> {
 
         if (OnIndicatorHazard != null)
             OnIndicatorHazard();
-
     }
 
     private static void IndicatorRight_performed(InputAction.CallbackContext obj) {
