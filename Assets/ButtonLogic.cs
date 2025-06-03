@@ -27,6 +27,11 @@ public class ButtonLogic : MonoBehaviour
     [Tooltip("UI Image that displays the play/pause icon.")]
     [SerializeField] private Image playImage;
 
+    [Tooltip("Music Panel GameObject")]
+    [SerializeField] GameObject panel;
+
+
+
     private bool isPlaying = false;
 
     public void TogglePlay()
@@ -55,4 +60,17 @@ public class ButtonLogic : MonoBehaviour
 
         volumeImage.sprite = isMuted ? muteIcon : volumeIcon;
     }
+
+
+
+
+    public void ToggleMusicMenu()
+    {
+        if (panel != null)
+        {
+            panel.SetActive(!panel.activeSelf);
+        }
+    }
 }
+
+
