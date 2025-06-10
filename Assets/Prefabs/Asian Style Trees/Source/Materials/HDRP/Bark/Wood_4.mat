@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wood_5
+  m_Name: Wood_4
   m_Shader: {fileID: -6465566751694194690, guid: b6b6ae15b4b072b43b86fe59f1bf3067,
     type: 3}
   m_Parent: {fileID: 0}
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_bcc946eb604a4eaaa8779a443c9e9e00:
-        m_Texture: {fileID: 2800000, guid: 2c67adbdc567faf47a710853a4477b13, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6e3b00b87faa92c45ba46114f7dab039, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_cdb370c0694b48f794ea55dfa1052cdc:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_f058a00c21fb4b57a16f241a5787773c:
-        m_Texture: {fileID: 2800000, guid: 954eb3f8e265cf5409a1bcfc03c887af, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d99b0bb6a83c1a479e529e8b52066fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -94,10 +94,10 @@ Material:
     - _StencilRefGBuffer: 10
     - _StencilRefMV: 40
     - _StencilWriteMask: 6
-    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDepth: 9
     - _StencilWriteMaskDistortionVec: 4
-    - _StencilWriteMaskGBuffer: 14
-    - _StencilWriteMaskMV: 40
+    - _StencilWriteMaskGBuffer: 15
+    - _StencilWriteMaskMV: 41
     - _SupportDecals: 1
     - _SurfaceType: 0
     - _TransparentBackfaceEnable: 0
