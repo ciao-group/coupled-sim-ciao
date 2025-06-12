@@ -65,7 +65,7 @@ namespace UnityStandardAssets.Utility
             this.circuit = circuit;
 
             Reset();
-
+            
         }
 
 

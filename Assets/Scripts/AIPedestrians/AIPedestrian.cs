@@ -13,7 +13,7 @@ public class AIPedestrian : MonoBehaviour
     public void Init(WaypointCircuit circuit)
     {
         enabled = true;
-        _tracker = GetComponent<WaypointProgressTracker>();
+        //_tracker = GetComponent<WaypointProgressTracker>();
         _tracker.enabled = true;
         _tracker.Init(circuit);
         foreach (var waypoint in circuit.Waypoints)
@@ -34,8 +34,13 @@ public class AIPedestrian : MonoBehaviour
         return Mathf.Lerp(source, target, 1 - Mathf.Pow(smoothing, dt));
     }
 
+
+
+
+
     private void Update()
     {
+        _tracker = GetComponent<WaypointProgressTracker>(); //Tami
         currentBlendFactor = Damp(currentBlendFactor, animationBlendFactor, SpeedDampingFactor, Time.deltaTime);
         animator.SetFloat("Speed", currentBlendFactor);
         var steer = Quaternion.LookRotation(_tracker.target.position - transform.position, Vector3.up).eulerAngles;
@@ -49,6 +54,7 @@ public class AIPedestrian : MonoBehaviour
             pos.y = Damp(pos.y, hitInfo.point.y, HeightDampingFactor, Time.deltaTime);
         }
         transform.position = pos;
+
     }
 
     void OnTriggerEnter(Collider other)
