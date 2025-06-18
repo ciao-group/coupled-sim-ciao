@@ -1,18 +1,21 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class ButtonLogic : MonoBehaviour
 {
 
 
     [Header("Menu Bar Button Settings")]
+    [Tooltip("AudioSource to mute/unmute.")]
+    [SerializeField] private AudioSource audioSource;
 
     [Tooltip("Icon when audio is not muted.")]
     [SerializeField] private Sprite volumeIcon;
 
-    [Tooltip("UI Image that displays the mute icon.")]
+    [Tooltip("Icon when audio is muted.")]
+    [SerializeField] private Sprite muteIcon;
+
+    [Tooltip("UI Image that displays the mute/unmute icon.")]
     [SerializeField] private Image volumeImage;
 
     [Tooltip("Icon when audio is playing.")]
@@ -24,64 +27,7 @@ public class ButtonLogic : MonoBehaviour
     [Tooltip("UI Image that displays the play/pause icon.")]
     [SerializeField] private Image playImage;
 
-    [Tooltip("Music Panel GameObject")]
-    [SerializeField] private GameObject musicPanel;
-
-    [Tooltip("Volume slider GameObject")]
-    [SerializeField] private Slider volumeSlider;
-
-    [Tooltip("Music Panel GameObject")]
-    [SerializeField] private GameObject volumePanel;
-
-    [Header("Music Player")]
-
-    [Tooltip("AudioSource to mute/unmute and volume control.")]
-    [SerializeField] private AudioSource audioSource;
-
-    [Tooltip("Progress Slider of the song played.")]
-    [SerializeField] private Slider progressSlider;
-
-    [Tooltip("Time elapsed / progressed.")]
-    [SerializeField] private TextMeshProUGUI currentTimeText;
-
-    [Tooltip("Total duration of the song.")]
-    [SerializeField] private TextMeshProUGUI totalTimeText;
-
-
-    private bool isDragging = false;
-
     private bool isPlaying = false;
-
-
-    void Start()
-    {
-        if (volumeSlider != null && audioSource != null)
-        {
-            // Set slider to match current volume
-            volumeSlider.value = audioSource.volume;
-
-            // Add listener for changes
-            volumeSlider.onValueChanged.AddListener(SetVolume);
-        }
-
-        // Set total duration once at start
-        if (audioSource.clip != null)
-        {
-            float totalSeconds = audioSource.clip.length;
-            totalTimeText.text = FormatTime(totalSeconds);
-            progressSlider.maxValue = totalSeconds;
-        }
-    }
-
-    void Update()
-    {
-        if (audioSource.clip == null || isDragging)
-            return;
-
-        // Update slider value and current time display
-        progressSlider.value = audioSource.time;
-        currentTimeText.text = FormatTime(audioSource.time);
-    }
 
     public void TogglePlay()
     {
@@ -98,48 +44,15 @@ public class ButtonLogic : MonoBehaviour
             audioSource.Pause();
         }
     }
+    private bool isMuted = false;
 
-    public void ToggleMusicMenu()
-    {
-        if (musicPanel != null)
-        {
-            musicPanel.SetActive(!musicPanel.activeSelf);
-        }
-    }
 
-    public void SetVolume(float value)
+    public void ToggleMute()
     {
-        if (audioSource != null)
-            audioSource.volume = value;
-    }
+        isMuted = !isMuted;
 
-    public void ToggleVolumeMenu()
-    {
-        if (volumePanel != null)
-        {
-            volumePanel.SetActive(!volumePanel.activeSelf);
-        }
-    }
+        audioSource.mute = isMuted;
 
-    public void OnSliderValueChanged(float value)
-    {
-        if (isDragging)
-        {
-            currentTimeText.text = FormatTime(value);
-        }
-    }
-
-    private string FormatTime(float seconds)
-    {
-        int minutes = Mathf.FloorToInt(seconds / 60f);
-        int secs = Mathf.FloorToInt(seconds % 60f);
-        return $"{minutes:00}:{secs:00}";
+        volumeImage.sprite = isMuted ? muteIcon : volumeIcon;
     }
 }
-
-
-
-
-
-
-

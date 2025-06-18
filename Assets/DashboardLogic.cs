@@ -32,10 +32,6 @@ public class DashboardGUI : MonoBehaviour
     public TextMeshProUGUI dateText;
     public TextMeshProUGUI tempText;
 
-    [Header("Top Elements Tablet")]
-    public TextMeshProUGUI timeTextTablet;
-    public TextMeshProUGUI dateTextTablet;
-
     [Header("Rightside Elements")]
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI timeElapsedText;
@@ -142,10 +138,6 @@ public class DashboardGUI : MonoBehaviour
 
         dateText.text = styledDate;
         timeText.text = styledTime;
-
-
-        dateTextTablet.text = styledDate;
-        timeTextTablet.text = styledTime;
 
     }
 }

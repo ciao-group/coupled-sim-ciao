@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-// we need this script because otherwise unity does not recognise the additional displays
 public class ActivateAllDisplays : MonoBehaviour
 {
     [Header("Display Cameras")]
