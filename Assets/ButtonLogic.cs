@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using System.Collections;
+using System.Collections.Generic;
 
 public class ButtonLogic : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class ButtonLogic : MonoBehaviour
 
     [Header("Menu Bar Button Settings")]
 
-    [Tooltip("Icon when audio is not muted.")]
+    [Tooltip("Volume menu Icon.")]
     [SerializeField] private Sprite volumeIcon;
 
     [Tooltip("UI Image that displays the mute icon.")]
@@ -55,14 +57,6 @@ public class ButtonLogic : MonoBehaviour
 
     void Start()
     {
-        if (volumeSlider != null && audioSource != null)
-        {
-            // Set slider to match current volume
-            volumeSlider.value = audioSource.volume;
-
-            // Add listener for changes
-            volumeSlider.onValueChanged.AddListener(SetVolume);
-        }
 
         // Set total duration once at start
         if (audioSource.clip != null)
@@ -71,6 +65,32 @@ public class ButtonLogic : MonoBehaviour
             totalTimeText.text = FormatTime(totalSeconds);
             progressSlider.maxValue = totalSeconds;
         }
+
+        if (volumeSlider != null && audioSource != null)
+        {
+            volumeSlider.value = audioSource.volume;
+            volumeSlider.onValueChanged.AddListener(SetVolume);
+
+            AddSliderEventTriggers(volumeSlider);
+        }
+
+        if (progressSlider != null && audioSource.clip != null)
+        {
+            float totalSeconds = audioSource.clip.length;
+            totalTimeText.text = FormatTime(totalSeconds);
+            progressSlider.maxValue = totalSeconds;
+
+            AddSliderEventTriggers(progressSlider);
+        }
+    }
+    public void SetDragging(bool dragging)
+    {
+        if (!dragging && progressSlider != null && audioSource != null)
+        {
+            audioSource.time = progressSlider.value;
+        }
+
+        isDragging = dragging;
     }
 
     void Update()
@@ -78,9 +98,32 @@ public class ButtonLogic : MonoBehaviour
         if (audioSource.clip == null || isDragging)
             return;
 
-        // Update slider value and current time display
         progressSlider.value = audioSource.time;
         currentTimeText.text = FormatTime(audioSource.time);
+    }
+
+    private void AddSliderEventTriggers(Slider slider)
+    {
+        EventTrigger trigger = slider.gameObject.GetComponent<EventTrigger>();
+        if (trigger == null)
+        {
+            trigger = slider.gameObject.AddComponent<EventTrigger>();
+        }
+        else
+        {
+            trigger.triggers.Clear();
+        }
+
+        EventTrigger.Entry beginDrag = new EventTrigger.Entry();
+        beginDrag.eventID = EventTriggerType.BeginDrag;
+        beginDrag.callback.AddListener((eventData) => SetDragging(true));
+
+        EventTrigger.Entry endDrag = new EventTrigger.Entry();
+        endDrag.eventID = EventTriggerType.EndDrag;
+        endDrag.callback.AddListener((eventData) => SetDragging(false));
+
+        trigger.triggers.Add(beginDrag);
+        trigger.triggers.Add(endDrag);
     }
 
     public void TogglePlay()
@@ -99,6 +142,7 @@ public class ButtonLogic : MonoBehaviour
         }
     }
 
+    // toggle menu visibility functions
     public void ToggleMusicMenu()
     {
         if (musicPanel != null)
@@ -106,13 +150,6 @@ public class ButtonLogic : MonoBehaviour
             musicPanel.SetActive(!musicPanel.activeSelf);
         }
     }
-
-    public void SetVolume(float value)
-    {
-        if (audioSource != null)
-            audioSource.volume = value;
-    }
-
     public void ToggleVolumeMenu()
     {
         if (volumePanel != null)
@@ -121,12 +158,19 @@ public class ButtonLogic : MonoBehaviour
         }
     }
 
+    //
+    public void SetVolume(float value)
+    {
+        if (audioSource != null)
+            audioSource.volume = value;
+    }
+
+
     public void OnSliderValueChanged(float value)
     {
-        if (isDragging)
-        {
+        if (currentTimeText != null)
             currentTimeText.text = FormatTime(value);
-        }
+
     }
 
     private string FormatTime(float seconds)
