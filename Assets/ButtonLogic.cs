@@ -11,37 +11,15 @@ public class ButtonLogic : MonoBehaviour
 
     [Header("Menu Bar Button Settings")]
 
-    [Tooltip("Volume menu Icon.")]
-    [SerializeField] private Sprite volumeIcon;
+    [Tooltip("AudioSource to mute/unmute and volume control (speaker).")]
+    [SerializeField] private AudioSource audioSource;
 
-    [Tooltip("UI Image that displays the mute icon.")]
-    [SerializeField] private Image volumeImage;
-
-    [Tooltip("Icon when audio is playing.")]
-    [SerializeField] private Sprite playIcon;
-
-    [Tooltip("Icon when audio is paused.")]
-    [SerializeField] private Sprite pauseIcon;
-
-    [Tooltip("UI Image that displays the play/pause icon.")]
-    [SerializeField] private Image playImage;
-
-    [Tooltip("Music Panel GameObject")]
-    [SerializeField] private GameObject musicPanel;
-
-    [Tooltip("Volume slider GameObject")]
-    [SerializeField] private Slider volumeSlider;
-
-    [Tooltip("Music Panel GameObject")]
-    [SerializeField] private GameObject volumePanel;
 
     [Header("Music Player")]
 
-    [Tooltip("AudioSource to mute/unmute and volume control.")]
-    [SerializeField] private AudioSource audioSource;
-
     [Tooltip("Progress Slider of the song played.")]
     [SerializeField] private Slider progressSlider;
+
 
     [Tooltip("Time elapsed / progressed.")]
     [SerializeField] private TextMeshProUGUI currentTimeText;
@@ -49,9 +27,23 @@ public class ButtonLogic : MonoBehaviour
     [Tooltip("Total duration of the song.")]
     [SerializeField] private TextMeshProUGUI totalTimeText;
 
+    [Tooltip("Button Icon to play audio source.")]
+    [SerializeField] private Sprite playIcon;
+
+    [Tooltip("Button Icon to pause audio source.")]
+    [SerializeField] private Sprite pauseIcon;
+
+    [Tooltip("UI Image that displays the play/pause icon.")]
+    [SerializeField] private Image playImage;
+
+
+    [Header("Volume Control Panel")]
+
+    [Tooltip("Volume Slider GameObject")]
+    [SerializeField] private Slider volumeSlider;
+
 
     private bool isDragging = false;
-
     private bool isPlaying = false;
 
 
@@ -64,14 +56,13 @@ public class ButtonLogic : MonoBehaviour
             float totalSeconds = audioSource.clip.length;
             totalTimeText.text = FormatTime(totalSeconds);
             progressSlider.maxValue = totalSeconds;
+           
         }
 
         if (volumeSlider != null && audioSource != null)
         {
             volumeSlider.value = audioSource.volume;
-            volumeSlider.onValueChanged.AddListener(SetVolume);
 
-            AddSliderEventTriggers(volumeSlider);
         }
 
         if (progressSlider != null && audioSource.clip != null)
@@ -80,17 +71,7 @@ public class ButtonLogic : MonoBehaviour
             totalTimeText.text = FormatTime(totalSeconds);
             progressSlider.maxValue = totalSeconds;
 
-            AddSliderEventTriggers(progressSlider);
         }
-    }
-    public void SetDragging(bool dragging)
-    {
-        if (!dragging && progressSlider != null && audioSource != null)
-        {
-            audioSource.time = progressSlider.value;
-        }
-
-        isDragging = dragging;
     }
 
     void Update()
@@ -102,31 +83,21 @@ public class ButtonLogic : MonoBehaviour
         currentTimeText.text = FormatTime(audioSource.time);
     }
 
-    private void AddSliderEventTriggers(Slider slider)
+    /// <summary>
+    /// MENU BAR
+    /// </summary>
+    public void TogglePanel(GameObject panel) // on click event for menu buttons
     {
-        EventTrigger trigger = slider.gameObject.GetComponent<EventTrigger>();
-        if (trigger == null)
+        if (panel != null)
         {
-            trigger = slider.gameObject.AddComponent<EventTrigger>();
+            panel.SetActive(!panel.activeSelf);
         }
-        else
-        {
-            trigger.triggers.Clear();
-        }
-
-        EventTrigger.Entry beginDrag = new EventTrigger.Entry();
-        beginDrag.eventID = EventTriggerType.BeginDrag;
-        beginDrag.callback.AddListener((eventData) => SetDragging(true));
-
-        EventTrigger.Entry endDrag = new EventTrigger.Entry();
-        endDrag.eventID = EventTriggerType.EndDrag;
-        endDrag.callback.AddListener((eventData) => SetDragging(false));
-
-        trigger.triggers.Add(beginDrag);
-        trigger.triggers.Add(endDrag);
     }
 
-    public void TogglePlay()
+    /// <summary>
+    /// MUSIC PLAYER MENU
+    /// </summary>
+    public void TogglePlay() // attach this to play/pause button
     {
         isPlaying = !isPlaying;
 
@@ -142,23 +113,17 @@ public class ButtonLogic : MonoBehaviour
         }
     }
 
-    // toggle menu visibility functions
-    public void ToggleMusicMenu()
+    private string FormatTime(float seconds)
     {
-        if (musicPanel != null)
-        {
-            musicPanel.SetActive(!musicPanel.activeSelf);
-        }
-    }
-    public void ToggleVolumeMenu()
-    {
-        if (volumePanel != null)
-        {
-            volumePanel.SetActive(!volumePanel.activeSelf);
-        }
+        int minutes = Mathf.FloorToInt(seconds / 60f);
+        int secs = Mathf.FloorToInt(seconds % 60f);
+        return $"{minutes:00}:{secs:00}";
     }
 
-    //
+    /// <summary>
+    /// VOLUME CONTROL MENU
+    /// </summary>
+
     public void SetVolume(float value)
     {
         if (audioSource != null)
@@ -171,14 +136,11 @@ public class ButtonLogic : MonoBehaviour
         if (currentTimeText != null)
             currentTimeText.text = FormatTime(value);
 
+        audioSource.time = progressSlider.value;
+
     }
 
-    private string FormatTime(float seconds)
-    {
-        int minutes = Mathf.FloorToInt(seconds / 60f);
-        int secs = Mathf.FloorToInt(seconds % 60f);
-        return $"{minutes:00}:{secs:00}";
-    }
+
 }
 
 
