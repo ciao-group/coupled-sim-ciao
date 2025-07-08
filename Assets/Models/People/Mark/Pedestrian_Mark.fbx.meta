@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d6b76c5ca42211a4f85ac932a9f10674
+guid: cbcf0628f49a37e4dac2ace6904370a8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -355,48 +355,48 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Correct(Clone)
+    - name: Mark(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shorts
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shirt
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Socks
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Body
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shoes
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Eyelashes
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Hair
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig5:Hips
-      parentName: Correct(Clone)
+      parentName: Mark(Clone)
       position: {x: -0.0000049817263, y: 0.9317931, z: 0.0076920623}
       rotation: {x: 0.0000009790463, y: -0.0000015214149, z: 0.000047493362, w: 1}
       scale: {x: 1, y: 1, z: 1}
