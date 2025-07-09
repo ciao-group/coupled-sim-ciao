@@ -40,7 +40,8 @@ public class RCC_SteerAngleSender : MonoBehaviour
         timer = 0f;
         /* 3) pick the angle you want to transmit -------------------------- */
         // A) mathematical – steering input * high-speed limit (often enough)
-        float steerDeg = car.steerInput * car.steerAngle * 5;
+        float maxAtThisSpeed = car.steerAngleCurve.Evaluate(car.speed);
+        float steerDeg = car.steerInput * maxAtThisSpeed;
         /* 4) send “<angle>\n” -------------------------------------------- */
         try
         {
