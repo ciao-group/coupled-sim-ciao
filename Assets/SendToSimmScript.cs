@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 [RequireComponent(typeof(RCC_CarControllerV3))]
-public class RCC_SteerAngleSender : MonoBehaviour
+public class RCC_SteerAngleSender2 : MonoBehaviour
 {
     /* -------- inspector ------------------------------------------------- */
     [Header("TCP target (must match UpperComputer)")]
