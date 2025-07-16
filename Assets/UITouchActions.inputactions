@@ -1,0 +1,54 @@
+{
+    "name": "UITouchActions",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "b34dac7f-0527-48d0-a860-e39a2df5df7d",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "b90d12c1-dc12-435b-9552-a67c5bfc4dff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "1ba55240-46dd-4709-84aa-d6370ee65540",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "52265c18-56f3-4aa6-88ad-3a3f17d04e9f",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f97f046-2995-4704-87bb-795045a12f9f",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
