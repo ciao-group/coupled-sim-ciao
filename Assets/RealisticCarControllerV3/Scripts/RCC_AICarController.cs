@@ -705,16 +705,16 @@ public class RCC_AICarController : MonoBehaviour
         {
             float after = Mathf.Lerp(before, steerInput, Time.deltaTime * 20f);
             CarController.steerInput = after;
-            Debug.Log($"[AI STEER] raw: {steerInput:F2}, " +
-                      $"prev: {before:F2}, " +
-                      $"smoothed→: {after:F2}"
-                );
+            //Debug.Log($"[AI STEER] raw: {steerInput:F2}, " +
+            //          $"prev: {before:F2}, " +
+            //          $"smoothed→: {after:F2}"
+            //    );
                         
         }
         else
         {
             CarController.steerInput = steerInput;
-            Debug.Log($"[AI STEER] raw applied: {steerInput:F2}");
+            //Debug.Log($"[AI STEER] raw applied: {steerInput:F2}");
         }
 
         CarController.handbrakeInput = handbrakeInput;
@@ -724,11 +724,11 @@ public class RCC_AICarController : MonoBehaviour
 
     private void DebugSteerInputs() { 
     float navX = transform.InverseTransformDirection(navigator.desiredVelocity).x;
-    Debug.Log($"[AI INPUT] navX: {navX:F2}, " +
-              $"rayInput: {rayInput:F2}, " +
-              $"ignoreWP: {ignoreWaypointNow:F2}, " +
-              $"computer steerInput: {steerInput:F2}"
-              );
+    //Debug.Log($"[AI INPUT] navX: {navX:F2}, " +
+    //          $"rayInput: {rayInput:F2}, " +
+    //          $"ignoreWP: {ignoreWaypointNow:F2}, " +
+    //         $"computer steerInput: {steerInput:F2}"
+    //        );
 
 
     }
