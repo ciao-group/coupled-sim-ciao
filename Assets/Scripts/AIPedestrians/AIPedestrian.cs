@@ -42,7 +42,7 @@ public class AIPedestrian : MonoBehaviour
     {
         _tracker = GetComponent<WaypointProgressTracker>(); 
         currentBlendFactor = Damp(currentBlendFactor, animationBlendFactor, SpeedDampingFactor, Time.deltaTime);
-        animator.SetFloat("Speed", currentBlendFactor);
+        //animator.SetFloat("Speed", currentBlendFactor);
         var steer = Quaternion.LookRotation(_tracker.target.position - transform.position, Vector3.up).eulerAngles;
         var rot = transform.eulerAngles;
         rot.y = steer.y;

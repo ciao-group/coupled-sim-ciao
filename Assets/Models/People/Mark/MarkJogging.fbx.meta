@@ -385,48 +385,48 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Ch38_nonPBR (1)(Clone)
+    - name: Mark(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shorts
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shirt
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Socks
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Body
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Shoes
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Eyelashes
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch38_Hair
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig5:Hips
-      parentName: Ch38_nonPBR (1)(Clone)
+      parentName: Mark(Clone)
       position: {x: -0.0000049817263, y: 0.9317931, z: 0.0076920623}
       rotation: {x: 0.0000009790463, y: -0.0000015214149, z: 0.000047493362, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -762,7 +762,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d6b76c5ca42211a4f85ac932a9f10674,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: cbcf0628f49a37e4dac2ace6904370a8,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
