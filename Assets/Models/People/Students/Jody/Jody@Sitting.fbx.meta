@@ -528,48 +528,48 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Ch37_nonPBR(Clone)
+    - name: Jody(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Pants
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Sneakers
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Shirt
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Eyeleashes
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Body
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Zipper
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch37_Hair
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig6:Hips
-      parentName: Ch37_nonPBR(Clone)
+      parentName: Jody(Clone)
       position: {x: -0.0000011379802, y: 0.9410213, z: 0.0012412333}
       rotation: {x: 0.0000000035552599, y: -0.00000026236933, z: 0.000008336337, w: 1}
       scale: {x: 1, y: 1, z: 1}
