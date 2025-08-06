@@ -411,6 +411,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.xr.oculus": {
+      "version": "4.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "4.2.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.varjo.xr": {
       "version": "https://github.com/varjocom/VarjoUnityXRPlugin.git",
       "depth": 0,
