@@ -35,7 +35,7 @@ public class RCC_SteerAngleSender : MonoBehaviour
             reconnectTimer += Time.fixedDeltaTime;
             connectionAttemptTime += Time.fixedDeltaTime;
 
-            if (connectionAttemptTime >= 10f)
+            if (connectionAttemptTime >= 3f)
             {
                 Debug.LogWarning("[SteerSender] No connection after 10 seconds. Disabling script.");
                 this.enabled = false; // ⬅️ Script deaktivieren
