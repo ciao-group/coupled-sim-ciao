@@ -1,4 +1,3 @@
-<img src="READme_Iimages/Pedestrian_Inspector_Overview.png" width="600">
 # CIAO's Mixed Reality Driving Simulator
 
 ## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
@@ -252,8 +251,9 @@ To hide environment objects for performance:
    - Only affects characters prefixed with **"Pedestrian_"**.  
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
-   ![Pedestrian inspector overview](READme_Images/Pedestrian_Inspector_Overview.png)
-    
+    <p align="center">
+      <img src="READme_Images/Pedestrian_Inspector_Overview.png" width="600" alt="Pedestrian inspector overview">
+    </p>
     *Figure 1: This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
 
 **Tip:** Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
