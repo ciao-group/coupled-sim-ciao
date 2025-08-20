@@ -122,10 +122,10 @@ The simulator replicates a realistic urban environment, integrating roads, build
 |------------------|-------------------------------------------------------|
 | Roads & Sidewalks | Base navigation surfaces for vehicles and pedestrians |
 | Pedestrians       | Dynamic agents performing animations                  |
-| Parked Vehicles   | Static props affecting pathfinding and realism        |
-| Buildings         | Environmental context and occlusion                  |
+| Parked Vehicles   | Static props affecting realism                       |
+| Buildings         | Environmental context                                |
 | Wind Turbines     | Background scenery, optional interactive props       |
-| Trees             | Decorative and cover elements                         |
+| Trees             | Decorative elements                                  |
 
 
 
@@ -236,6 +236,7 @@ To hide environment objects for performance:
    - Only affects characters prefixed with **"Pedestrian_"**.  
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
+   ![Pedestrian inspector overview](READme_Images/Pedestrian_Inspector_Overview.png)
 
 **Tip:** Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
 
