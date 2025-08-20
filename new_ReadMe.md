@@ -1,202 +1,178 @@
-\# **Project Name: CIAO's Mixed Reality Driving Simulator**
+\# CIAO's Mixed Reality Driving Simulator
 
-**## Sub-Title: Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity**
+\## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
 
 
-\## **Table of Contents**
+---
+
+
+
+\## Table of Contents
 
 1\. \[About](#about)
 
-2\. \[Features](#features)
+2\. \[Project Origin](#project-origin)
 
-3\. \[Tech Stack](#tech-stack)
+3\. \[Goal of the Project](#goal-of-the-project)
 
-4\. \[Environment Setup](#environment-setup)
+4\. \[Features](#features)
 
-5\. \[Setup](#setup)
+5\. \[Tech Stack](#tech-stack)
 
-6\. \[Usage](#usage)
+6\. \[Environment Setup](#environment-setup)
 
-7\. \[Troubleshooting / Known Issues](#troubleshooting-/-known Issues)
+7\. \[NPCs](#npcs)
 
-8\. \[Contributions](#contributions)
+8\. \[Setup](#setup)
 
-9\. \[Acknowledgments](#acknowledgments)
+9\. \[Usage](#usage)
 
-10\. \[Citation](#citation)
+10\. \[Troubleshooting / Known Issues](#troubleshooting--known-issues)
 
-11\. \[Contact](#contact)
+11\. \[Demo Video](#demo-video)
 
+12\. \[Contributions](#contributions)
 
+13\. \[Acknowledgments](#acknowledgments)
 
-\## **About**
+14\. \[Citation](#citation)
 
-We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) and work at the intersection of machine learning, human-computer interaction, and mobility. We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) at Leipzig University.
-
-ScaDS.AI Dresden/Leipzig is one of five new AI centers in Germany funded under the federal government’s AI strategy.
-
-
+15\. \[Contact](#contact)
 
 
 
+---
 
 
 
+\## About
 
-\### **Project Origin**
-
-This project is a modified version of a Coupled simulator for research on driver-pedestrian interactions made in Unity originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven.
-
-
-
-The original simulation was designed for academic research, offering insights into the interaction between pedestrians and (automated) vehicles.
-
-We have forked Dr. Bazilinskyy's project and tailored it to meet our specific research needs, adding new features and expanding its use cases.Our version builds on the original by combining a fixed-based driving simulator with a simulated driving environment into a Mixed-Reality soltion powered by Varjo XR-3 HMD. This adaptation provides a platform for in-depth research into driver-interface interaction within a simulated driving context.
+We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) at Leipzig University. Our research lies at the intersection of machine learning, human-computer interaction, and mobility. We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) Dresden/Leipzig, one of five new AI centers in Germany funded under the federal government’s AI strategy.
 
 
 
-
-
-\### **Goal of the Project**
-
-This project is open-source and aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. We encourage contributions, collaborations, and discussions to enhance the simulator's capabilities and applicability in various research domains.
+---
 
 
 
-\## **Features**
+\## Project Origin
 
- 	- Eye Tracking
-
- 	- Mixed Reality
-
- 	- Head Tracking
+This project is a modified version of a coupled simulator originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven for research on driver-pedestrian interactions.  
 
 
 
-\## **Tech Stack**
-
- 	**Software:**
-Unity Hub
-Unity 2022.3.5f1
-
- 		Varjo Base
-
- 		Varjo Lab Tools
-
- 		Steam and SteamVR
-
- 		Varjo SDK for Unity (pre-installed in the project)
-
- 		Blender 4.0 (or higher)
-
- 		DirectX11
+We have adapted the original simulator to a \*\*Mixed-Reality solution\*\* using the Varjo XR-3 HMD and HDRP in Unity, integrating a fixed-based driving simulator with a virtual driving environment. This allows for in-depth research on driver-interface interaction in realistic simulated conditions.
 
 
 
-\## **Environment Setup**
+---
 
-The simulator environment is designed to replicate a real-world urban setting.  
 
-To make the environment as realistic as possible, a variety of buildings, trees, and non-playable characters (NPCs) were added to the scene. NPCs perform various activities such as walking, running, or sitting to bring the world to life.  
+
+\## Goal of the Project
+
+This open-source project aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. Contributions, collaborations, and discussions are encouraged to enhance the simulator's capabilities and research applicability.
+
+
+
+---
+
+
+
+\## Features
+
+\- Eye Tracking
+
+\- Mixed Reality
+
+\- Head Tracking
+
+
+
+---
+
+
+
+\## Tech Stack
+
+\*\*Software:\*\*
+
+\- Unity Hub
+
+\- Unity 2022.3.5f1
+
+\- Varjo Base \& Varjo Lab Tools
+
+\- Steam \& SteamVR
+
+\- Varjo SDK for Unity (pre-installed)
+
+\- Blender 4.0 or higher
+
+\- DirectX11
+
+
+
+---
+
+
+
+\## Environment Setup
+
+The simulator environment replicates a real-world urban setting with buildings, trees, parked vehicles, and dynamic NPCs performing animations such as walking, running, or sitting.
 
 
 
 | Key Components | Description |
 
-|-----------------|-------------|
+|----------------|-------------|
 
 | Roads \& Sidewalks | Base navigation surfaces for vehicles and pedestrians |
 
-| Pedestrians | Dynamic agents performing animations (walking, running, sitting) |
+| Pedestrians | Dynamic agents performing animations |
 
-| Parked Vehicles | Static props that affect pathfinding and realism |
+| Parked Vehicles | Static props affecting pathfinding and realism |
 
 | Buildings | Environmental context and occlusion |
 
 | Wind Turbines | Background scenery, optional interactive props |
 
-| Trees | Decorative + cover elements |
+| Trees | Decorative and cover elements |
 
 
 
 \### Hierarchy of the Environment
 
-(\*\*Insert Picture\*\*)
+(\*Insert environment picture here\*)
 
 
 
-\## NPCs 
-
-\### Hierarchy of Pedestrians
-
-&nbsp;(\*\*Insert Picture\*\*)
+---
 
 
 
-\### Hierarchy of Idle\_Characters
+\## NPCs
 
-(\*\*Insert Picture\*\*)
+\### Pedestrians
+
+(\*Insert hierarchy picture here\*)
+
+
+
+\### Idle Characters
+
+(\*Insert hierarchy picture here\*)
 
 
 
 \### Extra
 
-To hide aspects of the environment:
+To hide environment objects for performance:
 
- 	1. Select the object in the Main Scene Hierarchy.
+1\. Select the object in the Main Scene Hierarchy.
 
- 	2. In the Inspector, uncheck the box next to the object’s name.
-
-If performance drops, consider hiding large environment groups (such as the buildings)
-
-
-
-
-
-\## **Setup**
-
-\### **Prerequisites**
-
- 	**Hardware:**
-
- 		A PC with Windows 10 or Windows 11
-
- 		Compatible PC fulfilling Varjo requirements
-
- 		GPU with two ports directly connected to it (e.g. 2 HDMI ports leading directly to the GPU). Some Laptops \& PCs don't have this feauture. Check Varjo XR-3 Requirements.
-
- 		four SteamVR Basestations 2.0.
-
- 		Fixed-Based Driving Simulator from Ergoneers
-
-
-
-\### **Installation**
-
-\### **Run Locally**
-
-
-
-**--> Intermission: Pictures**
-
-
-
-\## **Usage**
-
-
-
-\## Troubleshooting / Known Issues  
-
-
-
-\### Pedestrians Not Moving  
-
-
-
-\*\*Problem:\*\* Pedestrians placed in the scene are not performing their animations.  
-
-\*\*Possible Causes:\*\*  
+2\. In the Inspector, uncheck the box next to the object’s name.
 
 
 
@@ -204,51 +180,21 @@ If performance drops, consider hiding large environment groups (such as the buil
 
 
 
-\#### 1. Issue with Animation Controller  
-
-\- Make sure there is an animation connected to the \*\*"Entry" Node\*\*.  
-
-&nbsp; - Even if one is connected, delete it and re-drag the animation from the character’s folder into the Animation Controller. It should automatically connect to the Entry node.  
+\## Setup
 
 
 
-\- Keep in mind: not all characters have individual controllers.  
+\### Prerequisites
 
-&nbsp; - Many pedestrians share the same \*\*"Pedestrian\_Controller"\*\*.  
+\*\*Hardware:\*\*
 
-&nbsp; - If multiple characters (e.g., \*Pedestrian\_Claudia\* and \*Pedestrian\_Eric\*) are not working, the issue is likely with the controller itself.  
+\- PC with Windows 10 or 11
 
+\- GPU with two ports connected directly (Varjo XR-3 requirement)
 
+\- Four SteamVR Base Stations 2.0
 
-\- If the animation is still not working, check the \*\*Rig settings\*\*:  
-
-&nbsp; 1. Go to \*\*Assets → Models → People → <Character\_Name>\*\*.  
-
-&nbsp; 2. Select the character’s `.fbx`.  
-
-&nbsp; 3. In the \*\*Inspector\*\*, open the \*\*Rig\*\* tab.  
-
-&nbsp;    - Animation Type: \*\*Humanoid\*\*  
-
-&nbsp;    - Avatar Definition: \*\*Create From This Model\*\*  
-
-&nbsp; 4. Re-apply these settings.  
-
-
-
-\- Next, check the \*\*Animation file\*\* itself:  
-
-&nbsp; 1. In the Project window, select the animation (📷 \*Insert screenshot of icon\*).  
-
-&nbsp; 2. In the \*\*Rig\*\* tab:  
-
-&nbsp;    - Animation Type: \*\*Humanoid\*\*  
-
-&nbsp;    - Avatar Definition: \*\*Copy From Other Avatar\*\*  
-
-&nbsp;    - Source: The character’s avatar  
-
-&nbsp; 3. Re-apply these settings.  
+\- Fixed-Based Driving Simulator (Ergoneers)
 
 
 
@@ -256,47 +202,111 @@ If performance drops, consider hiding large environment groups (such as the buil
 
 
 
-\#### 2. Missing Script  
+\### Installation \& Running Locally
 
-\- This issue only affects characters with \*\*"Pedestrian\_"\*\* in front of their names.  
-
-\- \*\*Idle\_Characters\*\* do not use scripts — they only have an Animator.  
-
-
-
-\- To confirm:  
-
-&nbsp; - Select the pedestrian in the \*\*Inspector\*\*.  
-
-&nbsp; - Compare to the reference screenshot (📷 \*Insert picture here\*).  
+(\*Insert step-by-step installation instructions and pictures here\*)
 
 
 
 ---
 
-&nbsp;\*\*Tip:\*\* If several pedestrians are failing at once, it’s usually an Animator Controller problem. If only one pedestrian is failing, check the Rig or missing script.  
+
+
+\## Usage
+
+(\*Insert instructions or usage examples here\*)
 
 
 
-\### **Demo Video**
+---
 
 
 
-**## Contributions**
+\## Troubleshooting / Known Issues
 
 
 
-\## **Acknowledgments**
-
-This project is part of ScaDS.AI Dresden/Leipzig, supported under the federal government's AI strategy. originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven.
+\### Pedestrians Not Moving
 
 
 
+\*\*Problem:\*\* Pedestrians in the scene are not performing animations.  
 
 
-\## **Citation**
 
-If you utilize this modified simulator for academic purposes, please cite the original work:
+\*\*Possible Causes \& Fixes:\*\*
+
+
+
+1\. \*\*Animation Controller Issue\*\*
+
+&nbsp;  - Ensure animations are connected to the \*\*"Entry" Node\*\*.
+
+&nbsp;  - Delete and re-drag animations from the character folder into the Animation Controller.
+
+&nbsp;  - Check Rig settings:
+
+&nbsp;    - Select `.fbx` → Inspector → Rig tab  
+
+&nbsp;    - Animation Type: Humanoid  
+
+&nbsp;    - Avatar Definition: Create From This Model
+
+
+
+2\. \*\*Missing Script\*\*
+
+&nbsp;  - Only affects characters prefixed with \*\*"Pedestrian\_"\*\*.  
+
+&nbsp;  - Idle\_Characters use Animator only.
+
+&nbsp;  - Compare inspector to reference screenshot to confirm setup.
+
+
+
+\*\*Tip:\*\* Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
+
+
+
+---
+
+
+
+\## Demo Video
+
+(\*Insert link or embedded video here\*)
+
+
+
+---
+
+
+
+\## Contributions
+
+We welcome contributions! Please fork the repository, make changes, and submit a pull request. Ensure coding standards and documentation are maintained.
+
+
+
+---
+
+
+
+\## Acknowledgments
+
+\- ScaDS.AI Dresden/Leipzig, supported under Germany’s AI strategy.
+
+\- Original simulator by Dr. Pavlo Bazilinskyy at TU Eindhoven.
+
+
+
+---
+
+
+
+\## Citation
+
+If using this simulator for research, cite:
 
 
 
@@ -304,5 +314,13 @@ Bazilinskyy, P., Kooijman, L., Dodou, D., \& De Winter, J. C. F. (2020). Coupled
 
 
 
-\## **Contact**
+---
+
+
+
+\## Contact
+
+(\*Insert contact info: email, GitHub, etc.\*)
+
+
 
