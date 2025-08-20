@@ -252,9 +252,9 @@ To hide environment objects for performance:
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
     <p align="center">
-      <img src="READme_Images/Pedestrian_Inspector_Overview.png" heigth="60" alt="Pedestrian inspector overview">
+      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="60" alt="Pedestrian inspector overview">
     </p>
-    * Figure 1: This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
+    ***Figure 1**: *This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
 
 **Tip:** Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
 
