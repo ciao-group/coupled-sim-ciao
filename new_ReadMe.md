@@ -44,22 +44,21 @@
 
 ---
 
-
 ## About
 
 We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) at Leipzig University. Our research lies at the intersection of machine learning, human-computer interaction, and mobility. We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) Dresden/Leipzig, one of five new AI centers in Germany funded under the federal government’s AI strategy.
 
+This project reflects our interest in advancing mixed-reality applications for mobility research, providing a platform for studying driver-interface interaction in simulated environments. It is designed for researchers, developers, and students interested in exploring human-computer interaction in realistic driving scenarios.
 
 
 ---
 
+
 ## Project Origin
 
-This project is a modified version of a coupled simulator originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven for research on driver-pedestrian interactions.  
+This project is a modified version of a coupled simulator originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven for research on driver-pedestrian interactions. We have forked and tailored the original simulator to meet our specific research needs, adding new features and expanding its use cases.
 
-
-
-We have adapted the original simulator to a \*\*Mixed-Reality solution\*\* using the Varjo XR-3 HMD and HDRP in Unity, integrating a fixed-based driving simulator with a virtual driving environment. This allows for in-depth research on driver-interface interaction in realistic simulated conditions.
+Our adaptation combines a fixed-based driving simulator with a virtual environment into a Mixed-Reality solution powered by the Varjo XR-3 HMD and HDRP in Unity. This setup provides a platform for in-depth research on driver-interface interaction under realistic simulated conditions, building on the original simulation’s academic insights into pedestrian and (automated) vehicle interactions.
 
 
 
@@ -79,11 +78,13 @@ This open-source project aims to foster a community of researchers and developer
 
 ## Features
 
-- Eye Tracking
+### Eye Tracking
 
-- Mixed Reality
+### Mixed Reality
 
-- Head Tracking
+### Head Tracking
+
+### Automated Driving
 
 
 
@@ -116,9 +117,7 @@ This open-source project aims to foster a community of researchers and developer
 
 ## Environment Setup
 
-The simulator environment replicates a real-world urban setting with buildings, trees, parked vehicles, and dynamic NPCs performing animations such as walking, running, or sitting.
-
-
+The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The non-playable characters (NPCs) exhibit a range of behaviors including walking, resting, and interacting to help create a dynamic and immersive scene. This environment provides a great platform for exploration, testing, and observing real-world behaviors.
 
 | Key Components    | Description                                           |
 |------------------|-------------------------------------------------------|
