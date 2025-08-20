@@ -38,7 +38,6 @@
 
 14. [Citation](#citation)
 
-15. [Contact](#contact)
 
 
 
@@ -264,6 +263,3 @@ If using this simulator for research, cite:
 Bazilinskyy, P., Kooijman, L., Dodou, D., & De Winter, J. C. F. (2020). Coupled simulator for research on the interaction between pedestrians and (automated) vehicles. 19th Driving Simulation Conference (DSC). Antibes, France.
 
 ---
-
-## Contact
-(*Insert contact info: email, GitHub, etc.*)
