@@ -122,7 +122,7 @@ The simulator environment replicates a real-world urban setting with buildings, 
 
 | Key Components | Description |
 
-|----------------|-------------|
+|---------------------|------------------------------------------------------------|
 
 | Roads \& Sidewalks | Base navigation surfaces for vehicles and pedestrians |
 
@@ -233,10 +233,9 @@ To hide environment objects for performance:
 
 
 1. **Animation Controller Issue**
-
  - Ensure animations are connected to the **"Entry" Node**.
    - Delete and re-drag animations from the character folder into the Animation Controller.
-   - Check Rig settings:
+ - Check Rig settings:
      - Select `.fbx` → Inspector → Rig tab  
      - Animation Type: Humanoid  
      - Avatar Definition: Create From This Model
