@@ -12,17 +12,21 @@
 
 3\. \[Tech Stack](#tech-stack)
 
-4\. \[Setup](#setup)
+4\. \[Environment Setup](#environment-setup)
 
-5\. \[Usage](#usage)
+5\. \[Setup](#setup)
 
-6\. \[Contributions](#contributions)
+6\. \[Usage](#usage)
 
-7\. \[Acknowledgments](#acknowledgments)
+7\. \[Troubleshooting / Known Issues](#troubleshooting-/-known Issues)
 
-8\. \[Citation](#citation)
+8\. \[Contributions](#contributions)
 
-9\. \[Contact](#contact)
+9\. \[Acknowledgments](#acknowledgments)
+
+10\. \[Citation](#citation)
+
+11\. \[Contact](#contact)
 
 
 
