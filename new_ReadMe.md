@@ -232,11 +232,11 @@ To hide environment objects for performance:
      - Animation Type: Humanoid  
      - Avatar Definition: Create From This Model
 
-     1. Go to **Assets → Models → People → <Character_Name>**. 
-     2. Select the character’s .fbx. 
-     3. In the **Inspector**, open the **Rig** tab.
-      - Animation Type: **Humanoid** 
-      - Avatar Definition: **Create From This Model** 
+      1. Go to **Assets → Models → People → <Character_Name>**. 
+      2. Select the character’s .fbx. 
+      3. In the **Inspector**, open the **Rig** tab.
+       - Animation Type: **Humanoid** 
+       - Avatar Definition: **Create From This Model** 
     4. Re-apply these settings. 
     
   - Check **Animation's Rig** settings: 
@@ -251,8 +251,8 @@ To hide environment objects for performance:
    - Only affects characters prefixed with **"Pedestrian_"**.  
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
-    <p align="center">
-      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="300" alt="Pedestrian inspector overview">
+    <p>
+      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="450" alt="Pedestrian inspector overview">
     </p>
     ***Figure 1**: *This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
 
