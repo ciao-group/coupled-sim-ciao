@@ -8,45 +8,44 @@
 
 
 
-\## Table of Contents
+## Table of Contents
 
-1\. \[About](#about)
+1. [About](#about)
 
-2\. \[Project Origin](#project-origin)
+2. [Project Origin](#project-origin)
 
-3\. \[Goal of the Project](#goal-of-the-project)
+3. [Goal of the Project](#goal-of-the-project)
 
-4\. \[Features](#features)
+4. [Features](#features)
 
-5\. \[Tech Stack](#tech-stack)
+5. [Tech Stack](#tech-stack)
 
-6\. \[Environment Setup](#environment-setup)
+6. [Environment Setup](#environment-setup)
 
-7\. \[NPCs](#npcs)
+7. [NPCs](#npcs)
 
-8\. \[Setup](#setup)
+8. [Setup](#setup)
 
-9\. \[Usage](#usage)
+9. [Usage](#usage)
 
-10\. \[Troubleshooting / Known Issues](#troubleshooting--known-issues)
+10. [Troubleshooting / Known Issues](#troubleshooting--known-issues)
 
-11\. \[Demo Video](#demo-video)
+11. [Demo Video](#demo-video)
 
-12\. \[Contributions](#contributions)
+12. [Contributions](#contributions)
 
-13\. \[Acknowledgments](#acknowledgments)
+13. [Acknowledgments](#acknowledgments)
 
-14\. \[Citation](#citation)
+14. [Citation](#citation)
 
-15\. \[Contact](#contact)
+15. [Contact](#contact)
 
 
 
 ---
 
 
-
-\## About
+## About
 
 We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) at Leipzig University. Our research lies at the intersection of machine learning, human-computer interaction, and mobility. We are part of the Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) Dresden/Leipzig, one of five new AI centers in Germany funded under the federal government’s AI strategy.
 
@@ -54,9 +53,7 @@ We are a Junior Research Group "CIAO" (Computational Interaction and Mobility) a
 
 ---
 
-
-
-\## Project Origin
+## Project Origin
 
 This project is a modified version of a coupled simulator originally developed by Dr. Pavlo Bazilinskyy at TU Eindhoven for research on driver-pedestrian interactions.  
 
@@ -70,7 +67,7 @@ We have adapted the original simulator to a \*\*Mixed-Reality solution\*\* using
 
 
 
-\## Goal of the Project
+## Goal of the Project
 
 This open-source project aims to foster a community of researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. Contributions, collaborations, and discussions are encouraged to enhance the simulator's capabilities and research applicability.
 
@@ -80,13 +77,36 @@ This open-source project aims to foster a community of researchers and developer
 
 
 
-\## Features
+## Features
 
-\- Eye Tracking
+- Eye Tracking
 
-\- Mixed Reality
+- Mixed Reality
 
-\- Head Tracking
+- Head Tracking
+
+
+
+---
+
+
+## Tech Stack
+
+**Software:**
+
+- Unity Hub
+
+- Unity 2022.3.5f1
+
+- Varjo Base \& Varjo Lab Tools
+
+- Steam \& SteamVR
+
+- Varjo SDK for Unity (pre-installed)
+
+- Blender 4.0 or higher
+
+- DirectX11
 
 
 
@@ -94,31 +114,7 @@ This open-source project aims to foster a community of researchers and developer
 
 
 
-\## Tech Stack
-
-\*\*Software:\*\*
-
-\- Unity Hub
-
-\- Unity 2022.3.5f1
-
-\- Varjo Base \& Varjo Lab Tools
-
-\- Steam \& SteamVR
-
-\- Varjo SDK for Unity (pre-installed)
-
-\- Blender 4.0 or higher
-
-\- DirectX11
-
-
-
----
-
-
-
-\## Environment Setup
+## Environment Setup
 
 The simulator environment replicates a real-world urban setting with buildings, trees, parked vehicles, and dynamic NPCs performing animations such as walking, running, or sitting.
 
@@ -142,9 +138,9 @@ The simulator environment replicates a real-world urban setting with buildings, 
 
 
 
-\### Hierarchy of the Environment
+### Hierarchy of the Environment
 
-(\*Insert environment picture here\*)
+(*Insert environment picture here*)
 
 
 
@@ -152,49 +148,27 @@ The simulator environment replicates a real-world urban setting with buildings, 
 
 
 
-\## NPCs
+## NPCs
 
-\### Pedestrians
+### Pedestrians
 
-(\*Insert hierarchy picture here\*)
-
-
-
-\### Idle Characters
-
-(\*Insert hierarchy picture here\*)
+(*Insert hierarchy picture here*)
 
 
 
-\### Extra
+### Idle Characters
+
+(*Insert hierarchy picture here*)
+
+
+
+### Extra
 
 To hide environment objects for performance:
 
-1\. Select the object in the Main Scene Hierarchy.
+1. Select the object in the Main Scene Hierarchy.
 
-2\. In the Inspector, uncheck the box next to the object’s name.
-
-
-
----
-
-
-
-\## Setup
-
-
-
-\### Prerequisites
-
-\*\*Hardware:\*\*
-
-\- PC with Windows 10 or 11
-
-\- GPU with two ports connected directly (Varjo XR-3 requirement)
-
-\- Four SteamVR Base Stations 2.0
-
-\- Fixed-Based Driving Simulator (Ergoneers)
+2. In the Inspector, uncheck the box next to the object’s name.
 
 
 
@@ -202,69 +176,21 @@ To hide environment objects for performance:
 
 
 
-\### Installation \& Running Locally
-
-(\*Insert step-by-step installation instructions and pictures here\*)
+## Setup
 
 
 
----
+### Prerequisites
 
+**Hardware:**
 
+- PC with Windows 10 or 11
 
-\## Usage
+- GPU with two ports connected directly (Varjo XR-3 requirement)
 
-(\*Insert instructions or usage examples here\*)
+- Four SteamVR Base Stations 2.0
 
-
-
----
-
-
-
-\## Troubleshooting / Known Issues
-
-
-
-\### Pedestrians Not Moving
-
-
-
-\*\*Problem:\*\* Pedestrians in the scene are not performing animations.  
-
-
-
-\*\*Possible Causes \& Fixes:\*\*
-
-
-
-1\. \*\*Animation Controller Issue\*\*
-
-&nbsp;  - Ensure animations are connected to the \*\*"Entry" Node\*\*.
-
-&nbsp;  - Delete and re-drag animations from the character folder into the Animation Controller.
-
-&nbsp;  - Check Rig settings:
-
-&nbsp;    - Select `.fbx` → Inspector → Rig tab  
-
-&nbsp;    - Animation Type: Humanoid  
-
-&nbsp;    - Avatar Definition: Create From This Model
-
-
-
-2\. \*\*Missing Script\*\*
-
-&nbsp;  - Only affects characters prefixed with \*\*"Pedestrian\_"\*\*.  
-
-&nbsp;  - Idle\_Characters use Animator only.
-
-&nbsp;  - Compare inspector to reference screenshot to confirm setup.
-
-
-
-\*\*Tip:\*\* Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
+- Fixed-Based Driving Simulator (Ergoneers)
 
 
 
@@ -272,9 +198,9 @@ To hide environment objects for performance:
 
 
 
-\## Demo Video
+### Installation \& Running Locally
 
-(\*Insert link or embedded video here\*)
+(*Insert step-by-step installation instructions and pictures here*)
 
 
 
@@ -282,45 +208,70 @@ To hide environment objects for performance:
 
 
 
-\## Contributions
+## Usage
 
+(*Insert instructions or usage examples here*)
+
+
+
+---
+
+
+## Troubleshooting / Known Issues
+
+
+### Pedestrians Not Moving
+
+
+
+**Problem:** Pedestrians in the scene are not performing animations.  
+
+
+
+**Possible Causes \& Fixes:**
+
+
+
+1. **Animation Controller Issue**
+
+ - Ensure animations are connected to the **"Entry" Node**.
+   - Delete and re-drag animations from the character folder into the Animation Controller.
+   - Check Rig settings:
+     - Select `.fbx` → Inspector → Rig tab  
+     - Animation Type: Humanoid  
+     - Avatar Definition: Create From This Model
+
+2. **Missing Script**
+   - Only affects characters prefixed with **"Pedestrian_"**.  
+   - Idle_Characters use Animator only.
+   - Compare inspector to reference screenshot to confirm setup.
+
+**Tip:** Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
+
+---
+
+## Demo Video
+(*Insert link or embedded video here*)
+
+---
+
+## Contributions
 We welcome contributions! Please fork the repository, make changes, and submit a pull request. Ensure coding standards and documentation are maintained.
 
+---
 
+## Acknowledgments
+- ScaDS.AI Dresden/Leipzig, supported under Germany’s AI strategy.
+- Original simulator by Dr. Pavlo Bazilinskyy at TU Eindhoven.
 
 ---
 
-
-
-\## Acknowledgments
-
-\- ScaDS.AI Dresden/Leipzig, supported under Germany’s AI strategy.
-
-\- Original simulator by Dr. Pavlo Bazilinskyy at TU Eindhoven.
-
-
-
----
-
-
-
-\## Citation
-
+## Citation
 If using this simulator for research, cite:
 
-
-
-Bazilinskyy, P., Kooijman, L., Dodou, D., \& De Winter, J. C. F. (2020). Coupled simulator for research on the interaction between pedestrians and (automated) vehicles. 19th Driving Simulation Conference (DSC). Antibes, France.
-
-
+Bazilinskyy, P., Kooijman, L., Dodou, D., & De Winter, J. C. F. (2020). Coupled simulator for research on the interaction between pedestrians and (automated) vehicles. 19th Driving Simulation Conference (DSC). Antibes, France.
 
 ---
 
-
-
-\## Contact
-
-(\*Insert contact info: email, GitHub, etc.\*)
-
-
-
+## Contact
+(*Insert contact info: email, GitHub, etc.*)
