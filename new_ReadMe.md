@@ -1,6 +1,6 @@
-\# CIAO's Mixed Reality Driving Simulator
+# CIAO's Mixed Reality Driving Simulator
 
-\## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
+## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
 
 
