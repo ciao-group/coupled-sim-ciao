@@ -120,21 +120,15 @@ The simulator environment replicates a real-world urban setting with buildings, 
 
 
 
-| Key Components | Description |
+| Key Components    | Description                                           |
+|------------------|-------------------------------------------------------|
+| Roads & Sidewalks | Base navigation surfaces for vehicles and pedestrians |
+| Pedestrians       | Dynamic agents performing animations                  |
+| Parked Vehicles   | Static props affecting pathfinding and realism        |
+| Buildings         | Environmental context and occlusion                  |
+| Wind Turbines     | Background scenery, optional interactive props       |
+| Trees             | Decorative and cover elements                         |
 
-|---------------------|------------------------------------------------------------|
-
-| Roads \& Sidewalks | Base navigation surfaces for vehicles and pedestrians |
-
-| Pedestrians | Dynamic agents performing animations |
-
-| Parked Vehicles | Static props affecting pathfinding and realism |
-
-| Buildings | Environmental context and occlusion |
-
-| Wind Turbines | Background scenery, optional interactive props |
-
-| Trees | Decorative and cover elements |
 
 
 
