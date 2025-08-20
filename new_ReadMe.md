@@ -228,15 +228,11 @@ To hide environment objects for performance:
  - Ensure animations are connected to the **"Entry" Node**.
    - Delete and re-drag animations from the character folder into the Animation Controller.
  - Check **Character's Rig** settings:
-     - Select `.fbx` → Inspector → Rig tab  
-     - Animation Type: Humanoid  
-     - Avatar Definition: Create From This Model
-
-      1. Go to **Assets → Models → People → <Character_Name>**. 
-      2. Select the character’s .fbx. 
-      3. In the **Inspector**, open the **Rig** tab.
-       - Animation Type: **Humanoid** 
-       - Avatar Definition: **Create From This Model** 
+    1. Go to **Assets → Models → People → <Character_Name>**. 
+    2. Select the character’s .fbx. 
+    3. In the **Inspector**, open the **Rig** tab.
+      - Animation Type: **Humanoid** 
+      - Avatar Definition: **Create From This Model** 
     4. Re-apply these settings. 
     
   - Check **Animation's Rig** settings: 
