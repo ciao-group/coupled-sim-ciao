@@ -231,16 +231,16 @@ To hide environment objects for performance:
     1. Go to **Assets → Models → People → <Character_Name>**. 
     2. Select the character’s .fbx. 
     3. In the **Inspector**, open the **Rig** tab.
-      - Animation Type: **Humanoid** 
-      - Avatar Definition: **Create From This Model** 
+        - Animation Type: **Humanoid** 
+        - Avatar Definition: **Create From This Model** 
     4. Re-apply these settings. 
     
   - Check **Animation's Rig** settings: 
     1. In the Project window, select the animation 
     2. In the **Rig** tab: 
-     - Animation Type: **Humanoid** 
-     - Avatar Definition: **Copy From Other Avatar** 
-     - Source: The character’s avatar 
+        - Animation Type: **Humanoid** 
+        - Avatar Definition: **Copy From Other Avatar** 
+        - Source: The character’s avatar 
     3. Re-apply these settings.
 
 2. **Missing Script**
@@ -248,9 +248,9 @@ To hide environment objects for performance:
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
     <p>
-      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="450" alt="Pedestrian inspector overview">
+      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="500" alt="Pedestrian inspector overview">
     </p>
-    ***Figure 1**: *This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
+    **_Figure 1_**: *This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
 
 **Tip:** Multiple pedestrian failures usually indicate a controller problem; single failures may be rig or missing script issues.
 
