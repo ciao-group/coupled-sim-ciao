@@ -131,8 +131,9 @@ The simulator replicates a realistic urban environment, integrating roads, build
 
 
 ### Hierarchy of the Environment
-
-(*Insert environment picture here*)
+    <p>
+      <img src="READme_Images/Hierarchy_Environment.png" height="500" alt="Hierarchy_Environment">
+    </p>
 
 
 
@@ -143,14 +144,17 @@ The simulator replicates a realistic urban environment, integrating roads, build
 ## NPCs
 
 ### Pedestrians
+    <p>
+      <img src="READme_Images/Hierarchy_Pedestrians.png" height="500" alt="Hierarchy_Pedestrians">
+    </p>
 
-(*Insert hierarchy picture here*)
 
 
 
 ### Idle Characters
-
-(*Insert hierarchy picture here*)
+    <p>
+      <img src="READme_Images/Hierarchy_Idle_Characters.png" height="500" alt="Hierarchy_Idle_Characters">
+    </p>
 
 
 
