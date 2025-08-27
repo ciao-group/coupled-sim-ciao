@@ -275,7 +275,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         cameraHolder.SetParent(carRoot, false);
 
         // forcibly set local pos/rot
-        cameraHolder.localPosition = new Vector3(0.385f, -0.025f, 2.67f);
+        cameraHolder.localPosition = new Vector3(0.426f, 0f, 2.67f);
         cameraHolder.localEulerAngles = new Vector3(0f, 85.5f, 0f);
 
         // new world
