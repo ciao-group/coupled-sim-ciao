@@ -171,6 +171,8 @@ public class RCC_CarControllerV3 : RCC_Core {
     public enum SteeringType { Curve, Simple, Constant }
     public SteeringType steeringType = SteeringType.Curve;
     public AnimationCurve steerAngleCurve = new AnimationCurve();   //	Steering angle limiter curve based on speed.
+    public AnimationCurve betterSteerAngleCurve = new AnimationCurve(); 
+    public bool InspectorTest;
     public float steerAngle = 40f;                                                          // Maximum Steer Angle Of Your Vehicle.
     public float highspeedsteerAngle = 5f;                                          // Maximum Steer Angle At Highest Speed.
     public float highspeedsteerAngleAtspeed = 120f;                         // Highest Speed For Maximum Steer Angle.
@@ -549,10 +551,19 @@ public class RCC_CarControllerV3 : RCC_Core {
         }
 
         //	If steer angle curve is not initialized or has low keyframes, recreate it.
-        if (steerAngleCurve == null)
+        /*if (steerAngleCurve == null)
             steerAngleCurve = new AnimationCurve(new Keyframe(0f, 40f, 0f, -.3f), new Keyframe(120f, 10f, -.115f, -.1f), new Keyframe(200f, 7f));     //	Steering angle limiter curve based on speed.
         else if (steerAngleCurve.length < 1)
-            steerAngleCurve = new AnimationCurve(new Keyframe(0f, 40f, 0f, -.3f), new Keyframe(120f, 10f, -.115f, -.1f), new Keyframe(200f, 7f));     //	Steering angle limiter curve based on speed.
+            steerAngleCurve = new AnimationCurve(new Keyframe(0f, 40f, 0f, -.3f), new Keyframe(120f, 10f, -.115f, -.1f), new Keyframe(200f, 7f));     //	Steering angle limiter curve based on speed.*/
+
+        if (gameObject.GetComponent<RCC_AICarController>().enabled)
+        {
+            steerAngle = steerAngleCurve.Evaluate(speed);
+        }
+        else
+        {
+            steerAngle = betterSteerAngleCurve.Evaluate(speed);
+        }
 
     }
 
@@ -1016,7 +1027,7 @@ public class RCC_CarControllerV3 : RCC_Core {
         poweredWheels = currentPoweredWheels;
 
         Engine();
-        Steering();
+        //Steering();
         Wheels();
 
         if (canControl) {
@@ -1297,8 +1308,8 @@ public class RCC_CarControllerV3 : RCC_Core {
         switch (steeringType) {
 
             case SteeringType.Curve:
-                steerAngle = steerAngleCurve.Evaluate(speed);
-                break;
+                    steerAngle = steerAngleCurve.Evaluate(speed);
+                    break;
 
             case SteeringType.Simple:
                 steerAngle = Mathf.Lerp(orgSteerAngle, highspeedsteerAngle, (speed / highspeedsteerAngleAtspeed));

@@ -561,7 +561,8 @@ public class RCC_Editor : Editor {
 
             case RCC_CarControllerV3.SteeringType.Curve:
 
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("steerAngleCurve"), new GUIContent("Steer Angle Curve", "Steer Angle Curve based on speed. Maximum steer angle will be adjusted related to speed."), false);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("steerAngleCurve"), new GUIContent("Steer Angle Curve (used for AI)", "Steer Angle Curve based on speed. Maximum steer angle will be adjusted related to speed."), false);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("betterSteerAngleCurve"), new GUIContent("Steer Angle Curve (manual driving)", "Steer Angle Curve based on speed. Maximum steer angle will be adjusted related to speed."), false);
                 break;
 
             case RCC_CarControllerV3.SteeringType.Simple:
