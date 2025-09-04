@@ -112,7 +112,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - Vector2_8e39cc9d9407448cb5fc78370e60216c: {r: 1, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.72944045, b: 0.08018869, a: 0}
+    - _Color: {r: 0.28326866, g: 0.8396226, b: 0.15366672, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
