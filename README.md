@@ -3,16 +3,12 @@
 
 ## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
-  <p>
-    <img src="ReadMeImgs/ENV2.png" width="500" alt="Hierarchy_Environment">
-    <img src="ReadMeImgs/ENV1.png" width="500" alt="Hierarchy_Environment">
+  <p align="center">
+    <img src="ReadMeImgs/ENV2.png" width="45%" alt="Environment2">
+    <img src="ReadMeImgs/ENV1.png" width="45%" alt="Environment1">
   </p>
 
 ---
-
-
-
-## Table of Contents
 
 ## Table of Contents
 
@@ -48,7 +44,6 @@ Our adaptation combines a fixed-based driving simulator with a virtual environme
 
 This project aims to serve as a valuable contribution to the open-source landscape directed at researchers and developers interested in advancing mixed reality applications for mobility and interaction studies. Further contributions, collaborations, and discussions are encouraged to enhance the simulator's capabilities and research applicability.
 
-
 ---
 
 ## Environment
@@ -57,18 +52,7 @@ This project aims to serve as a valuable contribution to the open-source landsca
     <img src="ReadMeImgs/TOPDOWNMAP.png" width="500" alt="Top Down Map">
   </p>
 
-
-
-The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The non-playable characters (NPCs) exhibit a range of behaviors including walking, resting, and interacting to help create a dynamic and immersive scene.
-
-| Key Components    | Description                                           |
-|------------------|-------------------------------------------------------|
-| Roads & Sidewalks | Base navigation surfaces for vehicles and pedestrians |
-| Pedestrians       | Dynamic agents performing animations                  |
-| Parked Vehicles   | Static props affecting realism                       |
-| Buildings         | Environmental context                                |
-| Wind Turbines     | Background scenery, optional interactive props       |
-| Trees             | Decorative elements                                  |
+The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The basic layout of the roads was adopted 1:1 from the original version of the simulation. Buildings, props, and trees have been adjusted.
 
 
 ### Hierarchy of the Environment
@@ -82,6 +66,7 @@ The simulator replicates a realistic urban environment, integrating roads, build
 ## NPCs
 
 There are both idle and active pedestrians featured in the scene. The active pedestrians follow their own Waypoint cycles and currently do no have colliders.
+
 
 ---
 
@@ -112,12 +97,11 @@ There is a range of buttons, mostly for decoration. Only the left and right blin
   
   The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are sub-menus to play music and adjust volume.
   
-  <p>
-    <img src="ReadMeImgs/IVIS_Start.png" width="500" alt="Hierarchy_Environment"><img src="ReadMeImgs/IVIS_Home.png" width="500" alt="Hierarchy_Environment">
+  <p align="center">
+    <img src="ReadMeImgs/IVIS_Start.png" width="45%" alt="IVIS Start Screen"><img src="ReadMeImgs/IVIS_Home.png" width="45%" alt="IVIS Home Screen">
   </p>
   
 There are two additional screens: A Start screen, and a Home screen. These currently are mock ups only, and clicking buttons will only toggle their visibility.
-
 
 ---
 
@@ -126,9 +110,8 @@ There are two additional screens: A Start screen, and a Home screen. These curre
 The player car can either be manually driven, or control can be handed over to an AI driver. The AI driver will follow a Waypoint Cycle (RCC AI driver script), and move the physical steering wheel of the car. The image below shows the currently implement waypoint circuit.
 
   <p>
-    <img src="ReadMeImgs/AICAR.png" height="500" alt="Hierarchy_Environment">
+    <img src="ReadMeImgs/AICAR.png" height="500" alt="AI car waypoint route">
   </p>
-
 
 
 ## Setup
@@ -150,7 +133,6 @@ The player car can either be manually driven, or control can be handed over to a
 - vJoy
 
 ---
-
 
 ### Prerequisites
 
