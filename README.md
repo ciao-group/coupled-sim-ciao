@@ -284,7 +284,7 @@ This implementation uses **Varjo Base** Software to record the view from the HMD
    - Idle_Characters use Animator only.
    - Compare inspector to reference screenshot to confirm setup.
     <p>
-      <img src="READme_Images/Pedestrian_Inspector_Overview.png" height="500" alt="Pedestrian inspector overview">
+      <img src="ReadMeImgs/Pedestrian_Inspector_Overview.png" height="500" alt="Pedestrian inspector overview">
     </p>
   **Figure 1**: *This is what the Inspector of your pedestrian should look like. If any scripts are missing, make sure to find them in the project folder and add them to the Inspector. This is also important if you want to add new characters to the scene.*
 
