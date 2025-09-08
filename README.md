@@ -3,7 +3,10 @@
 
 ## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
-
+  <p>
+    <img src="ReadMeImgs/ENV2.png" width="500" alt="Hierarchy_Environment">
+    <img src="ReadMeImgs/ENV1.png" width="500" alt="Hierarchy_Environment">
+  </p>
 
 ---
 
@@ -17,27 +20,31 @@
 
 3. [Goal of the Project](#goal-of-the-project)
 
-4. [Features](#features)
+4. [Tech Stack](#tech-stack)
 
-5. [Tech Stack](#tech-stack)
+5. [Environment](#environment)
 
-6. [Environment Setup](#environment-setup)
+6. [NPCs](#npcs)
 
-7. [NPCs](#npcs)
+7. [Dashboard](#dashboard)
 
-8. [Setup](#setup)
+8. [IVIS](#ivis)
 
-9. [Usage](#usage)
+9. [AI Driver](#ai-driver)
 
-10. [Troubleshooting / Known Issues](#troubleshooting--known-issues)
+10. [Setup](#setup)
 
-11. [Demo Video](#demo-video)
+11. [Usage](#usage)
 
-12. [Contributions](#contributions)
+12. [Troubleshooting / Known Issues](#troubleshooting--known-issues)
 
-13. [Acknowledgments](#acknowledgments)
+13. [Demo Video](#demo-video)
 
-14. [Citation](#citation)
+14. [Contributions](#contributions)
+
+15. [Acknowledgments](#acknowledgments)
+
+16. [Citation](#citation)
 
 
 
@@ -89,15 +96,16 @@ This project aims to serve as a valuable contribution to the open-source landsca
 
 - DirectX11
 
+- vJoy
 
 
 ---
 
 
 
-## Environment Setup
+## Environment
 
-The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The non-playable characters (NPCs) exhibit a range of behaviors including walking, resting, and interacting to help create a dynamic and immersive scene. This environment provides a great platform for exploration, testing, and observing real-world behaviors.
+The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The non-playable characters (NPCs) exhibit a range of behaviors including walking, resting, and interacting to help create a dynamic and immersive scene.
 
 | Key Components    | Description                                           |
 |------------------|-------------------------------------------------------|
@@ -109,38 +117,59 @@ The simulator replicates a realistic urban environment, integrating roads, build
 | Trees             | Decorative elements                                  |
 
 
-
-
 ### Hierarchy of the Environment
   <p>
-    <img src="READme_Images/Hierarchy_Environment.png" height="500" alt="Hierarchy_Environment">
+    <img src="ReadMeImgs/Hierarchy.png" height="500" alt="Hierarchy_Environment">
   </p>
 
 
-
 ---
-
-
 
 ## NPCs
 
-### Pedestrians
+There are both idle and active pedestrians featured in the scene. The active pedestrians follow their own Waypoint cycles and currently do no have colliders.
+
+---
+
+## Dashboard
+
+
   <p>
-    <img src="READme_Images/Hierarchy_Pedestrians.png" height="500" alt="Hierarchy_Pedestrians">
+    <img src="ReadMeImgs/Dashboard.png" width="700" alt="Hierarchy_Environment">
   </p>
 
 
+The dashboard display shows key driving information:
 
+- Top: Time, date, mock temperature.
+- Left side: Brake and throttle input are displayed as vertical bars; Current gear is highlighted, along with inactive gears.
+- Center: The steering wheel angle and current speed.
+- Right side: Additional driving metrics including speed, elapsed time, distance traveled, and Mock Consumption.
 
-### Idle Characters
-  <p>
-    <img src="READme_Images/Hierarchy_Idle_Characters.png" height="500" alt="Hierarchy_Idle_Characters">
+There is a range of buttons, mostly for decoration. Only the left and right blinking icons are mapped to inputs; all shortly light up, then fade out on start up.
+
+---
+
+## IVIS
+
+  <p align="center">
+    <img src="ReadMeImgs/IVIS.png" width="700" alt="IVIS">
   </p>
-
+  
+  The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are sub-menus to play music and adjust volume.
+  
+  <p>
+    <img src="ReadMeImgs/IVIS_Start.png" width="500" alt="Hierarchy_Environment"><img src="ReadMeImgs/IVIS_Home.png" width="500" alt="Hierarchy_Environment">
+  </p>
+  
+There are two additional screens: A Start screen, and a Home screen. These currently are mock ups only, and clicking buttons will only toggle their visibility.
 
 
 ---
 
+## AI Driver
+
+The player car can either be manually driven, or control can be handed over to an AI driver. The AI driver will follow a Waypoint Cycle (RCC AI driver script), and move the physical steering wheel of the car.
 
 
 ## Setup
@@ -159,6 +188,13 @@ The simulator replicates a realistic urban environment, integrating roads, build
 
 - Fixed-Based Driving Simulator (Ergoneers)
 
+**Software:**
+
+- Realistic Car Controller (Bonecracker Games) -- A license for this asset is needed. You can buy it in the [Unity Asset Store](https://assetstore.unity.com/packages/tools/physics/realistic-car-controller-16296?srsltid=AfmBOorEkki7rHdWpDJJYPRQbDawsVYkARHaRmIliXc-epry_dH2PXpR)
+
+
+
+This Simulation was build for use with the Ergoneers Fixed-Based Driving Simulator. If you do not have this, the simulation should be adaptable to run without by modifiying the input system and Mixed-Reality set up.
 
 
 ---
@@ -166,8 +202,6 @@ The simulator replicates a realistic urban environment, integrating roads, build
 
 
 ### Installation \& Running Locally
-
-(*Insert step-by-step installation instructions and pictures here*)
 
 
 
@@ -177,7 +211,6 @@ The simulator replicates a realistic urban environment, integrating roads, build
 
 ## Usage
 
-(*Insert instructions or usage examples here*)
 
 
 
