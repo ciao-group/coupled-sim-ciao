@@ -49,7 +49,7 @@ This project aims to serve as a valuable contribution to the open-source landsca
 ## Environment
 
   <p>
-    <img src="ReadMeImgs/TOPDOWNMAP.png" width="500" alt="Top Down Map">
+    <img src="ReadMeImgs/TOPDOWNMAP.png" width="45%" alt="Top Down Map"><img src="ReadMeImgs/CityTOP.png" width="45%" alt="Top Down Map">
   </p>
 
 The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The basic layout of the roads was adopted 1:1 from the original version of the simulation. Buildings, props, and trees have been adjusted.
@@ -92,13 +92,13 @@ There is a range of buttons, mostly for decoration. Only the left and right blin
 ## IVIS
 
   <p align="center">
-    <img src="ReadMeImgs/IVIS.png" width="700" alt="IVIS">
+    <img src="ReadMeImgs/MapScreen.png" width="700" alt="IVIS">
   </p>
   
-  The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are sub-menus to play music and adjust volume.
+  The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are buttons to play/pause and mute/unmute music, as well as a assistant button that currently triggers a mock message. The `Pull Over` button is not functional yet.
   
   <p align="center">
-    <img src="ReadMeImgs/IVIS_Start.png" width="45%" alt="IVIS Start Screen"><img src="ReadMeImgs/IVIS_Home.png" width="45%" alt="IVIS Home Screen">
+    <img src="ReadMeImgs/StartScreen.png" width="45%" alt="IVIS Start Screen"><img src="ReadMeImgs/HomeScreen.png" width="45%" alt="IVIS Home Screen">
   </p>
   
 There are two additional screens: A Start screen, and a Home screen. These currently are mock ups only, and clicking buttons will only toggle their visibility.
