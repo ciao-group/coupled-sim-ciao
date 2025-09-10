@@ -49,10 +49,20 @@ This project aims to serve as a valuable contribution to the open-source landsca
 ## Environment
 
   <p>
-    <img src="ReadMeImgs/TOPDOWNMAP.png" width="45%" alt="Top Down Map"><img src="ReadMeImgs/CityTOP.png" width="45%" alt="Top Down Map">
+    <img src="ReadMeImgs/TOPDOWNMAP.png" width="47.73%" alt="Top Down Map">
+    <img src="ReadMeImgs/CityTOP.png" width="42.27%" alt="Top Down Map">
   </p>
 
-The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The basic layout of the roads was adopted 1:1 from the original version of the simulation. Buildings, props, and trees have been adjusted.
+The simulator replicates a realistic urban environment, integrating roads, buildings, trees, and animated pedestrians. The basic layout of the roads was adopted 1:1 from the original version of the simulation. Buildings, props, and trees have been adjusted. It features:
+
+- Network of 2-lane roads.
+- Loop of 4-lane road (partially surrounded by buildings).
+- Loop of 6-lane road (partially surrounded by buildings).
+- Half-clover interchange for the motorway.
+- 10 intersections, currently without traffic lights (to be re-implemented).
+- 34 zebra crossings.
+- Static objects (buildings, parked cars, trees).
+- Dynamic objects (pedestrians).
 
 
 ### Hierarchy of the Environment
@@ -95,13 +105,14 @@ There is a range of buttons, mostly for decoration. Only the left and right blin
     <img src="ReadMeImgs/MapScreen.png" width="700" alt="IVIS">
   </p>
   
-  The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are buttons to play/pause and mute/unmute music, as well as a assistant button that currently triggers a mock message. The `Pull Over` button is not functional yet.
+  The IVIS features a Birds-Eye-View of the Player Car in a simplified environment. Pedestrians and other vehicles are marked in light green. There are buttons to play/pause and mute/unmute music, as well as an assistant button that currently triggers a mock message. The `Pull Over` button is not functional yet.
   
   <p align="center">
-    <img src="ReadMeImgs/StartScreen.png" width="45%" alt="IVIS Start Screen"><img src="ReadMeImgs/HomeScreen.png" width="45%" alt="IVIS Home Screen">
+    <img src="ReadMeImgs/StartScreen.png" width="44.5%" alt="IVIS Start Screen">
+    <img src="ReadMeImgs/HomeScreen.png" width="45%" alt="IVIS Home Screen">
   </p>
   
-There are two additional screens: A Start screen, and a Home screen. These currently are mock ups only, and clicking buttons will only toggle their visibility.
+There are two additional screens: A Start screen, and a Home screen. Clicking buttons will only toggle their visibility.
 
 ---
 
