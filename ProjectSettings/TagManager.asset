@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
@@ -57,3 +58,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:b241254c263af95c8f222292eb88b1dba5b765afc2582a03ed274e7f2af53889
+size 781
+>>>>>>> Stashed changes
