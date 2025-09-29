@@ -1227,7 +1227,7 @@ public class RCC_CarControllerV3 : RCC_Core {
         if (AutomaticGear && !semiAutomaticGear && !changingGear && !RCC_InputManager.Instance.logitechHShifterUsed) {
 
             //Reversing Bool.
-            Debug.Log("entered");
+            //Debug.Log("entered");
             if (brakeInput > .9f && transform.InverseTransformDirection(Rigid.velocity).z < 1f && canGoReverseNow && direction != -1)
                 StartCoroutine(ChangeGear(-1));
             else if (throttleInput < .1f && transform.InverseTransformDirection(Rigid.velocity).z > -1f && direction == -1)

@@ -23,6 +23,10 @@ using Barmetler;
 /// </summary>
 [RequireComponent(typeof(RCC_CarControllerV3))]
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/RCC AI Car Controller")]
+
+
+
+
 public class RCC_AICarController : MonoBehaviour
 {
 
@@ -39,6 +43,12 @@ public class RCC_AICarController : MonoBehaviour
         }
     }
     private RCC_CarControllerV3 _carController;
+
+
+    [Header("Distance Keeping")]
+    public float safeDistance = 10f;
+    public float brakingForce = 2f;   
+
 
     /// <summary>
     /// Waypoints Container.
@@ -65,7 +75,7 @@ public class RCC_AICarController : MonoBehaviour
     /// <summary>
     /// Raycast distances used for detecting obstacles at front of the AI vehicle.
     /// </summary>
-    [Range(5f, 30f)] public float raycastLength = 3f;
+    [Range(3f, 30f)] public float raycastLength = 3f;
 
     /// <summary>
     /// Raycast distances used for detecting obstacles at front of the AI vehicle.
@@ -101,6 +111,8 @@ public class RCC_AICarController : MonoBehaviour
     /// Raycasts hits an obstacle now?
     /// </summary>
     private bool raycasting = false;
+
+    private bool pedestrianDetected = false;
 
     /// <summary>
     /// This timer was used for deciding go back or not, after crashing.
@@ -305,7 +317,6 @@ public class RCC_AICarController : MonoBehaviour
         FeedRCC();      // Feeds inputs of the RCC.
 
     }
-
     private void Navigation()
     {
 
@@ -359,6 +370,8 @@ public class RCC_AICarController : MonoBehaviour
                 // Checks for the distance to next waypoint. If it is less than written value, then pass to next waypoint.
                 float distanceToNextWaypoint = Vector3.Distance(transform.position, currentWaypoint.transform.position);
 
+                float targetSpeed = currentWaypoint.targetSpeed;
+
                 // Setting destination of the Navigator.
                 if (navigator.isOnNavMesh)
                     navigator.SetDestination(waypointsContainer.waypoints[currentWaypointIndex].transform.position);
@@ -384,14 +397,48 @@ public class RCC_AICarController : MonoBehaviour
                         navigator.SetDestination(waypointsContainer.waypoints[currentWaypointIndex].transform.position);
 
                 }
+                // +++ pedestrian detected? pause waypoint following until they have cleared the path
+                if (pedestrianDetected)
+                {
+                    throttleInput = 0f;
+                    brakeInput = 1f;
+                    ignoreWaypointNow = true;
+                }
+                // +++
 
                 //  If vehicle goes forward, calculate throttle and brake inputs.
-                if (!reversingNow)
+                else if (!reversingNow)
                 {
+                    throttleInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
+                                    ? Mathf.Clamp01(targetSpeed - CarController.speed)
+                                    : 1f;
 
-                    throttleInput = (distanceToNextWaypoint < (waypointsContainer.waypoints[currentWaypointIndex].radius * (CarController.speed / 30f))) ? (Mathf.Clamp01(currentWaypoint.targetSpeed - CarController.speed)) : 1f;
-                    throttleInput *= Mathf.Clamp01(Mathf.Lerp(10f, 0f, (CarController.speed) / maximumSpeed));
-                    brakeInput = (distanceToNextWaypoint < (waypointsContainer.waypoints[currentWaypointIndex].radius * (CarController.speed / 30f))) ? (Mathf.Clamp01(CarController.speed - currentWaypoint.targetSpeed)) : 0f;
+                    throttleInput *= Mathf.Clamp01(Mathf.Lerp(10f, 0f, CarController.speed / maximumSpeed));
+
+                    brakeInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
+                                 ? Mathf.Clamp01(CarController.speed - targetSpeed)
+                                 : 0f;
+                    // +++ slow down in relation to cars in front to avoid crashes (WIP)
+                    if (obstacle != null && obstacle.CompareTag("AICar"))
+                    {
+                        float distanceToCar = Vector3.Distance(transform.position, obstacle.transform.position) - 7f;
+                        float safeDistance = 4f;
+                        Debug.Log(distanceToCar);
+                        
+                        float brakeFactor = Mathf.Clamp01((safeDistance - distanceToCar) / safeDistance);
+
+                        // Apply braking proportional to proximity
+                        brakeInput = Mathf.Max(brakeInput, brakeFactor);
+                        throttleInput = Mathf.Clamp01(throttleInput * (1f - brakeFactor));
+                    }
+
+                    //Debug.Log("Throttle: " + throttleInput);
+                    //Debug.Log("Brake: " + brakeInput);
+
+
+                    //throttleInput = (distanceToNextWaypoint < (waypointsContainer.waypoints[currentWaypointIndex].radius * (CarController.speed / 30f))) ? (Mathf.Clamp01(targetSpeed - CarController.speed)) : 1f;
+                    //throttleInput *= Mathf.Clamp01(Mathf.Lerp(10f, 0f, (CarController.speed) / maximumSpeed));
+                    //brakeInput = (distanceToNextWaypoint < (waypointsContainer.waypoints[currentWaypointIndex].radius * (CarController.speed / 30f))) ? (Mathf.Clamp01(CarController.speed - targetSpeed)) : 0f;
                     handbrakeInput = 0f;
 
                     //  If vehicle speed is high enough, calculate them related to navigator input. This will reduce throttle input, and increase brake input on sharp turns.
@@ -510,10 +557,14 @@ public class RCC_AICarController : MonoBehaviour
             throttleInput = 0f;
 
         // Steer input.
-        steerInput = (ignoreWaypointNow ? rayInput : navigatorInput + rayInput);
+        if (obstacle != null && obstacle.CompareTag("AICar"))
+            steerInput = navigatorInput;  // ignore rayInput
+        else
+            steerInput = (ignoreWaypointNow ? rayInput : navigatorInput + rayInput);
+
+        //steerInput = (ignoreWaypointNow ? rayInput : navigatorInput + rayInput);
         steerInput = Mathf.Clamp(steerInput, -1f, 1f) * CarController.direction;
 
-      
         //  Clamping inputs.
         throttleInput = Mathf.Clamp01(throttleInput);
         brakeInput = Mathf.Clamp01(brakeInput);
@@ -548,6 +599,14 @@ public class RCC_AICarController : MonoBehaviour
     /// </summary>
     private void CheckReset()
     {
+        // +++ car is NOT stuck if it is waiting for a pedestrian to cross the road
+        if (pedestrianDetected)
+        {
+            reversingNow = false;
+            resetTime = 0f;
+            return;
+        }
+        // +++
 
         //  If navigation mode is set to follow, this means vehicle may stop. If vehicle is stopped near the target, no need to go backwards.
         if (targetChase && navigationMode == NavigationMode.FollowTarget && Vector3.Distance(transform.position, targetChase.position) < stopFollowDistance)
@@ -575,7 +634,6 @@ public class RCC_AICarController : MonoBehaviour
             resetTime = 0;
 
         }
-
     }
 
     /// <summary>
@@ -594,6 +652,8 @@ public class RCC_AICarController : MonoBehaviour
 
         // Ray pivot position.
         Vector3 pivotPos = transform.position + transform.TransformVector(rayOrigin);
+
+
 
         //  Ray hit.
         RaycastHit hit;
@@ -660,6 +720,18 @@ public class RCC_AICarController : MonoBehaviour
                 //  If ray hits an obstacle, set obstacle. Otherwise set it to null.
                 if (casted)
                     obstacle = hit.transform.gameObject;
+                /*
+                    // +++ if it detects a car in front, keep distance
+                    if (hit.collider.CompareTag("AICar"))
+                    {
+                        float ratio = Mathf.Clamp01(hit.distance / raycastLength);
+                        throttleInput *= ratio;
+                        if (ratio < 0.5f)
+                            brakeInput = Mathf.Lerp(brakeInput, 1f, Time.deltaTime * brakingForce);
+                    }
+                    // +++
+                */
+
                 else
                     obstacle = null;
 
@@ -672,14 +744,73 @@ public class RCC_AICarController : MonoBehaviour
 
         //  If so, clamp the ray input.
         rayInput = Mathf.Clamp(rayInput, -1f, 1f);
-
+        /*
         //  If ray input is high enough, ignore the navigator input and directly use the ray input for steering.
         if (raycasting && Mathf.Abs(rayInput) > .5f)
             ignoreWaypointNow = true;
         else
             ignoreWaypointNow = false;
+        */
+        // Only ignore waypoint steering for non-car obstacles
+        // ignoreWaypointNow = raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar");
+        if (raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar"))
+            ignoreWaypointNow = true;
+        else
+            ignoreWaypointNow = false;
 
+        // + + +
+        // Drawing a ray box to detect pedestrians 
+        // + + +
+        float pedestrianLength = 7f;
+        float pedestrianWidth = 6f;
+        float pedestrianHeight = 2f;
+        Vector3 pedestrianBoxOffset = new Vector3(0.5f, 1.5f, 1.5f);
+
+        Vector3 boxCenter = transform.position
+                    + transform.forward * (pedestrianLength / 2f) * pedestrianBoxOffset.z   // forward distance
+                    + transform.up * pedestrianBoxOffset.y        // vertical offset
+                    + transform.right * pedestrianBoxOffset.x;    // sideways offset
+
+        //Vector3 boxCenter = transform.position + transform.forward * (pedestrianLength / 2f) + Vector3.up * (pedestrianHeight / 2f);
+        Vector3 halfExtents = new Vector3(pedestrianWidth / 2f, pedestrianHeight / 2f, pedestrianLength / 2f);
+        Quaternion rot = transform.rotation;
+
+        // Debug draw the zone
+        Vector3[] corners = new Vector3[8];
+        corners[0] = boxCenter + rot * new Vector3(-halfExtents.x, -halfExtents.y, -halfExtents.z);
+        corners[1] = boxCenter + rot * new Vector3(halfExtents.x, -halfExtents.y, -halfExtents.z);
+        corners[2] = boxCenter + rot * new Vector3(halfExtents.x, -halfExtents.y, halfExtents.z);
+        corners[3] = boxCenter + rot * new Vector3(-halfExtents.x, -halfExtents.y, halfExtents.z);
+
+        corners[4] = boxCenter + rot * new Vector3(-halfExtents.x, halfExtents.y, -halfExtents.z);
+        corners[5] = boxCenter + rot * new Vector3(halfExtents.x, halfExtents.y, -halfExtents.z);
+        corners[6] = boxCenter + rot * new Vector3(halfExtents.x, halfExtents.y, halfExtents.z);
+        corners[7] = boxCenter + rot * new Vector3(-halfExtents.x, halfExtents.y, halfExtents.z);
+
+        for (int i = 0; i < 4; i++)
+        {
+            Debug.DrawLine(corners[i], corners[(i + 1) % 4], Color.blue);         // bottom
+            Debug.DrawLine(corners[i + 4], corners[((i + 1) % 4) + 4], Color.blue); // top
+            Debug.DrawLine(corners[i], corners[i + 4], Color.blue);                 // verticals
+        }
+
+
+        pedestrianDetected = false;
+        // Check if a pedestrian is in the zone
+        Collider[] hits = Physics.OverlapBox(boxCenter, halfExtents, rot, obstacleLayers);
+
+        foreach (var c in hits)
+        {
+            if (c.CompareTag("Pedestrian"))
+            {
+                pedestrianDetected = true;
+                break;
+            }
+        }
+
+        // + + +
     }
+
 
     /// <summary>
     /// Feeding the RCC with throttle, brake, steer, and handbrake inputs.
