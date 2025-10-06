@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using Barmetler;
+using HealthbarGames;
 
 /// <summary>
 /// AI Controller of RCC. It's not professional, but it does the job. Follows all waypoints, or follows/chases the target gameobject.
@@ -113,6 +114,23 @@ public class RCC_AICarController : MonoBehaviour
     private bool raycasting = false;
 
     private bool pedestrianDetected = false;
+
+    /// <summary>
+    /// Crosswalk Zone with Stop line
+    /// </summary>
+    private CrosswalkZone currentCrosswalkZone;
+
+
+    private Transform stopLineTarget;
+
+    /// <summary>
+    /// Are we in a Crosswalk Zone?
+    /// </summary>
+    private bool inCrosswalkZone = false;
+
+    private float distanceToStopLine = Mathf.Infinity;
+
+    private bool mustStopForLight = false;
 
     /// <summary>
     /// This timer was used for deciding go back or not, after crashing.
@@ -397,14 +415,49 @@ public class RCC_AICarController : MonoBehaviour
                         navigator.SetDestination(waypointsContainer.waypoints[currentWaypointIndex].transform.position);
 
                 }
-                // +++ pedestrian detected? pause waypoint following until they have cleared the path
-                if (pedestrianDetected)
+
+
+                if (inCrosswalkZone && currentCrosswalkZone != null)
                 {
-                    throttleInput = 0f;
-                    brakeInput = 1f;
-                    ignoreWaypointNow = true;
+                    //Debug.Log(currentCrosswalkZone);
+                    //Debug.Log(currentCrosswalkZone.GetPhase());
+                    //Debug.Log(currentCrosswalkZone.GetPhase().GetState());
+                    var phaseState = currentCrosswalkZone.GetPhase().GetState();
+
+                    mustStopForLight = (phaseState == TrafficLightBase.State.Stop ||
+                    phaseState == TrafficLightBase.State.PrepareToStop);
+                    //if (mustStopForLight) { Debug.Log("RED!"); } else { Debug.Log("GREEN!"); }
                 }
-                // +++
+
+                if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
+                { 
+                    distanceToStopLine = Vector3.Distance(transform.position, stopLineTarget.position);
+
+                    //Debug.Log("in zone and ped!");
+                    if (distanceToStopLine > 8f)
+                    {
+                        //Debug.Log("slowing down");
+                        throttleInput = Mathf.Lerp(throttleInput, 0.4f, Time.deltaTime * 2f);
+                        brakeInput = Mathf.Lerp(brakeInput, 0f, Time.deltaTime * 2f);
+                    }
+                    else if (distanceToStopLine > 3f)
+                    {
+                        //Debug.Log("slowing down hard");
+                        throttleInput = Mathf.Lerp(throttleInput, 0f, Time.deltaTime * 3f);
+                        brakeInput = Mathf.Lerp(brakeInput, 0.4f, Time.deltaTime * 3f);
+                    }
+                    else
+                    {
+                        //Debug.Log("slamming!");
+                        throttleInput = 0f;
+                        brakeInput = 1f;
+                    }
+
+                    ignoreWaypointNow = true;
+                    return;
+                }
+
+                // TO CHECK - should this be else if or if?
 
                 //  If vehicle goes forward, calculate throttle and brake inputs.
                 else if (!reversingNow)
@@ -1054,6 +1107,31 @@ public class RCC_AICarController : MonoBehaviour
         if (OnRCCAIDestroyed != null)
             OnRCCAIDestroyed(this);
 
+    }
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CrosswalkZone"))
+        {
+            currentCrosswalkZone = other.GetComponent<CrosswalkZone>();
+            if (currentCrosswalkZone != null)
+            {
+                stopLineTarget = currentCrosswalkZone.stopLine;
+                inCrosswalkZone = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CrosswalkZone"))
+        {
+            inCrosswalkZone = false;
+            currentCrosswalkZone = null;
+            stopLineTarget = null;
+        }
     }
 
 }
