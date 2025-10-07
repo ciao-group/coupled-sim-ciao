@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using Barmetler;
 using HealthbarGames;
+using UnityEditor.Experimental.GraphView;
 
 /// <summary>
 /// AI Controller of RCC. It's not professional, but it does the job. Follows all waypoints, or follows/chases the target gameobject.
@@ -131,6 +132,8 @@ public class RCC_AICarController : MonoBehaviour
     private float distanceToStopLine = Mathf.Infinity;
 
     private bool mustStopForLight = false;
+
+    private bool mustStopForCar = false;
 
     /// <summary>
     /// This timer was used for deciding go back or not, after crashing.
@@ -431,26 +434,37 @@ public class RCC_AICarController : MonoBehaviour
 
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
                 { 
-                    distanceToStopLine = Vector3.Distance(transform.position, stopLineTarget.position);
+                    distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
 
                     //Debug.Log("in zone and ped!");
-                    if (distanceToStopLine > 8f)
+
+                    if (CarController.speed <= 1f)
+                    {
+                        throttleInput = 0f;
+                        brakeInput = 0f;
+                        handbrakeInput = 1f;
+                        CarController.direction = 1;
+                    }
+                    else if (distanceToStopLine > 8f)
                     {
                         //Debug.Log("slowing down");
                         throttleInput = Mathf.Lerp(throttleInput, 0.4f, Time.deltaTime * 2f);
                         brakeInput = Mathf.Lerp(brakeInput, 0f, Time.deltaTime * 2f);
+                        CarController.direction = 1;
                     }
                     else if (distanceToStopLine > 3f)
                     {
                         //Debug.Log("slowing down hard");
                         throttleInput = Mathf.Lerp(throttleInput, 0f, Time.deltaTime * 3f);
                         brakeInput = Mathf.Lerp(brakeInput, 0.4f, Time.deltaTime * 3f);
+                        CarController.direction = 1;
                     }
                     else
                     {
                         //Debug.Log("slamming!");
                         throttleInput = 0f;
                         brakeInput = 1f;
+                        CarController.direction = 1;
                     }
 
                     ignoreWaypointNow = true;
@@ -475,14 +489,17 @@ public class RCC_AICarController : MonoBehaviour
                     if (obstacle != null && obstacle.CompareTag("AICar"))
                     {
                         float distanceToCar = Vector3.Distance(transform.position, obstacle.transform.position) - 7f;
-                        float safeDistance = 4f;
-                        Debug.Log(distanceToCar);
+                        float safeDistance = 5f;
+                        //Debug.Log(distanceToCar);
                         
                         float brakeFactor = Mathf.Clamp01((safeDistance - distanceToCar) / safeDistance);
 
                         // Apply braking proportional to proximity
+
                         brakeInput = Mathf.Max(brakeInput, brakeFactor);
                         throttleInput = Mathf.Clamp01(throttleInput * (1f - brakeFactor));
+
+                        ignoreWaypointNow = (CarController.speed <= 1f);
                     }
 
                     //Debug.Log("Throttle: " + throttleInput);
@@ -652,8 +669,9 @@ public class RCC_AICarController : MonoBehaviour
     /// </summary>
     private void CheckReset()
     {
+        //Debug.Log(CarController.name + CarController.speed);
         // +++ car is NOT stuck if it is waiting for a pedestrian to cross the road
-        if (pedestrianDetected)
+        if (pedestrianDetected || mustStopForLight || mustStopForCar)
         {
             reversingNow = false;
             resetTime = 0f;
@@ -674,15 +692,18 @@ public class RCC_AICarController : MonoBehaviour
         // If unable to move forward, puts the gear to R.
         if (CarController.speed <= 5 && transform.InverseTransformDirection(CarController.Rigid.velocity).z <= 1f)
             resetTime += Time.deltaTime;
+        
 
         //  If car is stucked for 2 seconds, reverse now.
         if (resetTime >= 2)
+        {
+            Debug.Log("stuck");
             reversingNow = true;
+        }
 
         //  If car is stucked for 4 seconds, or speed exceeds 25, go forward.
         if (resetTime >= 4 || CarController.speed >= 25)
         {
-
             reversingNow = false;
             resetTime = 0;
 
@@ -696,12 +717,12 @@ public class RCC_AICarController : MonoBehaviour
     {
 
         //  Creating five raycasts with angles.
-        int[] anglesOfRaycasts = new int[5];
+        int[] anglesOfRaycasts = new int[3];
         anglesOfRaycasts[0] = 0;
         anglesOfRaycasts[1] = Mathf.FloorToInt(raycastAngle / 3f);
-        anglesOfRaycasts[2] = Mathf.FloorToInt(raycastAngle / 1f);
-        anglesOfRaycasts[3] = -Mathf.FloorToInt(raycastAngle / 1f);
-        anglesOfRaycasts[4] = -Mathf.FloorToInt(raycastAngle / 3f);
+        // anglesOfRaycasts[1] = Mathf.FloorToInt(raycastAngle / 1f);
+        // anglesOfRaycasts[2] = -Mathf.FloorToInt(raycastAngle / 1f);
+        anglesOfRaycasts[2] = -Mathf.FloorToInt(raycastAngle / 3f);
 
         // Ray pivot position.
         Vector3 pivotPos = transform.position + transform.TransformVector(rayOrigin);
@@ -772,7 +793,13 @@ public class RCC_AICarController : MonoBehaviour
 
                 //  If ray hits an obstacle, set obstacle. Otherwise set it to null.
                 if (casted)
+                {
                     obstacle = hit.transform.gameObject;
+
+                    mustStopForCar = obstacle.CompareTag("AICar");
+
+                }
+
                 /*
                     // +++ if it detects a car in front, keep distance
                     if (hit.collider.CompareTag("AICar"))
@@ -808,7 +835,10 @@ public class RCC_AICarController : MonoBehaviour
         // ignoreWaypointNow = raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar");
         if (raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar"))
             ignoreWaypointNow = true;
+            //else if (raycasting && obstacle.CompareTag("AICar") && CarController.speed <= 1f)
+            //ignoreWaypointNow = true;
         else
+            //Debug.Log("here");
             ignoreWaypointNow = false;
 
         // + + +
