@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using Unity.VectorGraphics;
+using Barmetler;
 
 public class IVISLogic : MonoBehaviour
 {
 
 
     [Header("Assignments")]
+    [SerializeField] private RCC_AICarController aiCar;
     [SerializeField] private RectTransform homeScreen;
     [SerializeField] private RectTransform toggleButton;
     [SerializeField] private Vector2 homeHiddenPos; // Offscreen position
@@ -94,7 +96,23 @@ public class IVISLogic : MonoBehaviour
 
 
 
+    public void ActivateAI()
+    {
+        if (aiCar != null)
+        {
+            aiCar.enabled = true;         // enables the AI script
+            aiCar.CarController.externalController = true; // ensures RCC is using AI
+        }
+    }
 
+    public void DeactivateAI()
+    {
+        if (aiCar != null)
+        {
+            aiCar.enabled = false;
+            aiCar.CarController.externalController = false;
+        }
+    }
 
 
 

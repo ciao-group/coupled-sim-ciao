@@ -500,7 +500,7 @@ public class RCC_AICarController : MonoBehaviour
                         throttleInput = Mathf.Clamp01(throttleInput * (1f - brakeFactor));
 
                         ignoreWaypointNow = (CarController.speed <= 1f);
-                    }
+                    } 
 
                     //Debug.Log("Throttle: " + throttleInput);
                     //Debug.Log("Brake: " + brakeInput);
@@ -519,6 +519,8 @@ public class RCC_AICarController : MonoBehaviour
                         brakeInput += Mathf.Abs(navigatorInput) / 3f;
 
                     }
+
+                    ignoreWaypointNow = false;
 
                 }
 

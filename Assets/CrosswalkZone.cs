@@ -78,16 +78,16 @@ public class CrosswalkZone : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{trafficLightManager.name} contains {list.Count} phases:");
+        //Debug.Log($"{trafficLightManager.name} contains {list.Count} phases:");
         foreach (var phase in list)
         {
             if (phase == null)
             {
-                Debug.Log("   - (null entry)");
+                //Debug.Log("   - (null entry)");
                 continue;
             }
 
-            Debug.Log($"   {phase.Name} | State: {phase.GetState()} | Start:{phase.PhaseStartTime}s | Green:{phase.PhaseActiveTime}s | End:{phase.PhaseEndTime}s");
+            //Debug.Log($"   {phase.Name} | State: {phase.GetState()} | Start:{phase.PhaseStartTime}s | Green:{phase.PhaseActiveTime}s | End:{phase.PhaseEndTime}s");
         }
     }
 }

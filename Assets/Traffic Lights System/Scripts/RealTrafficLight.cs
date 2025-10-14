@@ -46,7 +46,7 @@ namespace HealthbarGames
                 )
             {
                 mInitialized = true;
-                Debug.Log("initialised");
+                //Debug.Log("initialised");
             }
             else
             {
