@@ -14,7 +14,8 @@
 
 - [About](#about)
 - [Environment](#environment)
-- [NPCs](#npcs)
+- [AI Agents](#ai-agents)
+- [Traffic Lights](#traffic-lights)
 - [Dashboard](#dashboard)
 - [IVIS](#ivis)
 - [AI Driver](#ai-driver)
@@ -59,10 +60,10 @@ The simulator replicates a realistic urban environment, integrating roads, build
 - Loop of 4-lane road (partially surrounded by buildings).
 - Loop of 6-lane road (partially surrounded by buildings).
 - Half-clover interchange for the motorway.
-- 10 intersections, currently without traffic lights (to be re-implemented).
+- 10 intersections with traffic lights.
 - 34 zebra crossings.
 - Static objects (buildings, parked cars, trees).
-- Dynamic objects (pedestrians).
+- Dynamic objects (pedestrians, cars).
 
 
 ### Hierarchy of the Environment
@@ -73,18 +74,26 @@ The simulator replicates a realistic urban environment, integrating roads, build
 
 ---
 
-## NPCs
+## AI Agents
 
-There are both idle and active pedestrians featured in the scene. The active pedestrians follow their own Waypoint cycles and currently do no have colliders.
+There are agents in form of pedestrians and other cars, some active, some idle in the scene. Active agents follow specific waypoint cycles while avoiding collisions using colliders and raycasts. If a pedestrian crosses the street on a crosswalk, cars will stop until the street is clear. Cars try to avoid crashing into other cars by slowing down based on proximity to the car in front.
 
 
 ---
+
+## Traffic Lights
+
+There is a traffic light system implemented at all crossings. Each crossing features a ``Traffic Light Manager`` script which controls two phases, ``NS`` (north & south) and ``EW`` (east & west). When a traffic light is red, AI cars will stop at a specified ``stop line`` (yellow line) in front of the pedestrian crosswalk. Similarily, cars will stop here if they detect a pedestrian on the crosswalk. To facilitate gradual braking, AI cars check the state of an upcoming traffic light once they enter a ``crosswalk zone`` (yellow zone).
+
+  <p>
+    <img src="ReadmeFiles/Crossing.png" height="500" alt="Crossing">
+  </p>
 
 ## Dashboard
 
 
   <p>
-    <img src="ReadmeFiles/Dashboard.png" width="700" alt="Hierarchy_Environment">
+    <img src="ReadmeFiles/Dashboard.png" width="700" alt="Dashboard">
   </p>
 
 
@@ -112,7 +121,7 @@ There is a range of buttons, mostly for decoration. Only the left and right blin
     <img src="ReadmeFiles/HomeScreen.png" width="45%" alt="IVIS Home Screen">
   </p>
   
-There are two additional screens: A Start screen, and a Home screen. Clicking buttons will only toggle their visibility.
+There are two additional screens: A Start screen, and a Home screen. The `start ride` button swaps the manual driving function for an AI driver. Clicking buttons on the Home screen will toggle their visibility.
 
 ---
 
@@ -121,7 +130,7 @@ There are two additional screens: A Start screen, and a Home screen. Clicking bu
 The player car can either be manually driven, or control can be handed over to an AI driver. The AI driver will follow a Waypoint Cycle (RCC AI driver script), and move the physical steering wheel of the car. The image below shows the currently implement waypoint circuit.
 
   <p>
-    <img src="ReadmeFiles/AICAR.png" height="500" alt="AI car waypoint route">
+    <img src="ReadmeFiles/PlayerCarWaypoints.png" height="500" alt="Player car waypoint route">
   </p>
 
 
