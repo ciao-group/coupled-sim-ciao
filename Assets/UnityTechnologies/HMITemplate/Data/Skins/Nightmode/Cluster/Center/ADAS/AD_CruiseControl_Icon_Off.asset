@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4700d155331717dd1333b5a6abd83e6e3d5f84394662495a746b9f5f61882fa3
-size 489
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253781ff4609ce74a921da9669c45dd5, type: 3}
+  m_Name: AD_CruiseControl_Icon_Off
+  m_EditorClassIdentifier: 
+  Color: {r: 0.09064614, g: 0.18706171, b: 0.1981132, a: 1}
