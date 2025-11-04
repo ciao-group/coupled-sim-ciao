@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using Barmetler;
 using HealthbarGames;
-using UnityEditor.Experimental.GraphView;
 
 /// <summary>
 /// AI Controller of RCC. It's not professional, but it does the job. Follows all waypoints, or follows/chases the target gameobject.
