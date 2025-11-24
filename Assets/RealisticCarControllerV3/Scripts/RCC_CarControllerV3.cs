@@ -813,6 +813,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         for (int i = 0; i < gears.Length; i++) {
 
+
             maxSpeedForGear[i] = (int)((maxspeed / gears.Length) * (i + 1));
             targetSpeedForGear[i] = (int)(Mathf.Lerp(0, maxspeed * Mathf.Lerp(0f, 1f, gearShiftingThreshold), ((float)(i + 1) / (float)(gears.Length))));
 
