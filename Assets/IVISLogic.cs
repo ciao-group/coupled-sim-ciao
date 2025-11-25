@@ -1,8 +1,10 @@
+using System.Collections;
+using Barmetler;
+using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using Unity.VectorGraphics;
-using Barmetler;
+using Varjo.XR;
 
 public class IVISLogic : MonoBehaviour
 {
@@ -16,6 +18,21 @@ public class IVISLogic : MonoBehaviour
     [SerializeField] private Vector2 homeVisiblePos; // Target onscreen position
     [SerializeField] private Vector2 buttonHiddenPos; // Start button position
     [SerializeField] private Vector2 buttonVisiblePos;
+
+    [Header("Assistant")]
+    [SerializeField] private Button agentButton;
+    [SerializeField] private Image agentImage;
+    [SerializeField] private Sprite idleSprite;
+    [SerializeField] private Sprite alertSprite;
+    [SerializeField] private Sprite activeSprite;
+
+    [Header("Explanation")]
+    [SerializeField] private CanvasGroup agentSpeechBubble;
+    [SerializeField] private TextMeshProUGUI HowText;
+    [SerializeField] private TextMeshProUGUI WhatText;
+
+    private ZoneTrigger currentZone;
+    private Coroutine fadeRoutine;
 
     private bool isOpen = false;
 
@@ -202,7 +219,80 @@ public class IVISLogic : MonoBehaviour
     }
 
 
+    public void EnterZone(ZoneTrigger zone)
+    {
+        currentZone = zone;
 
+        agentButton.interactable = true;
+        agentImage.sprite = alertSprite;
+    }
 
+    // -----------------------------
+    // EXIT ZONE
+    // -----------------------------
+    public void ExitZone()
+    {
+        currentZone = null;
+        SetIdleState();
+        FadeOutBubbleInstant();
+    }
+    public void OnAgentButtonClicked()
+    {
+        if (currentZone == null)
+            return;
+
+        // Change sprite to ACTIVE
+        agentImage.sprite = activeSprite;
+
+        // Update bubble text
+        HowText.text = currentZone.howText;
+        WhatText.text = currentZone.whatText;
+
+        // Show bubble
+        FadeInBubble();
+
+        // Hide after 5 seconds
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(5f));
+    }
+
+    // -----------------------------
+    // Helper: Reset to idle
+    // -----------------------------
+    private void SetIdleState()
+    {
+        agentButton.interactable = false;
+        agentImage.sprite = idleSprite;
+    }
+
+    // -----------------------------
+    // Bubble Fade Routines
+    // -----------------------------
+    private void FadeInBubble()
+    {
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        agentSpeechBubble.alpha = 1f;
+    }
+
+    private void FadeOutBubbleInstant()
+    {
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        agentSpeechBubble.alpha = 0f;
+    }
+
+    private IEnumerator FadeOutBubbleAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        float t = 0f;
+        float start = agentSpeechBubble.alpha;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 1f; // 1 second fade
+            agentSpeechBubble.alpha = Mathf.Lerp(start, 0f, t);
+            yield return null;
+        }
+    }
 }
 
