@@ -10,7 +10,7 @@ public class ZoneDetector : MonoBehaviour
         {
             LogicScript.EnterZone(zone);
             zone.PlayEnterSound();
-            Debug.Log("Zone entered.");
+            Debug.Log("Zone " + zone + " entered.");
         }
     }
 
@@ -19,7 +19,7 @@ public class ZoneDetector : MonoBehaviour
         if (other.TryGetComponent(out ZoneTrigger zone))
         {
             LogicScript.ExitZone();
-            Debug.Log("Zone left.");
+            Debug.Log("Zone" + zone + " left.");
         }
     }
 }
