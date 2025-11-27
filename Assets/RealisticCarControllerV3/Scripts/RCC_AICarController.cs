@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using Barmetler;
 using HealthbarGames;
+using UnityEditor.UI;
 
 /// <summary>
 /// AI Controller of RCC. It's not professional, but it does the job. Follows all waypoints, or follows/chases the target gameobject.
@@ -48,7 +49,7 @@ public class RCC_AICarController : MonoBehaviour
 
     [Header("Distance Keeping")]
     public float safeDistance = 10f;
-    public float brakingForce = 2f;   
+    public float brakingForce = 2f;
 
 
     /// <summary>
@@ -264,7 +265,8 @@ public class RCC_AICarController : MonoBehaviour
     public delegate void onRCCAIDestroyed(RCC_AICarController RCCAI);
     public static event onRCCAIDestroyed OnRCCAIDestroyed;
 
-    private void Awake() {
+    private void Awake()
+    {
 
         // If Waypoints Container is not selected in Inspector Panel, find it on scene.
         if (!waypointsContainer)
@@ -432,7 +434,7 @@ public class RCC_AICarController : MonoBehaviour
                 }
 
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
-                { 
+                {
                     distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
 
                     //Debug.Log("in zone and ped!");
@@ -490,7 +492,7 @@ public class RCC_AICarController : MonoBehaviour
                         float distanceToCar = Vector3.Distance(transform.position, obstacle.transform.position) - 7f;
                         float safeDistance = 5f;
                         //Debug.Log(distanceToCar);
-                        
+
                         float brakeFactor = Mathf.Clamp01((safeDistance - distanceToCar) / safeDistance);
 
                         // Apply braking proportional to proximity
@@ -499,7 +501,7 @@ public class RCC_AICarController : MonoBehaviour
                         throttleInput = Mathf.Clamp01(throttleInput * (1f - brakeFactor));
 
                         ignoreWaypointNow = (CarController.speed <= 1f);
-                    } 
+                    }
 
                     //Debug.Log("Throttle: " + throttleInput);
                     //Debug.Log("Brake: " + brakeInput);
@@ -693,7 +695,7 @@ public class RCC_AICarController : MonoBehaviour
         // If unable to move forward, puts the gear to R.
         if (CarController.speed <= 5 && transform.InverseTransformDirection(CarController.Rigid.velocity).z <= 1f)
             resetTime += Time.deltaTime;
-        
+
 
         //  If car is stucked for 2 seconds, reverse now.
         if (resetTime >= 2)
@@ -836,8 +838,8 @@ public class RCC_AICarController : MonoBehaviour
         // ignoreWaypointNow = raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar");
         if (raycasting && Mathf.Abs(rayInput) > .5f && !obstacle.CompareTag("AICar"))
             ignoreWaypointNow = true;
-            //else if (raycasting && obstacle.CompareTag("AICar") && CarController.speed <= 1f)
-            //ignoreWaypointNow = true;
+        //else if (raycasting && obstacle.CompareTag("AICar") && CarController.speed <= 1f)
+        //ignoreWaypointNow = true;
         else
             //Debug.Log("here");
             ignoreWaypointNow = false;
@@ -924,7 +926,7 @@ public class RCC_AICarController : MonoBehaviour
             //          $"prev: {before:F2}, " +
             //          $"smoothed→: {after:F2}"
             //    );
-                        
+
         }
         else
         {
@@ -933,17 +935,18 @@ public class RCC_AICarController : MonoBehaviour
         }
 
         CarController.handbrakeInput = handbrakeInput;
-        
+
     }
 
 
-    private void DebugSteerInputs() { 
-    float navX = transform.InverseTransformDirection(navigator.desiredVelocity).x;
-    //Debug.Log($"[AI INPUT] navX: {navX:F2}, " +
-    //          $"rayInput: {rayInput:F2}, " +
-    //          $"ignoreWP: {ignoreWaypointNow:F2}, " +
-    //         $"computer steerInput: {steerInput:F2}"
-    //        );
+    private void DebugSteerInputs()
+    {
+        float navX = transform.InverseTransformDirection(navigator.desiredVelocity).x;
+        //Debug.Log($"[AI INPUT] navX: {navX:F2}, " +
+        //          $"rayInput: {rayInput:F2}, " +
+        //          $"ignoreWP: {ignoreWaypointNow:F2}, " +
+        //         $"computer steerInput: {steerInput:F2}"
+        //        );
 
 
     }

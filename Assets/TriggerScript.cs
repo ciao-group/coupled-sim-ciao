@@ -78,7 +78,7 @@ public class TriggerScript : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         if (BreakZoneforStopping != null)
-            Destroy(BreakZoneforStopping);
+            BreakZoneforStopping.SetActive(false);
 
         Debug.Log("No more break zone!");
     }
