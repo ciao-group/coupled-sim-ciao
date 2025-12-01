@@ -28,7 +28,7 @@ public class IVISLogic : MonoBehaviour
 
     [Header("Explanation")]
     [SerializeField] private CanvasGroup agentSpeechBubble;
-    [SerializeField] private TextMeshProUGUI HowText;
+    [SerializeField] private TextMeshProUGUI WhyText;
     [SerializeField] private TextMeshProUGUI WhatText;
 
     private ZoneTrigger currentZone;
@@ -112,16 +112,15 @@ public class IVISLogic : MonoBehaviour
     }
 
 
-
+    // turn RCC waypoint following on / off
     public void ActivateAI()
     {
         if (aiCar != null)
         {
-            aiCar.enabled = true;         // enables the AI script
-            aiCar.CarController.externalController = true; // ensures RCC is using AI
+            aiCar.enabled = true;
+            aiCar.CarController.externalController = true;
         }
     }
-
     public void DeactivateAI()
     {
         if (aiCar != null)
@@ -131,8 +130,26 @@ public class IVISLogic : MonoBehaviour
         }
     }
 
+    public void startDialogue()
+    {
+        StartCoroutine(startAgent());
+    }
 
+    IEnumerator startAgent()
+    {
+        agentImage.sprite = activeSprite;
 
+        FadeInBubble();
+
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(5f));
+
+        yield return new WaitForSeconds(5);
+
+        agentImage.sprite = idleSprite;
+
+        ActivateAI();
+
+    }
 
     public void ToggleUIBehaviour(Behaviour uiElement)
     {
@@ -184,6 +201,7 @@ public class IVISLogic : MonoBehaviour
         currentAnim = null;
     }
 
+    // Music player scripts
     public void TogglePlay()
     {
         isPlaying = !isPlaying;
@@ -218,7 +236,7 @@ public class IVISLogic : MonoBehaviour
         }
     }
 
-
+    // --------------------------
     public void EnterZone(ZoneTrigger zone)
     {
         currentZone = zone;
@@ -227,9 +245,6 @@ public class IVISLogic : MonoBehaviour
         agentImage.sprite = alertSprite;
     }
 
-    // -----------------------------
-    // EXIT ZONE
-    // -----------------------------
     public void ExitZone()
     {
         currentZone = null;
@@ -245,7 +260,7 @@ public class IVISLogic : MonoBehaviour
         agentImage.sprite = activeSprite;
 
         // Update bubble text
-        HowText.text = currentZone.howText;
+        WhyText.text = currentZone.whyText;
         WhatText.text = currentZone.whatText;
 
         // Show bubble
@@ -256,18 +271,13 @@ public class IVISLogic : MonoBehaviour
         fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(5f));
     }
 
-    // -----------------------------
-    // Helper: Reset to idle
-    // -----------------------------
+
     private void SetIdleState()
     {
         agentButton.interactable = false;
         agentImage.sprite = idleSprite;
     }
 
-    // -----------------------------
-    // Bubble Fade Routines
-    // -----------------------------
     private void FadeInBubble()
     {
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);

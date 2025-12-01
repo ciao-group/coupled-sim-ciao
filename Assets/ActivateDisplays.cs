@@ -13,7 +13,7 @@ public class ActivateAllDisplays : MonoBehaviour
 
         Debug.Log("Displays connected: " + Display.displays.Length);
         ActivateDisplays();
-        AssignCamerasToDisplays();
+        //AssignCamerasToDisplays();
     }
 
     private void ActivateDisplays()
@@ -21,7 +21,7 @@ public class ActivateAllDisplays : MonoBehaviour
 
         for (int i = 1; i < Display.displays.Length; i++)
         {
-            if (!Display.displays[i].active)
+            if (!Display.displays[i].active && i != 1)
             {
                 Display.displays[i].Activate();
                 Debug.Log("Display " + i + " activated.");
