@@ -16,6 +16,10 @@ public class TrajectoryPainter : MonoBehaviour
     public Color baseColor = Color.cyan;
     public float lineWidth = 0.12f;
 
+    [Header("Waypoints")]
+    public bool isCycle = false;
+    public float WPIndexDestination = 1f;
+
     private Material lineMaterial;
 
     void Awake()
@@ -37,9 +41,6 @@ public class TrajectoryPainter : MonoBehaviour
         lineMaterial.renderQueue = 1000;
 
         lineRenderer.material = lineMaterial;
-
-
-        lineRenderer.material = lineMaterial;
         lineRenderer.useWorldSpace = true;
         lineRenderer.loop = false;
         lineRenderer.startWidth = lineWidth;
@@ -58,6 +59,8 @@ public class TrajectoryPainter : MonoBehaviour
             return;
 
         var waypoints = aiController.waypointsContainer.waypoints;
+
+        // draw no line if there is no waypoint container attached to car
         if (waypoints == null || waypoints.Count < 1)
         {
             lineRenderer.positionCount = 0;
@@ -75,6 +78,11 @@ public class TrajectoryPainter : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             int idx = (current + i) % waypoints.Count;
+
+            // simulate star-to-finish line by breaking once destination index is reached
+            if (!isCycle && idx >= WPIndexDestination)
+                break;
+
             controlPoints.Add(waypoints[idx].transform.position + under);
         }
 
@@ -131,7 +139,7 @@ public class TrajectoryPainter : MonoBehaviour
         if (points == null || points.Count < 2)
             return result;
 
-        // For Catmull-Rom we want P-1..Pn+1; duplicate endpoints for natural endpoints.
+        // For Catmull-Rom we want P-1..Pn+1; duplicate endpoints for natural endpoints
         List<Vector3> pts = new List<Vector3>();
         pts.Add(points[0]); // duplicate first
         pts.AddRange(points);

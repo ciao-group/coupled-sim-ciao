@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TriggerScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TriggerScript : MonoBehaviour
     [Header("Despawn Settings")]
     [Tooltip("Time in seconds before the car despawns")]
     public float despawnTime = 30f;
+    [SerializeField] private InputAction indicatorRightAction;
 
     private void Start()
     {
@@ -36,7 +38,10 @@ public class TriggerScript : MonoBehaviour
         {
             Debug.LogWarning("Target car not assigned!");
         }
+
+        indicatorRightAction.WasPressedThisFrame();
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -62,6 +67,7 @@ public class TriggerScript : MonoBehaviour
             Debug.Log("RCC Car Activated!");
         }
     }
+
 
     private IEnumerator DespawnCarAfterTime(float time)
     {

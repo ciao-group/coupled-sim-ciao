@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Media;
 using Barmetler;
 using TMPro;
 using Unity.VectorGraphics;
@@ -20,16 +21,16 @@ public class IVISLogic : MonoBehaviour
     [SerializeField] private Vector2 buttonVisiblePos;
 
     [Header("Assistant")]
-    [SerializeField] private Button agentButton;
-    [SerializeField] private Image agentImage;
-    [SerializeField] private Sprite idleSprite;
-    [SerializeField] private Sprite alertSprite;
-    [SerializeField] private Sprite activeSprite;
+    [SerializeField] public Button agentButton;
+    [SerializeField] public Image agentImage;
+    [SerializeField] public Sprite idleSprite;
+    [SerializeField] public Sprite alertSprite;
+    [SerializeField] public Sprite activeSprite;
 
     [Header("Explanation")]
-    [SerializeField] private CanvasGroup agentSpeechBubble;
-    [SerializeField] private TextMeshProUGUI WhyText;
-    [SerializeField] private TextMeshProUGUI WhatText;
+    [SerializeField] public CanvasGroup agentSpeechBubble;
+    [SerializeField] public TextMeshProUGUI WhyText;
+    [SerializeField] public TextMeshProUGUI WhatText;
 
     private ZoneTrigger currentZone;
     private Coroutine fadeRoutine;
@@ -118,6 +119,7 @@ public class IVISLogic : MonoBehaviour
         if (aiCar != null)
         {
             aiCar.enabled = true;
+            aiCar.CarController.enabled = true;
             aiCar.CarController.externalController = true;
         }
     }
@@ -278,7 +280,7 @@ public class IVISLogic : MonoBehaviour
         agentImage.sprite = idleSprite;
     }
 
-    private void FadeInBubble()
+    public void FadeInBubble()
     {
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         agentSpeechBubble.alpha = 1f;
