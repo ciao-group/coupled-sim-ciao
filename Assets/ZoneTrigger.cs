@@ -3,10 +3,10 @@ using UnityEngine;
 
 public enum ZoneType
 {
-    ZoneA,
-    ZoneB,
-    ZoneC,
-    ZoneD
+    A,
+    B,
+    C,
+    N
 }
 
 public class ZoneTrigger : MonoBehaviour

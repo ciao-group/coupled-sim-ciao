@@ -10,6 +10,7 @@ using Varjo.XR;
 public class IVISLogic : MonoBehaviour
 {
 
+    public ExperimentConfigs Configs;
 
     [Header("Assignments")]
     [SerializeField] private RCC_AICarController aiCar;
@@ -243,8 +244,23 @@ public class IVISLogic : MonoBehaviour
     {
         currentZone = zone;
 
-        agentButton.interactable = true;
-        agentImage.sprite = alertSprite;
+        if (Configs.condition == ConditionType.Lumo)
+        {
+            agentButton.interactable = true;
+            agentImage.sprite = alertSprite;
+        }
+        else
+        {
+            // Change sprite to ACTIVE
+            agentImage.sprite = activeSprite;
+
+            // Update bubble text
+            WhyText.text = currentZone.whyText;
+            WhatText.text = currentZone.whatText;
+
+            // Show bubble
+            FadeInBubble();
+        }
     }
 
     public void ExitZone()
