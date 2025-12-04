@@ -31,6 +31,8 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         Phase3_Done          // Car normal physics, no forced alignment
     }
 
+    private Vector3 posit;
+
     [Header("Car & RCC")]
     [Tooltip("RCC Car Controller for your simulated vehicle.")]
     public RCC_CarControllerV3 rccCar;
@@ -79,6 +81,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
 
     private void OnEnable()
     {
+        posit = rccCar.transform.position;
         StartPhase1();
     }
 
@@ -125,10 +128,12 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
     {
         currentPhase = CalibrationPhase.Phase3_Done;
         debugTimer = 0f;
-
+        rccCar.transform.position = posit;
         // Car normal physics
         if (rccCar && rccCar.Rigid)
             rccCar.Rigid.isKinematic = false;
+
+
 
         Debug.Log("[Phase3] Car physics ON, no more forced alignment. Calibration done!");
     }
@@ -163,7 +168,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         }
 
         // Forced alignment
-        AlignCarToTrackerOffset();
+        //AlignCarToTrackerOffset();
 
         // Debug logs each second
         if (debugEverySecond)
@@ -211,7 +216,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
 
         // 1) Real offset in position
         Vector3 realPosDiff = realTracker.position - cameraHolder.position;
-
+        Debug.Log(realTracker.position);
         // 2) Real offset in rotation
         Quaternion realRotDiff = realTracker.rotation * Quaternion.Inverse(cameraHolder.rotation);
 
@@ -277,8 +282,11 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         // forcibly set local pos/rot
         //cameraHolder.localPosition = new Vector3(0.426f, 0f, 2.67f);
         //cameraHolder.localEulerAngles = new Vector3(0f, 85.5f, 0f);
-        cameraHolder.localPosition = new Vector3(-1.63f, 0.025f, 1.53f);
-        cameraHolder.localEulerAngles = new Vector3(0f, 16.54f, 0f);
+        //cameraHolder.localPosition = new Vector3(-1.63f, 0.025f, 1.53f);
+        cameraHolder.localPosition = new Vector3(-1.79f, 0.026f, 1.374f);
+        //cameraHolder.localEulerAngles = new Vector3(0f, 16.54f, 0f); 
+        cameraHolder.localEulerAngles = new Vector3(0f, 21.451f, 0f);
+        //cameraHolder.localEulerAngles = new Vector3(0f, 0f, 0f);
 
         // new world
         Vector3 newPos = cameraHolder.position;

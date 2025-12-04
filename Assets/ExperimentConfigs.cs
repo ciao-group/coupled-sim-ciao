@@ -13,13 +13,11 @@ public enum ConditionType
 public class ExperimentConfigs : MonoBehaviour
 {
 
-
     [Header("Experiment")]
     [TextArea] public string participant_ID;
 
     [Header("Choose Condition")]
     public ConditionType condition;
-
 
     [Header("Lumo")]
     public Sprite lumoIdleSprite;
@@ -59,6 +57,7 @@ public class ExperimentConfigs : MonoBehaviour
         else { Debug.Log("Filename already exists."); }
 
     }
+
 
     public void LogButtonPress(string buttonName)
     {
