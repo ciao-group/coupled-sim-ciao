@@ -123,7 +123,22 @@ public class IVISLogic : MonoBehaviour
             aiCar.CarController.enabled = true;
             aiCar.CarController.externalController = true;
         }
+
+        GameObject[] aiCars = GameObject.FindGameObjectsWithTag("AICar");
+
+        foreach (GameObject car in aiCars)
+        {
+            car.GetComponent<RCC_AICarController>().enabled = true;
+        }
+
+        GameObject[] trafficLights = GameObject.FindGameObjectsWithTag("TrafficLight");
+
+        foreach (GameObject light in trafficLights)
+        {
+            light.GetComponent<HealthbarGames.TrafficLightManager>().enabled = true;
+        }
     }
+
     public void DeactivateAI()
     {
         if (aiCar != null)

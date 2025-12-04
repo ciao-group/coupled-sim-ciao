@@ -24,6 +24,7 @@ TagManager:
   - AICar
   - StopLine
   - CrosswalkZone
+  - TrafficLight
   layers:
   - Default
   - TransparentFX

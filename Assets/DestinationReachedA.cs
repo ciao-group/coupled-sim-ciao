@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class DestinationReachedA : MonoBehaviour
+public class DestinationReached : MonoBehaviour
 {
 
     public IVISLogic IvisLogic;

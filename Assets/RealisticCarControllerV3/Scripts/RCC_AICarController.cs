@@ -430,7 +430,7 @@ public class RCC_AICarController : MonoBehaviour
 
                     mustStopForLight = (phaseState == TrafficLightBase.State.Stop ||
                     phaseState == TrafficLightBase.State.PrepareToStop);
-                    //if (mustStopForLight) { Debug.Log("RED!"); } else { Debug.Log("GREEN!"); }
+                    //if (mustStopForLight) { Debug.Log("RED!"); } 
                 }
 
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
@@ -438,6 +438,7 @@ public class RCC_AICarController : MonoBehaviour
                     distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
 
                     //Debug.Log("in zone and ped!");
+                    //Debug.Log(distanceToStopLine);
 
                     if (CarController.speed <= 1f)
                     {
@@ -465,7 +466,14 @@ public class RCC_AICarController : MonoBehaviour
                         //Debug.Log("slamming!");
                         throttleInput = 0f;
                         brakeInput = 1f;
+                        handbrakeInput = 1f;
                         CarController.direction = 1;
+                    }
+
+                    if (distanceToStopLine <= 1f && mustStopForLight)
+                    {
+                        //Debug.Log("stop");
+                        CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     }
 
                     ignoreWaypointNow = true;

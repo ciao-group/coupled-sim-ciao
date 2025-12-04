@@ -35,9 +35,12 @@ public class ExperimentConfigs : MonoBehaviour
     public Sprite nevoAlertSprite;
 
     public IVISLogic ivisLogic;
+    public GameObject PlayerCar;
 
 
     public ZoneDetector zoneDetector;
+    public GameObject TrajectoryLine;
+
     private string logPath;
 
     void Start()
@@ -56,6 +59,13 @@ public class ExperimentConfigs : MonoBehaviour
         }
         else { Debug.Log("Filename already exists."); }
 
+        if (TrajectoryLine != null)
+        {
+            int length = PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer.waypoints.Count;
+
+            TrajectoryLine.GetComponent<TrajectoryPainter>().WPIndexDestination = length;
+            Debug.Log(length);
+        }
     }
 
 

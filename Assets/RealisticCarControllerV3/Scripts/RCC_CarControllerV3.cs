@@ -200,7 +200,7 @@ public class RCC_CarControllerV3 : RCC_Core {
     public enum COMAssisterTypes { Off, Slight, Medium, Opposite }
     public COMAssisterTypes COMAssister = COMAssisterTypes.Off;
 
-    public float brakeTorque = 2000f;                                   // Maximum brake torque.,
+    public float brakeTorque = 2000f;                                   // Maximum brake torque, was 2000 default
     public float downForce = 25f;                                       // Applies downforce related with vehicle speed.
     public float speed = 0f;                                                    // Vehicle speed in km/h or mp/h.
     public float maxspeed = 240f;                                       // Top speed.
@@ -1878,7 +1878,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             if (!reversingSound.isPlaying)
                 reversingSound.Play();
-            Debug.Log("Reversing Engaged");
+            //Debug.Log("Reversing Engaged");
             reversingSound.volume = Mathf.Lerp(0f, 1f, speed / gears[0].maxSpeed);
             reversingSound.pitch = reversingSound.volume;
 
