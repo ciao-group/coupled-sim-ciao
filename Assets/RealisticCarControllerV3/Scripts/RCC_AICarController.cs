@@ -437,10 +437,14 @@ public class RCC_AICarController : MonoBehaviour
                 {
                     distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
 
+                    if (CarController.CompareTag("Untagged"))
+                    {
+                        return;
+                    }
                     //Debug.Log("in zone and ped!");
                     //Debug.Log(distanceToStopLine);
 
-                    if (CarController.speed <= 1f)
+                    else if (CarController.speed <= 1f)
                     {
                         throttleInput = 0f;
                         brakeInput = 0f;
@@ -708,7 +712,7 @@ public class RCC_AICarController : MonoBehaviour
         //  If car is stucked for 2 seconds, reverse now.
         if (resetTime >= 2)
         {
-            Debug.Log("stuck");
+            //Debug.Log("stuck");
             reversingNow = true;
         }
 

@@ -54,8 +54,6 @@ public class TriggerScript : MonoBehaviour
             if (aiController != null)
                 aiController.enabled = true;
 
-
-
             // Start despawn countdown
             StartCoroutine(DespawnCarAfterTime(despawnTime));
             // Start despawn countdown

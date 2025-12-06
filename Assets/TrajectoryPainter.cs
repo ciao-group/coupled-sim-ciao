@@ -18,7 +18,7 @@ public class TrajectoryPainter : MonoBehaviour
 
     [Header("Waypoints")]
     public bool isCycle = false;
-    public float WPIndexDestination = 1f;
+    public float WPIndexDestination;
 
     private Material lineMaterial;
 
@@ -79,10 +79,13 @@ public class TrajectoryPainter : MonoBehaviour
         {
             int idx = (current + i) % waypoints.Count;
 
-
+  
             // simulate star-to-finish line by breaking once destination index is reached
             if (!isCycle && idx >= (WPIndexDestination-1))
+            {
+                Debug.Log(idx);
                 break;
+            }
 
             controlPoints.Add(waypoints[idx].transform.position + under);
         }

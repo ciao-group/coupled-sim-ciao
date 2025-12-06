@@ -41,7 +41,7 @@ public class ZoneCEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (targetpedestrian != null)
+        if (targetpedestrian != null && other.gameObject.layer == LayerMask.NameToLayer("RCC"))
         {
             // Activate
             if (aipedestrian != null)
