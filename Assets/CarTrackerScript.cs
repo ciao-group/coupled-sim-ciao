@@ -1,4 +1,5 @@
 using UnityEngine;
+using static EdyCommonTools.RotationController;
 
 /// <summary>
 /// Three-phase calibration with a 'cameraHolder' parent object for the actual camera:
@@ -31,7 +32,8 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         Phase3_Done          // Car normal physics, no forced alignment
     }
 
-    private Vector3 posit;
+    public ExperimentConfigs configs;
+    //public Vector3 posit;
 
     [Header("Car & RCC")]
     [Tooltip("RCC Car Controller for your simulated vehicle.")]
@@ -81,7 +83,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
 
     private void OnEnable()
     {
-        posit = rccCar.transform.position;
+        //posit = rccCar.transform.position;
         StartPhase1();
     }
 
@@ -128,7 +130,8 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
     {
         currentPhase = CalibrationPhase.Phase3_Done;
         debugTimer = 0f;
-        rccCar.transform.position = posit;
+        rccCar.transform.position = configs.startPosition;
+        rccCar.transform.rotation = configs.startRotation;
         // Car normal physics
         if (rccCar && rccCar.Rigid)
             rccCar.Rigid.isKinematic = false;

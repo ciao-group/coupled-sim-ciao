@@ -83,7 +83,7 @@ public class TrajectoryPainter : MonoBehaviour
             // simulate star-to-finish line by breaking once destination index is reached
             if (!isCycle && idx >= (WPIndexDestination-1))
             {
-                Debug.Log(idx);
+                //Debug.Log(idx);
                 break;
             }
 

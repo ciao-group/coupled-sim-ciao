@@ -437,7 +437,7 @@ public class RCC_AICarController : MonoBehaviour
                 {
                     distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
 
-                    if (CarController.CompareTag("Untagged"))
+                    if (CarController.CompareTag("EventTruck"))
                     {
                         return;
                     }

@@ -25,6 +25,7 @@ TagManager:
   - StopLine
   - CrosswalkZone
   - TrafficLight
+  - EventTruck
   layers:
   - Default
   - TransparentFX
