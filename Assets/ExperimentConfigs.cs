@@ -14,7 +14,8 @@ public enum RouteType
 {
     A,
     B,
-    C
+    C,
+    T
 }
 
 public class ExperimentConfigs : MonoBehaviour
@@ -50,6 +51,12 @@ public class ExperimentConfigs : MonoBehaviour
     public RCC_AIWaypointsContainer wpRouteC;
     public Vector3 routeCStartPos;
     public Vector3 routeCStartRot;
+
+    [Header("Route T")]
+    public GameObject routeT;
+    public RCC_AIWaypointsContainer wpRouteT;
+    public Vector3 routeTStartPos;
+    public Vector3 routeTStartRot;
 
 
     [Header("Lumo")]
@@ -88,7 +95,7 @@ public class ExperimentConfigs : MonoBehaviour
 
         if (!File.Exists(logPath))
         {
-            File.WriteAllText(logPath, "participant_id,condition,zone,timestamp,button\n");
+            File.WriteAllText(logPath, "participant_id,route,condition,zone,timestamp,button\n");
             Debug.Log("=== Button Log Started ===");
         }
         else { Debug.Log("Filename already exists."); }
@@ -105,7 +112,7 @@ public class ExperimentConfigs : MonoBehaviour
 
     public void LogButtonPress(string buttonName)
     {
-        string line = $"{participant_ID},{condition},{zoneDetector.currentZone},{Time.time:F4},{buttonName}\n";
+        string line = $"{participant_ID},{route},{condition},{zoneDetector.currentZone},{Time.time:F4},{buttonName}\n";
         Debug.Log(line);
         File.AppendAllText(logPath, line);
 
@@ -135,6 +142,7 @@ public class ExperimentConfigs : MonoBehaviour
             case RouteType.A:
                 routeB.SetActive(false);
                 routeC.SetActive(false);
+                routeT.SetActive(false);
                 routeA.SetActive(true);
                 startPosition = routeAStartPos;
                 startRotation = Quaternion.Euler(routeAStartRot);
@@ -142,6 +150,7 @@ public class ExperimentConfigs : MonoBehaviour
                 break;
             case RouteType.B:
                 routeA.SetActive(false);
+                routeT.SetActive(false);
                 routeC.SetActive(false);
                 routeB.SetActive(true);
                 startPosition = routeBStartPos;
@@ -151,10 +160,20 @@ public class ExperimentConfigs : MonoBehaviour
             case RouteType.C:
                 routeA.SetActive(false);
                 routeB.SetActive(false);
+                routeT.SetActive(false);
                 routeC.SetActive(true);
                 startPosition = routeCStartPos;
                 startRotation = Quaternion.Euler(routeCStartRot);
                 PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer = wpRouteC;
+                break;
+            case RouteType.T:
+                routeA.SetActive(false);
+                routeB.SetActive(false);
+                routeC.SetActive(false);
+                routeT.SetActive(true);
+                startPosition = routeTStartPos;
+                startRotation = Quaternion.Euler(routeTStartRot);
+                PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer = wpRouteT;
                 break;
         }
     }
