@@ -150,7 +150,10 @@ public class IVISLogic : MonoBehaviour
 
     public void startDialogue()
     {
-        StartCoroutine(startAgent());
+        if (Configs.isAutomated)
+        {
+            StartCoroutine(startAgent());
+        }
     }
 
     IEnumerator startAgent()

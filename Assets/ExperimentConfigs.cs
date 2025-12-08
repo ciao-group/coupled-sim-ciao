@@ -24,6 +24,9 @@ public class ExperimentConfigs : MonoBehaviour
     [Header("Experiment")]
     [TextArea] public string participant_ID;
 
+    public bool isAutomated = true;
+    public bool isLogging = true;
+
     public Vector3 startPosition;
     public Quaternion startRotation;
 
@@ -85,37 +88,64 @@ public class ExperimentConfigs : MonoBehaviour
 
     void Start()
     {
-        ApplyRoute();
-        ApplyCondition();
 
-        string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-        logPath = $"C:\\Users\\ciaos\\Desktop\\Logs\\button_log_{timestamp}.csv";
-        Debug.Log("Logging to: " + logPath);
-
-
-        if (!File.Exists(logPath))
+        if (isAutomated)
         {
-            File.WriteAllText(logPath, "participant_id,route,condition,zone,timestamp,button\n");
-            Debug.Log("=== Button Log Started ===");
+            ApplyRoute();
+            ApplyCondition();
+
+        } else
+        {
+            GameObject[] aiCars = GameObject.FindGameObjectsWithTag("AICar");
+
+            foreach (GameObject car in aiCars)
+            {
+                car.GetComponent<RCC_AICarController>().enabled = true;
+            }
+
+            GameObject[] trafficLights = GameObject.FindGameObjectsWithTag("TrafficLight");
+
+            foreach (GameObject light in trafficLights)
+            {
+                light.GetComponent<HealthbarGames.TrafficLightManager>().enabled = true;
+            }
+
         }
-        else { Debug.Log("Filename already exists."); }
 
-        if (TrajectoryLine != null)
+        if (isLogging)
         {
-            int length = PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer.waypoints.Count;
 
-            TrajectoryLine.GetComponent<TrajectoryPainter>().WPIndexDestination = length;
-            //Debug.Log(length);
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            logPath = $"C:\\Users\\ciaos\\Desktop\\Logs\\button_log_{timestamp}.csv";
+            Debug.Log("Logging to: " + logPath);
+
+
+            if (!File.Exists(logPath))
+            {
+                File.WriteAllText(logPath, "participant_id,route,condition,zone,timestamp,button\n");
+                Debug.Log("=== Button Log Started ===");
+            }
+            else { Debug.Log("Filename already exists."); }
+
+            if (TrajectoryLine != null)
+            {
+                int length = PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer.waypoints.Count;
+
+                TrajectoryLine.GetComponent<TrajectoryPainter>().WPIndexDestination = length;
+                //Debug.Log(length);
+            }
         }
     }
 
 
     public void LogButtonPress(string buttonName)
     {
+        if (isLogging)
+        { 
         string line = $"{participant_ID},{route},{condition},{zoneDetector.currentZone},{Time.time:F4},{buttonName}\n";
         Debug.Log(line);
         File.AppendAllText(logPath, line);
-
+        }
     }
 
 
