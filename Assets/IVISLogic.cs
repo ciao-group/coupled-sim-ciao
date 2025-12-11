@@ -27,6 +27,10 @@ public class IVISLogic : MonoBehaviour
     [SerializeField] public Sprite idleSprite;
     [SerializeField] public Sprite alertSprite;
     [SerializeField] public Sprite activeSprite;
+    [SerializeField] public AudioSource VoiceSource;
+    [SerializeField] public AudioClip lumo2;
+    [SerializeField] public AudioClip lumo3;
+
 
     [Header("Explanation")]
     [SerializeField] public CanvasGroup agentSpeechBubble;
@@ -158,15 +162,33 @@ public class IVISLogic : MonoBehaviour
 
     IEnumerator startAgent()
     {
+        yield return new WaitForSeconds(2);
+
         agentImage.sprite = activeSprite;
 
         FadeInBubble();
 
-        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(5f));
+        VoiceSource.Play();
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
+
+        VoiceSource.clip = lumo3;
+        VoiceSource.Play();
+        WhyText.text = "If I notice something unusual and decide to act on it, I will notify you with a <b><color=red>red exclamation mark</b></color>.";
+
+        yield return new WaitForSeconds(7);
+        VoiceSource.clip = lumo2;
+        VoiceSource.Play();
+        WhyText.text = "Please <b>click on me</b> if you would like me to explain myself. \r\nI will tell you what my sensors detected and how I adjusted my behaviour in accordance to it.";
+
+        yield return new WaitForSeconds(9);
 
         agentImage.sprite = idleSprite;
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(1f));
+
+
+
+        yield return new WaitForSeconds(3);
 
         ActivateAI();
 
@@ -276,6 +298,9 @@ public class IVISLogic : MonoBehaviour
             WhyText.text = currentZone.whyText;
             WhatText.text = currentZone.whatText;
 
+            // update audio clip
+            VoiceSource.clip = currentZone.voiceClip;
+            VoiceSource.Play();
             // Show bubble
             FadeInBubble();
         }
@@ -298,6 +323,9 @@ public class IVISLogic : MonoBehaviour
         // Update bubble text
         WhyText.text = currentZone.whyText;
         WhatText.text = currentZone.whatText;
+
+        VoiceSource.clip = currentZone.voiceClip;
+        VoiceSource.Play();
 
         // Show bubble
         FadeInBubble();

@@ -216,7 +216,7 @@ public class ExperimentConfigs : MonoBehaviour
             ivisLogic.activeSprite = active;
             ivisLogic.alertSprite = alert;
 
-            ivisLogic.WhyText.text = $"My name is <b><color={hue}>{name}</color></b> and I will be your driver today.";
+            ivisLogic.WhyText.text = $"<b><size=28>Welcome!</b></size>\nMy name is <b><color={hue}>{name}</color></b> and I will be your driver today.";
         }
         else
         {

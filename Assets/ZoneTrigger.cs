@@ -13,6 +13,7 @@ public class ZoneTrigger : MonoBehaviour
 {
     public ZoneType zoneType;
     public AudioSource zoneEnterSound;
+    public AudioClip voiceClip;
 
     [TextArea] public string whyText;
     [TextArea] public string whatText;
