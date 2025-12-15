@@ -240,7 +240,7 @@ public class RCC_AICarController : MonoBehaviour
     /// </summary>
     public List<Transform> targetsInZone = new List<Transform>();
     public List<RCC_AIBrakeZone> brakeZones = new List<RCC_AIBrakeZone>();
-
+    public List<RCC_AISlowZone> slowZones = new List<RCC_AISlowZone>();
     /// <summary>
     /// Target Gameobject for chasing.
     /// </summary>
@@ -250,6 +250,11 @@ public class RCC_AICarController : MonoBehaviour
     /// Target brakezone.
     /// </summary>
     public RCC_AIBrakeZone targetBrake;
+
+    /// <summary>
+    /// Target brakezone.
+    /// </summary>
+    public RCC_AISlowZone targetSlow;
 
     /// <summary>
     /// Firing an event when each RCC AI vehicle spawned / enabled.
@@ -314,6 +319,7 @@ public class RCC_AICarController : MonoBehaviour
 
         CheckTargets();     //  Checking targets if navigation mode is set to chase or follow target mode.
         CheckBrakeZones();      //  Checking existing brake zones in the scene.
+        CheckSlowZones(); //ADDED
 
         if (!updateTargets)
             lastUpdatedTargets += Time.deltaTime;
@@ -436,13 +442,12 @@ public class RCC_AICarController : MonoBehaviour
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
                 {
                     distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
+                    //Debug.Log(distanceToStopLine);
 
                     if (CarController.CompareTag("EventTruck"))
                     {
                         return;
                     }
-                    //Debug.Log("in zone and ped!");
-                    //Debug.Log(distanceToStopLine);
 
                     else if (CarController.speed <= 1f)
                     {
@@ -454,31 +459,32 @@ public class RCC_AICarController : MonoBehaviour
                     else if (distanceToStopLine > 8f)
                     {
                         //Debug.Log("slowing down");
-                        throttleInput = Mathf.Lerp(throttleInput, 0.4f, Time.deltaTime * 2f);
+                        throttleInput = 0f;
                         brakeInput = Mathf.Lerp(brakeInput, 0f, Time.deltaTime * 2f);
                         CarController.direction = 1;
                     }
                     else if (distanceToStopLine > 3f)
                     {
                         //Debug.Log("slowing down hard");
-                        throttleInput = Mathf.Lerp(throttleInput, 0f, Time.deltaTime * 3f);
+                        throttleInput = 0f;
                         brakeInput = Mathf.Lerp(brakeInput, 0.4f, Time.deltaTime * 3f);
                         CarController.direction = 1;
                     }
                     else
                     {
-                        //Debug.Log("slamming!");
+                        //Debug.Log("STOP!");
                         throttleInput = 0f;
-                        brakeInput = 1f;
+                        brakeInput = 0f;
+                        steerInput = 0f;
                         handbrakeInput = 1f;
                         CarController.direction = 1;
                     }
 
-                    if (distanceToStopLine <= 1f && mustStopForLight)
-                    {
+                    //if (distanceToStopLine <= 1f && mustStopForLight)
+                    //{
                         //Debug.Log("stop");
-                        CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    }
+                        //CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    //}
 
                     ignoreWaypointNow = true;
                     return;
@@ -489,15 +495,18 @@ public class RCC_AICarController : MonoBehaviour
                 //  If vehicle goes forward, calculate throttle and brake inputs.
                 else if (!reversingNow)
                 {
-                    throttleInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
-                                    ? Mathf.Clamp01(targetSpeed - CarController.speed)
-                                    : 1f;
+                    //throttleInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
+                    //? Mathf.Clamp01(targetSpeed - CarController.speed)
+                    //: 1f;
+                    throttleInput = Mathf.Clamp01(targetSpeed - CarController.speed);
 
                     throttleInput *= Mathf.Clamp01(Mathf.Lerp(10f, 0f, CarController.speed / maximumSpeed));
 
                     brakeInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
-                                 ? Mathf.Clamp01(CarController.speed - targetSpeed)
+                                 ? (Mathf.Clamp01(CarController.speed - targetSpeed)*0.5f)
                                  : 0f;
+
+
                     // +++ slow down in relation to cars in front to avoid crashes (WIP)
                     if (obstacle != null && obstacle.CompareTag("AICar"))
                     {
@@ -529,7 +538,7 @@ public class RCC_AICarController : MonoBehaviour
                     {
 
                         throttleInput -= Mathf.Abs(navigatorInput) / 3f;
-                        brakeInput += Mathf.Abs(navigatorInput) / 3f;
+                        //brakeInput += Mathf.Abs(navigatorInput) / 3f;
 
                     }
 
@@ -568,7 +577,7 @@ public class RCC_AICarController : MonoBehaviour
                     {
 
                         throttleInput -= Mathf.Abs(navigatorInput) / 3f;
-                        brakeInput += Mathf.Abs(navigatorInput) / 3f;
+                        //brakeInput += Mathf.Abs(navigatorInput) / 3f;
 
                     }
 
@@ -608,7 +617,7 @@ public class RCC_AICarController : MonoBehaviour
                     {
 
                         throttleInput -= Mathf.Abs(navigatorInput) / 3f;
-                        brakeInput += Mathf.Abs(navigatorInput) / 3f;
+                        //brakeInput += Mathf.Abs(navigatorInput) / 3f;
 
                     }
 
@@ -637,6 +646,26 @@ public class RCC_AICarController : MonoBehaviour
             }
 
         }
+
+
+        // ADDED slow zone; no brake input, just no throttle input to not go any faster
+
+        if (targetSlow)
+        {
+            //  If vehicle is in slow zone and speed of the vehicle is higher than the target speed, no more throttle but no brake.
+            if (Vector3.Distance(transform.position, targetSlow.transform.position) < targetSlow.distance && CarController.speed > targetSlow.targetSpeed)
+            {
+
+                throttleInput = 0f;
+                Debug.Log("SLOW ZONE");
+                brakeInput = 0f;
+
+            }
+
+        }
+
+
+
 
         if (brakeInput > .25f)
             throttleInput = 0f;
@@ -1010,6 +1039,13 @@ public class RCC_AICarController : MonoBehaviour
                     brakeZones.Add(colliders[i].GetComponent<RCC_AIBrakeZone>());
 
             }
+            //  If a slow zone in the zone, add it to the list.
+            if (colliders[i].GetComponent<RCC_AISlowZone>())
+            {
+                if (!slowZones.Contains(colliders[i].GetComponent<RCC_AISlowZone>()))
+                    slowZones.Add(colliders[i].GetComponent<RCC_AISlowZone>());
+
+            }
 
         }
 
@@ -1074,6 +1110,39 @@ public class RCC_AICarController : MonoBehaviour
             targetBrake = GetClosestBrakeZone(brakeZones.ToArray());
         else
             targetBrake = null;
+    }
+
+    private void CheckSlowZones()
+    {
+
+    // ADDED Removing unnecessary slow zones in list. If slow zone is null or not active, remove it from the list.
+    for (int i = 0; i < slowZones.Count; i++)
+    {
+
+        if (slowZones[i] == null)
+            slowZones.RemoveAt(i);
+
+        if (!slowZones[i].gameObject.activeInHierarchy)
+            slowZones.RemoveAt(i);
+
+        else
+        {
+
+            //  If distance to the brake zone is far away, remove it from the list.
+            if (Vector3.Distance(transform.position, slowZones[i].transform.position) > (detectorRadius * 1.1f))
+                slowZones.RemoveAt(i);
+
+        }
+
+    }
+
+        // ADDED If there is a slow zone, get closest one.
+        if (slowZones.Count > 0)
+        {
+            targetSlow = GetClosestSlowZone(slowZones.ToArray());
+        }
+        else
+            targetSlow = null;
 
     }
 
@@ -1142,6 +1211,35 @@ public class RCC_AICarController : MonoBehaviour
         return bestTarget;
 
     }
+
+    private RCC_AISlowZone GetClosestSlowZone(RCC_AISlowZone[] enemies)
+    {
+
+        RCC_AISlowZone bestTarget = null;
+
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (RCC_AISlowZone potentialTarget in enemies)
+        {
+
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+
+            }
+
+        }
+
+        return bestTarget;
+
+    }
+
 
     private void OnDisable()
     {

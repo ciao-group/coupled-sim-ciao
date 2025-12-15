@@ -219,7 +219,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
 
         // 1) Real offset in position
         Vector3 realPosDiff = realTracker.position - cameraHolder.position;
-        Debug.Log(realTracker.position);
+        //Debug.Log(realTracker.position);
         // 2) Real offset in rotation
         Quaternion realRotDiff = realTracker.rotation * Quaternion.Inverse(cameraHolder.rotation);
 

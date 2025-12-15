@@ -163,7 +163,7 @@ public class IVISLogic : MonoBehaviour
     IEnumerator startAgent()
     {
         yield return new WaitForSeconds(2);
-
+        /*
         agentImage.sprite = activeSprite;
 
         FadeInBubble();
@@ -189,7 +189,7 @@ public class IVISLogic : MonoBehaviour
 
 
         yield return new WaitForSeconds(3);
-
+        */
         ActivateAI();
 
     }
