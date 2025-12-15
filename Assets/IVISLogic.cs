@@ -140,6 +140,7 @@ public class IVISLogic : MonoBehaviour
         foreach (GameObject light in trafficLights)
         {
             light.GetComponent<HealthbarGames.TrafficLightManager>().enabled = true;
+            Debug.Log("turned on");
         }
     }
 
@@ -185,7 +186,6 @@ public class IVISLogic : MonoBehaviour
 
         agentImage.sprite = idleSprite;
         fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(1f));
-
 
 
         yield return new WaitForSeconds(3);

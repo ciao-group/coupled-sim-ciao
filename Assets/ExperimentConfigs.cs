@@ -1,6 +1,9 @@
 using System;
 using System.IO;
 using TMPro;
+using Unity.Properties;
+using UnityEditor;
+using UnityEditor.Recorder;
 using UnityEngine;
 using UnityEngine.UI;
 public enum ConditionType
@@ -116,11 +119,13 @@ public class ExperimentConfigs : MonoBehaviour
         {
 
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-            logPath = $"C:\\Users\\ciaos\\Desktop\\Logs\\button_log_{timestamp}.csv";
+            string logDirectory = "C:\\Users\\ciaos\\Desktop\\Logs\\";
+            string fileName = $"button_log_{timestamp}.csv";
+            logPath = $"{logDirectory}{timestamp}";
             Debug.Log("Logging to: " + logPath);
 
 
-            if (!File.Exists(logPath))
+            if (!File.Exists(logPath) && AssetDatabase.IsValidFolder(logPath))
             {
                 File.WriteAllText(logPath, "participant_id,route,condition,zone,timestamp,button\n");
                 Debug.Log("=== Button Log Started ===");

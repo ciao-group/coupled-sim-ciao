@@ -26,6 +26,7 @@ TagManager:
   - CrosswalkZone
   - TrafficLight
   - EventTruck
+  - SplineCar
   layers:
   - Default
   - TransparentFX
