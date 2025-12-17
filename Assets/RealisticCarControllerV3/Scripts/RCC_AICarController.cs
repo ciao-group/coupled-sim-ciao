@@ -10,14 +10,18 @@
 
 
 
-using UnityEngine;
-using UnityEngine.AI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Runtime.ConstrainedExecution;
 using Barmetler;
 using HealthbarGames;
+using sc.terrain.proceduralpainter;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
+using static Indicate;
 //using UnityEditor.UI;
 
 /// <summary>
@@ -50,6 +54,10 @@ public class RCC_AICarController : MonoBehaviour
     [Header("Distance Keeping")]
     public float safeDistance = 10f;
     public float brakingForce = 2f;
+
+
+    private IndicatorDirection indicatorState = IndicatorDirection.None;
+    private IndicatorDirection currentIndicatorState = IndicatorDirection.None;
 
 
     /// <summary>
@@ -400,6 +408,39 @@ public class RCC_AICarController : MonoBehaviour
 
                 float targetSpeed = currentWaypoint.targetSpeed;
 
+
+                // ADDED -- indicator logic
+
+                if (currentWaypoint.GetComponent<Indicate>() is Indicate indicate)
+                {
+                    indicatorState = indicate.inDirection;
+                }
+
+                if (indicatorState != currentIndicatorState)
+                {
+                    switch (indicatorState)
+                    {
+                        case IndicatorDirection.Left:
+                            CarController.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Left;
+                            Debug.Log("Left");
+                            break;
+                        case IndicatorDirection.Right:
+                            CarController.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Right;
+                            Debug.Log("Right");
+
+                            break;
+                        case IndicatorDirection.Off:
+                            CarController.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+                            Debug.Log("Off");
+
+                            break;
+                        case IndicatorDirection.None:
+                            Debug.Log("None");
+                            break;
+                    }
+                    currentIndicatorState = indicatorState;
+                }
+
                 // Setting destination of the Navigator.
                 if (navigator.isOnNavMesh)
                     navigator.SetDestination(waypointsContainer.waypoints[currentWaypointIndex].transform.position);
@@ -482,8 +523,8 @@ public class RCC_AICarController : MonoBehaviour
 
                     //if (distanceToStopLine <= 1f && mustStopForLight)
                     //{
-                        //Debug.Log("stop");
-                        //CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    //Debug.Log("stop");
+                    //CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     //}
 
                     ignoreWaypointNow = true;
@@ -503,7 +544,7 @@ public class RCC_AICarController : MonoBehaviour
                     throttleInput *= Mathf.Clamp01(Mathf.Lerp(10f, 0f, CarController.speed / maximumSpeed));
 
                     brakeInput = (distanceToNextWaypoint < (currentWaypoint.radius * (CarController.speed / 30f)))
-                                 ? (Mathf.Clamp01(CarController.speed - targetSpeed)*0.5f)
+                                 ? (Mathf.Clamp01(CarController.speed - targetSpeed) * 0.5f)
                                  : 0f;
 
 
@@ -1115,26 +1156,26 @@ public class RCC_AICarController : MonoBehaviour
     private void CheckSlowZones()
     {
 
-    // ADDED Removing unnecessary slow zones in list. If slow zone is null or not active, remove it from the list.
-    for (int i = 0; i < slowZones.Count; i++)
-    {
-
-        if (slowZones[i] == null)
-            slowZones.RemoveAt(i);
-
-        if (!slowZones[i].gameObject.activeInHierarchy)
-            slowZones.RemoveAt(i);
-
-        else
+        // ADDED Removing unnecessary slow zones in list. If slow zone is null or not active, remove it from the list.
+        for (int i = 0; i < slowZones.Count; i++)
         {
 
-            //  If distance to the brake zone is far away, remove it from the list.
-            if (Vector3.Distance(transform.position, slowZones[i].transform.position) > (detectorRadius * 1.1f))
+            if (slowZones[i] == null)
                 slowZones.RemoveAt(i);
 
-        }
+            if (!slowZones[i].gameObject.activeInHierarchy)
+                slowZones.RemoveAt(i);
 
-    }
+            else
+            {
+
+                //  If distance to the brake zone is far away, remove it from the list.
+                if (Vector3.Distance(transform.position, slowZones[i].transform.position) > (detectorRadius * 1.1f))
+                    slowZones.RemoveAt(i);
+
+            }
+
+        }
 
         // ADDED If there is a slow zone, get closest one.
         if (slowZones.Count > 0)
@@ -1279,10 +1320,6 @@ public class RCC_AICarController : MonoBehaviour
     }
 
 }
-
-
-
-
 
 
 
