@@ -59,6 +59,7 @@ public class RCC_AICarController : MonoBehaviour
     private IndicatorDirection indicatorState = IndicatorDirection.None;
     private IndicatorDirection currentIndicatorState = IndicatorDirection.None;
 
+    private float currentSteer = 0f;
 
     /// <summary>
     /// Waypoints Container.
@@ -719,6 +720,12 @@ public class RCC_AICarController : MonoBehaviour
 
         //steerInput = (ignoreWaypointNow ? rayInput : navigatorInput + rayInput);
         steerInput = Mathf.Clamp(steerInput, -1f, 1f) * CarController.direction;
+
+        // ADDED interpolation for smooth steering (adapt multiplication to fine tune, higher -> less smoothing)
+        currentSteer = Mathf.Lerp(currentSteer, steerInput, Time.deltaTime * 10);
+
+        steerInput = currentSteer;
+
 
         //  Clamping inputs.
         throttleInput = Mathf.Clamp01(throttleInput);
