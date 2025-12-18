@@ -7,6 +7,7 @@ public class TriggerB : MonoBehaviour
     public GameObject BreakZoneforStopping1;
     public GameObject BreakZoneforStopping2;
 
+    public GameObject targetpedestrian;
     [Header("Despawn Settings")]
     [Tooltip("Time in seconds before the pedestrian despawns")]
     public float despawnTime = 30f;
@@ -15,10 +16,9 @@ public class TriggerB : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("RCC"))
         {
+            StartCoroutine(DespawnAfterTime(11f));
+            StartCoroutine(DespawnBreakZone(15f));
 
-            StartCoroutine(DespawnBreakZone(10f));
-
-            // Optional: Disable trigger so it doesn't activate again
             GetComponent<Collider>().enabled = false;
 
             Debug.Log("RCC Car Activated!");
@@ -34,6 +34,41 @@ public class TriggerB : MonoBehaviour
         BreakZoneforStopping2.SetActive(false);
 
         Debug.Log("No more break zone!");
+    }
+
+    private IEnumerator DespawnAfterTime(float time)
+    {
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(true);
+
+        yield return new WaitForSeconds(time);
+
+        if (targetpedestrian != null)
+            targetpedestrian.SetActive(false);
+
+
+        Debug.Log("targetpedestrian despawned");
     }
 
 }
