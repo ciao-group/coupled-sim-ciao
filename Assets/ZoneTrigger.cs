@@ -6,6 +6,7 @@ public enum ZoneType
     A,
     B,
     C,
+    D,
     N
 }
 
@@ -15,8 +16,7 @@ public class ZoneTrigger : MonoBehaviour
     public AudioSource zoneEnterSound;
     public AudioClip voiceClip;
 
-    [TextArea] public string whyText;
-    [TextArea] public string whatText;
+    [TextArea] public string explanationText;
 
     public void PlayEnterSound()
     {

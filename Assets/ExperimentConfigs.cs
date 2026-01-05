@@ -63,16 +63,24 @@ public class ExperimentConfigs : MonoBehaviour
 
 
     [Header("Lumo")]
+    [Header("Sprites")]
     public Sprite lumoIdleSprite;
     public Sprite lumoActiveSprite;
     public Sprite lumoAlertSprite;
+    [Header("Voice clips")]
+    public AudioClip introLumo1;
+    public AudioClip introLumo2;
+    public AudioClip introLumo3;
+    public AudioClip introLumo4;
 
     [Header("Coda")]
+    [Header("Sprites")]
     public Sprite codaIdleSprite;
     public Sprite codaActiveSprite;
     public Sprite codaAlertSprite;
 
     [Header("Nevo")]
+    [Header("Sprites")]
     public Sprite nevoIdleSprite;
     public Sprite nevoActiveSprite;
     public Sprite nevoAlertSprite;
@@ -148,19 +156,22 @@ public class ExperimentConfigs : MonoBehaviour
         }
     }
 
-
+    // TODO: individuelle voice clips für Coda und Nevo
     public void ApplyCondition()
     {
         switch (condition)
         {
             case ConditionType.Lumo:
                 AssignSprites(lumoIdleSprite, lumoActiveSprite, lumoAlertSprite, "Lumo", "#31edae");
+                AssignVoiceClips(introLumo1, introLumo2, introLumo3, introLumo4);
                 break;
             case ConditionType.Coda:
                 AssignSprites(codaIdleSprite, codaActiveSprite, codaAlertSprite, "Coda", "#5170ff");
+                AssignVoiceClips(introLumo1, introLumo2, introLumo3, introLumo4);
                 break;
             case ConditionType.Nevo:
                 AssignSprites(nevoIdleSprite, nevoActiveSprite, nevoAlertSprite, "Nevo", "#ffbd59");
+                AssignVoiceClips(introLumo1, introLumo2, introLumo3, introLumo4);
                 break;
         }
     }
@@ -216,7 +227,22 @@ public class ExperimentConfigs : MonoBehaviour
             ivisLogic.activeSprite = active;
             ivisLogic.alertSprite = alert;
 
-            ivisLogic.WhyText.text = $"<b><size=28>Welcome!</b></size>\nMy name is <b><color={hue}>{name}</color></b> and I will be your driver today.";
+            ivisLogic.explanationText.text = $"<b><size=28>Welcome!</b></size>\nMy name is <b><color={hue}>{name}</color></b> and I will be your driver today.";
+        }
+        else
+        {
+            Debug.LogWarning("IvisLogic ref not assigned");
+        }
+    }
+
+    private void AssignVoiceClips(AudioClip intro1, AudioClip intro2, AudioClip intro3, AudioClip intro4)
+    {
+        if (ivisLogic != null)
+        {
+            ivisLogic.intro1 = intro1;
+            ivisLogic.intro2 = intro2;
+            ivisLogic.intro3 = intro3;
+            ivisLogic.intro4 = intro4;
         }
         else
         {

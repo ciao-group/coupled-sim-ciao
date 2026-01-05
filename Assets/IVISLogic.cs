@@ -22,20 +22,24 @@ public class IVISLogic : MonoBehaviour
     [SerializeField] private Vector2 buttonVisiblePos;
 
     [Header("Assistant")]
+    [SerializeField] public AudioClip startSound;
     [SerializeField] public Button agentButton;
     [SerializeField] public Image agentImage;
     [SerializeField] public Sprite idleSprite;
     [SerializeField] public Sprite alertSprite;
     [SerializeField] public Sprite activeSprite;
-    [SerializeField] public AudioSource VoiceSource;
-    [SerializeField] public AudioClip lumo2;
-    [SerializeField] public AudioClip lumo3;
 
+    [Header("Assistant Voice Output")]
+    [SerializeField] public AudioSource voiceSource;
+
+    [SerializeField] public AudioClip intro1;
+    [SerializeField] public AudioClip intro2;
+    [SerializeField] public AudioClip intro3;
+    [SerializeField] public AudioClip intro4;
 
     [Header("Explanation")]
     [SerializeField] public CanvasGroup agentSpeechBubble;
-    [SerializeField] public TextMeshProUGUI WhyText;
-    [SerializeField] public TextMeshProUGUI WhatText;
+    [SerializeField] public TextMeshProUGUI explanationText;
 
     private ZoneTrigger currentZone;
     private Coroutine fadeRoutine;
@@ -118,7 +122,7 @@ public class IVISLogic : MonoBehaviour
     }
 
 
-    // turn RCC waypoint following on / off
+    // turn on AI traffic, traffic lights, and Player car waypoint following
     public void ActivateAI()
     {
         if (aiCar != null)
@@ -162,34 +166,42 @@ public class IVISLogic : MonoBehaviour
 
     IEnumerator startAgent()
     {
-        yield return new WaitForSeconds(2);
-        /*
+        yield return new WaitForSeconds(1);
+        
+        voiceSource.clip = startSound;
+        voiceSource.Play();
+
+        yield return new WaitForSeconds(3);
         agentImage.sprite = activeSprite;
-
         FadeInBubble();
+        voiceSource.clip = intro1;
+        voiceSource.Play();
 
-        VoiceSource.Play();
+        yield return new WaitForSeconds(5);
 
-        yield return new WaitForSeconds(4);
-
-        VoiceSource.clip = lumo3;
-        VoiceSource.Play();
-        WhyText.text = "If I notice something unusual and decide to act on it, I will notify you with a <b><color=red>red exclamation mark</b></color>.";
+        voiceSource.clip = intro2;
+        voiceSource.Play();
+        explanationText.text = "If I notice something unusual and decide to act on it, I will notify you with a <b><color=red>red exclamation mark</b></color>.";
 
         yield return new WaitForSeconds(7);
-        VoiceSource.clip = lumo2;
-        VoiceSource.Play();
-        WhyText.text = "Please <b>click on me</b> if you would like me to explain myself. \r\nI will tell you what my sensors detected and how I adjusted my behaviour in accordance to it.";
+        voiceSource.clip = intro3;
+        voiceSource.Play();
+        explanationText.text = "Please <b>click on my icon</b> if you would like me to explain myself. I will tell you what I detected and how I adjusted my behaviour in reaction to it.";
+        
+        yield return new WaitForSeconds(10);
+        voiceSource.clip = intro4;
+        voiceSource.Play();
+        explanationText.text = "That's all for now. \r\nPlease lean back and enjoy the ride.";
 
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(3);
 
         agentImage.sprite = idleSprite;
         fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(1f));
 
 
 
-        yield return new WaitForSeconds(3);
-        */
+        yield return new WaitForSeconds(6);
+        
         ActivateAI();
 
     }
@@ -295,12 +307,11 @@ public class IVISLogic : MonoBehaviour
             agentImage.sprite = activeSprite;
 
             // Update bubble text
-            WhyText.text = currentZone.whyText;
-            WhatText.text = currentZone.whatText;
+            explanationText.text = currentZone.explanationText;
 
             // update audio clip
-            VoiceSource.clip = currentZone.voiceClip;
-            VoiceSource.Play();
+            voiceSource.clip = currentZone.voiceClip;
+            voiceSource.Play();
             // Show bubble
             FadeInBubble();
         }
@@ -321,18 +332,17 @@ public class IVISLogic : MonoBehaviour
         agentImage.sprite = activeSprite;
 
         // Update bubble text
-        WhyText.text = currentZone.whyText;
-        WhatText.text = currentZone.whatText;
+        explanationText.text = currentZone.explanationText;
 
-        VoiceSource.clip = currentZone.voiceClip;
-        VoiceSource.Play();
+        voiceSource.clip = currentZone.voiceClip;
+        voiceSource.Play();
 
         // Show bubble
         FadeInBubble();
 
-        // Hide after 5 seconds
+        // Hide after clip has fully played
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
-        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(5f));
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(voiceSource.clip.length));
     }
 
 

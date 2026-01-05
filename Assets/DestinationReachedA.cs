@@ -8,9 +8,11 @@ public class DestinationReached : MonoBehaviour
     public IVISLogic IvisLogic;
 
     public AudioSource DestinationReachedSound;
+    [Header("Assistant Voice Output")]
+    [SerializeField] public AudioSource voiceSource;
+    [SerializeField] public AudioClip destinationClip;
 
-    [TextArea] public string whyText;
-    [TextArea] public string whatText;
+    [TextArea] public string explanationText;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,17 +20,23 @@ public class DestinationReached : MonoBehaviour
         IvisLogic.agentImage.sprite = IvisLogic.activeSprite;
 
         // Update bubble text
-        IvisLogic.WhyText.text = whyText;
-        IvisLogic.WhatText.text = whatText;
+        IvisLogic.explanationText.text = explanationText;
 
-        // Show bubble and play sound
+        // Show bubble and play sound and voice clip
 
         IvisLogic.FadeInBubble();
 
+        StartCoroutine(destinationReached());
+    }
+
+    IEnumerator destinationReached()
+    {
         if (DestinationReachedSound != null)
         {
             DestinationReachedSound.Play();
+            yield return new WaitForSeconds(2);
+            voiceSource.clip = destinationClip;
+            voiceSource.Play();
         }
     }
-
 }
