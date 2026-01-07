@@ -6,11 +6,21 @@ public class DestinationReached : MonoBehaviour
 {
 
     public IVISLogic IvisLogic;
+    public ExperimentConfigs Configs;
 
     public AudioSource DestinationReachedSound;
     [Header("Assistant Voice Output")]
+    public AudioClip lumoClip;
+    public AudioClip codaClip;
+    public AudioClip neloClip;
+
+    public AudioClip DestinationClip =>
+        Configs.condition == ConditionType.Lumo ? lumoClip :
+        Configs.condition == ConditionType.Coda ? codaClip :
+        Configs.condition == ConditionType.Nevo ? neloClip :
+        null;
+
     [SerializeField] public AudioSource voiceSource;
-    [SerializeField] public AudioClip destinationClip;
 
     [TextArea] public string explanationText;
 
@@ -22,20 +32,18 @@ public class DestinationReached : MonoBehaviour
         // Update bubble text
         IvisLogic.explanationText.text = explanationText;
 
-        // Show bubble and play sound and voice clip
-
         IvisLogic.FadeInBubble();
-
-        StartCoroutine(destinationReached());
+        StartCoroutine(DestinationReachedClip());
+        GetComponent<Collider>().enabled = false;
     }
 
-    IEnumerator destinationReached()
+    IEnumerator DestinationReachedClip()
     {
         if (DestinationReachedSound != null)
         {
             DestinationReachedSound.Play();
             yield return new WaitForSeconds(2);
-            voiceSource.clip = destinationClip;
+            voiceSource.clip = DestinationClip;
             voiceSource.Play();
         }
     }

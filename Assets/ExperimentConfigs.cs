@@ -78,12 +78,20 @@ public class ExperimentConfigs : MonoBehaviour
     public Sprite codaIdleSprite;
     public Sprite codaActiveSprite;
     public Sprite codaAlertSprite;
+    [Header("Voice clips")]
+    public AudioClip introCoda1;
+    public AudioClip introCoda2;
+    public AudioClip introCoda3;
+    public AudioClip introCoda4;
 
-    [Header("Nevo")]
+    [Header("Nelo")]
     [Header("Sprites")]
     public Sprite nevoIdleSprite;
     public Sprite nevoActiveSprite;
     public Sprite nevoAlertSprite;
+    [Header("Voice clips")]
+    public AudioClip introNelo1;
+    public AudioClip introNelo4;
 
     public IVISLogic ivisLogic;
     public GameObject PlayerCar;
@@ -167,11 +175,11 @@ public class ExperimentConfigs : MonoBehaviour
                 break;
             case ConditionType.Coda:
                 AssignSprites(codaIdleSprite, codaActiveSprite, codaAlertSprite, "Coda", "#5170ff");
-                AssignVoiceClips(introLumo1, introLumo2, introLumo3, introLumo4);
+                AssignVoiceClips(introCoda1, introCoda2, introCoda3, introCoda4);
                 break;
             case ConditionType.Nevo:
                 AssignSprites(nevoIdleSprite, nevoActiveSprite, nevoAlertSprite, "Nevo", "#ffbd59");
-                AssignVoiceClips(introLumo1, introLumo2, introLumo3, introLumo4);
+                AssignVoiceClips(introNelo1, introLumo2, introLumo3, introNelo4);
                 break;
         }
     }

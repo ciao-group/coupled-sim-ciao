@@ -13,7 +13,7 @@ public class RouteBEventATrigger : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("RCC"))
         {
             // despawn the brake zones after some hesitation
-            StartCoroutine(DespawnBrakeZone(20f));
+            StartCoroutine(DespawnBrakeZone(25f));
             // disable trigger 
             GetComponent<Collider>().enabled = false;
 

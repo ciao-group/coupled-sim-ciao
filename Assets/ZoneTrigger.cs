@@ -12,9 +12,17 @@ public enum ZoneType
 
 public class ZoneTrigger : MonoBehaviour
 {
+    public ExperimentConfigs Configs;
+
     public ZoneType zoneType;
     public AudioSource zoneEnterSound;
-    public AudioClip voiceClip;
+    public AudioClip lumoClip;
+    public AudioClip codaClip;
+
+    public AudioClip voiceClip =>
+        Configs.condition == ConditionType.Lumo ? lumoClip :
+        Configs.condition == ConditionType.Coda ? codaClip :
+        null;
 
     [TextArea] public string explanationText;
 

@@ -160,50 +160,74 @@ public class IVISLogic : MonoBehaviour
     {
         if (Configs.isAutomated)
         {
-            StartCoroutine(startAgent());
+            StartCoroutine(StartAgent());
         }
     }
-
-    IEnumerator startAgent()
+    IEnumerator Speak(AudioClip clip, string text = null, bool fadeInBubble = false, float idlePause = 1f)
     {
-        yield return new WaitForSeconds(1);
-        
+        agentImage.sprite = activeSprite;
+
+        if (fadeInBubble)
+            FadeInBubble();
+
+        if (!string.IsNullOrEmpty(text))
+            explanationText.text = text;
+
+        voiceSource.clip = clip;
+        voiceSource.Play();
+
+        yield return new WaitForSeconds(clip.length);
+
+        agentImage.sprite = idleSprite;
+        yield return new WaitForSeconds(idlePause);
+    }
+    IEnumerator StartAgent()
+    {
+        agentImage.sprite = idleSprite;
+        yield return new WaitForSeconds(1f);
+
         voiceSource.clip = startSound;
         voiceSource.Play();
+        yield return new WaitForSeconds(3f);
 
-        yield return new WaitForSeconds(3);
-        agentImage.sprite = activeSprite;
-        FadeInBubble();
-        voiceSource.clip = intro1;
-        voiceSource.Play();
+        yield return Speak(intro1, fadeInBubble: true);
 
-        yield return new WaitForSeconds(5);
+        if (Configs.condition == ConditionType.Lumo)
+        {
+            yield return Speak(
+                intro2,
+                "If I notice something unusual and decide to act on it, I will notify you with a <b><color=red>red exclamation mark</color></b>."
+            );
 
-        voiceSource.clip = intro2;
-        voiceSource.Play();
-        explanationText.text = "If I notice something unusual and decide to act on it, I will notify you with a <b><color=red>red exclamation mark</b></color>.";
+            yield return Speak(
+                intro3,
+                "Please <b>click on my icon</b> if you would like me to explain myself. I will tell you what I detected and how I adjusted my behaviour in reaction to it."
+            );
+        }
+        else if (Configs.condition == ConditionType.Coda)
+        {
+            yield return Speak(
+                intro2,
+                "If I notice something unusual and decide to act on it, I will explain myself."
+            );
 
-        yield return new WaitForSeconds(7);
-        voiceSource.clip = intro3;
-        voiceSource.Play();
-        explanationText.text = "Please <b>click on my icon</b> if you would like me to explain myself. I will tell you what I detected and how I adjusted my behaviour in reaction to it.";
-        
-        yield return new WaitForSeconds(10);
-        voiceSource.clip = intro4;
-        voiceSource.Play();
-        explanationText.text = "That's all for now. \r\nPlease lean back and enjoy the ride.";
+            yield return Speak(
+                intro3,
+                "I will tell you what I detected and how I adjusted my behaviour in reaction to it."
+            );
+        }
 
-        yield return new WaitForSeconds(3);
+        string closingText = Configs.condition == ConditionType.Nevo
+            ? "Please lean back and enjoy the ride."
+            : "That's all for now.\nPlease lean back and enjoy the ride.";
+
+        yield return Speak(intro4, closingText);
 
         agentImage.sprite = idleSprite;
         fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(1f));
 
-
-
-        yield return new WaitForSeconds(6);
-        
+        yield return new WaitForSeconds(6f);
         ActivateAI();
-
     }
 
     public void ToggleUIBehaviour(Behaviour uiElement)
@@ -303,17 +327,7 @@ public class IVISLogic : MonoBehaviour
         }
         else
         {
-            // Change sprite to ACTIVE
-            agentImage.sprite = activeSprite;
-
-            // Update bubble text
-            explanationText.text = currentZone.explanationText;
-
-            // update audio clip
-            voiceSource.clip = currentZone.voiceClip;
-            voiceSource.Play();
-            // Show bubble
-            FadeInBubble();
+            StartCoroutine(CodaExplains());
         }
     }
 
@@ -327,22 +341,10 @@ public class IVISLogic : MonoBehaviour
     {
         if (currentZone == null)
             return;
-
-        // Change sprite to ACTIVE
-        agentImage.sprite = activeSprite;
-
-        // Update bubble text
-        explanationText.text = currentZone.explanationText;
-
-        voiceSource.clip = currentZone.voiceClip;
-        voiceSource.Play();
-
-        // Show bubble
-        FadeInBubble();
-
-        // Hide after clip has fully played
-        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
-        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(voiceSource.clip.length));
+        if (Configs.condition == ConditionType.Lumo)
+        {
+            StartCoroutine(LumoExplains());
+        }
     }
 
 
@@ -377,6 +379,35 @@ public class IVISLogic : MonoBehaviour
             agentSpeechBubble.alpha = Mathf.Lerp(start, 0f, t);
             yield return null;
         }
+    }
+    private IEnumerator CodaExplains()
+    {
+        agentImage.sprite = idleSprite;
+        yield return new WaitForSeconds(2f);
+        agentImage.sprite = activeSprite;
+
+        explanationText.text = currentZone.explanationText;
+        voiceSource.clip = currentZone.voiceClip;
+
+        voiceSource.Play();
+        FadeInBubble();
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(voiceSource.clip.length));
+        yield return new WaitForSeconds(voiceSource.clip.length);
+        SetIdleState();
+    }
+    private IEnumerator LumoExplains()
+    {
+        agentImage.sprite = activeSprite;
+        explanationText.text = currentZone.explanationText;
+
+        voiceSource.clip = currentZone.voiceClip;
+        voiceSource.Play();
+        FadeInBubble();
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(voiceSource.clip.length));
+        yield return new WaitForSeconds(voiceSource.clip.length);
+        SetIdleState();
     }
 }
 

@@ -17,7 +17,7 @@ public class Event_PhantomBrake : MonoBehaviour
         {
             phantomMarker.SetActive(true);
 
-            StartCoroutine(DespawnBrakeZone(15f));
+            StartCoroutine(DespawnBrakeZone(17f));
             // despawn the brake zones after some hesitation
             StartCoroutine(DespawnPhantom(10f));
             // disable trigger 

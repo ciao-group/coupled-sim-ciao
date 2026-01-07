@@ -138,8 +138,6 @@ public class RCC_AICarController : MonoBehaviour
     /// </summary>
     private bool inCrosswalkZone = false;
 
-    private float distanceToStopLine = Mathf.Infinity;
-
     private bool mustStopForLight = false;
 
     private bool mustStopForCar = false;
@@ -483,54 +481,39 @@ public class RCC_AICarController : MonoBehaviour
 
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
                 {
-                    distanceToStopLine = mustStopForCar ? 0f : Vector3.Distance(transform.position, stopLineTarget.position);
-                    //Debug.Log(distanceToStopLine);
+                    // how far is the stop line?
+                    float distanceToStopLine = mustStopForCar
+                        ? 0f
+                        : Vector3.Distance(transform.position, stopLineTarget.position);
+                    // aiming for a tiny bit before the line so overshooting isn't as bad
+                    distanceToStopLine = Mathf.Max(distanceToStopLine - 1.0f, 0.1f);
 
-                    if (CarController.CompareTag("EventTruck"))
+                    float speedMS = CarController.speed / 3.6f;
+
+                    // let's not roll away actually
+                    if (speedMS < 0.5f)
                     {
+                        throttleInput = 0f;
+                        brakeInput = 0f;
+                        handbrakeInput = 1f;
+                        CarController.direction = 1;
+                        ignoreWaypointNow = true;
                         return;
                     }
 
-                    else if (CarController.speed <= 1f)
-                    {
-                        throttleInput = 0f;
-                        brakeInput = 0f;
-                        handbrakeInput = 1f;
-                        CarController.direction = 1;
-                    }
-                    else if (distanceToStopLine > 8f)
-                    {
-                        //Debug.Log("slowing down");
-                        throttleInput = 0f;
-                        brakeInput = Mathf.Lerp(brakeInput, 0f, Time.deltaTime * 2f);
-                        CarController.direction = 1;
-                    }
-                    else if (distanceToStopLine > 3f)
-                    {
-                        //Debug.Log("slowing down hard");
-                        throttleInput = 0f;
-                        brakeInput = Mathf.Lerp(brakeInput, 0.4f, Time.deltaTime * 3f);
-                        CarController.direction = 1;
-                    }
-                    else
-                    {
-                        //Debug.Log("STOP!");
-                        throttleInput = 0f;
-                        brakeInput = 0f;
-                        steerInput = 0f;
-                        handbrakeInput = 1f;
-                        CarController.direction = 1;
-                    }
+                    // calc: how much do we need to brake based on distance and current speed to stop at the line?
+                    float requiredDecel = (speedMS * speedMS) / (2f * distanceToStopLine);
+                    float brakeStrength = Mathf.Clamp01(requiredDecel / 10f); // 10f bc our max brake torque is set to 2000; adjust if you change this
 
-                    //if (distanceToStopLine <= 1f && mustStopForLight)
-                    //{
-                    //Debug.Log("stop");
-                    //CarController.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    //}
+                    throttleInput = 0f;
+                    brakeInput = Mathf.Lerp(brakeInput, brakeStrength, Time.deltaTime * 5f);
+                    handbrakeInput = 0f;
+                    CarController.direction = 1;
 
                     ignoreWaypointNow = true;
                     return;
                 }
+
 
                 // TO CHECK - should this be else if or if?
 
