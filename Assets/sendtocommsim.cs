@@ -57,8 +57,8 @@ public class RCC_SteerAngleSender : MonoBehaviour
         if (sendTimer < sendInterval) return;
         sendTimer = 0f;
 
-        float maxAtThisSpeed = car.steerAngleCurve.Evaluate(car.speed);
-        float steerDeg = car.steerInput * maxAtThisSpeed;
+        //float maxAtThisSpeed = car.steerAngleCurve.Evaluate(car.speed);
+        float steerDeg = car.steerInput * 360;
 
         try
         {
