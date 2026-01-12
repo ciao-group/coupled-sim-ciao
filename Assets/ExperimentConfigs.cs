@@ -142,15 +142,15 @@ public class ExperimentConfigs : MonoBehaviour
                 Debug.Log("=== Button Log Started ===");
             }
             else { Debug.Log("Filename already exists."); }
-
-            if (TrajectoryLine != null)
-            {
-                int length = PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer.waypoints.Count;
-
-                TrajectoryLine.GetComponent<TrajectoryPainter>().WPIndexDestination = length;
-                //Debug.Log(length);
-            }
         }
+        if (TrajectoryLine != null)
+        {
+            int length = PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer.waypoints.Count;
+
+            TrajectoryLine.GetComponent<TrajectoryPainter>().WPIndexDestination = length;
+            //Debug.Log(length);
+        }
+        
     }
 
 

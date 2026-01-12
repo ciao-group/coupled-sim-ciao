@@ -17,18 +17,18 @@ public class RouteBEventBTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        StartCoroutine(RecalculateRoute(6f));
-        StartCoroutine(DespawnBrakeZone(7f));
+        StartCoroutine(RecalculateRoute(8f));
+        StartCoroutine(DespawnBrakeZone(11f));
 
     }
     private IEnumerator RecalculateRoute(float time)
     {
         yield return new WaitForSeconds(time);
 
-        Waypoint1.transform.position = new Vector3(-68.3f, 0f, 10f);
-        Waypoint2.transform.position = new Vector3(-62.97f, 0f, 10f);
-        Waypoint3.transform.position = new Vector3(-57.72731f, 0f, 10f);
-        Waypoint4.transform.position = new Vector3(-52.39731f, 0f, 10f);
+        Waypoint1.transform.position = new Vector3(-195f, 0.7f, -49.2f);
+        Waypoint2.transform.position = new Vector3(-195f, 0.7f, -43.5f);
+        Waypoint3.transform.position = new Vector3(-195f, 0.7f, -37.2f);
+        Waypoint4.transform.position = new Vector3(-195f, 0.7f, -30.8f);
 
         Debug.Log("Moved Waypoints");
     }
