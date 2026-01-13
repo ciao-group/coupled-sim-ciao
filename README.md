@@ -164,6 +164,8 @@ The player car can either be manually driven, or control can be handed over to a
 
 - Four SteamVR Base Stations 2.0
 
+- HTC Vive Tracker 3.0
+
 - Fixed-Based Driving Simulator (Ergoneers)
 
 **Software:**
