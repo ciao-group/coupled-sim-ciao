@@ -16,10 +16,11 @@ public class RouteBEventBTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        StartCoroutine(RecalculateRoute(8f));
-        StartCoroutine(DespawnBrakeZone(11f));
-
+        if (other.gameObject.tag == "Player")
+        {
+            StartCoroutine(RecalculateRoute(8f));
+            StartCoroutine(DespawnBrakeZone(11f));
+        }
     }
     private IEnumerator RecalculateRoute(float time)
     {

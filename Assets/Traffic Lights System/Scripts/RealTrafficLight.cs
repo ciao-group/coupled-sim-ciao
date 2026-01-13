@@ -36,10 +36,14 @@ namespace HealthbarGames
         public Material LightsOnMat;
         public Material LightsOffMat;
 
+        public Material LightsOnMatRuntime;
+
         private bool mInitialized = false;
 
         void Awake()
         {
+            LightsOnMatRuntime = new Material(LightsOnMat);
+
             if (   (RedRenderer != null || RedHalo != null || RedLight != null)
                 && (YellowRenderer != null || YellowHalo != null || YellowLight != null)
                 && (GreenRenderer != null || GreenHalo != null || GreenLight != null)
@@ -65,7 +69,7 @@ namespace HealthbarGames
                 RedHalo.SetActive(redLightState);
 
             if (RedRenderer != null)
-                RedRenderer.material = (redLightState) ? LightsOnMat : LightsOffMat;
+                RedRenderer.material = (redLightState) ? LightsOnMatRuntime : LightsOffMat;
 
             if (RedLight != null)
                 RedLight.enabled = redLightState;
@@ -74,7 +78,7 @@ namespace HealthbarGames
                 YellowHalo.SetActive(yellowLightState);
 
             if (YellowRenderer != null)
-                YellowRenderer.material = (yellowLightState) ? LightsOnMat : LightsOffMat;
+                YellowRenderer.material = (yellowLightState) ? LightsOnMatRuntime : LightsOffMat;
 
             if (YellowLight != null)
                 YellowLight.enabled = yellowLightState;
@@ -83,7 +87,7 @@ namespace HealthbarGames
                 GreenHalo.SetActive(greenLightState);
 
             if (GreenRenderer != null)
-                GreenRenderer.material = (greenLightState) ? LightsOnMat : LightsOffMat;
+                GreenRenderer.material = (greenLightState) ? LightsOnMatRuntime : LightsOffMat;
 
             if (GreenLight != null)
                 GreenLight.enabled = greenLightState;

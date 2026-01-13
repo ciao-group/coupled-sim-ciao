@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Event_Pedestrian : MonoBehaviour
 {
@@ -37,9 +38,9 @@ public class Event_Pedestrian : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-  
+        Debug.Log(other.gameObject.tag);
 
-        if (targetpedestrian != null && other.gameObject.layer == LayerMask.NameToLayer("RCC"))
+        if (targetpedestrian != null && other.gameObject.tag == "Player")
         {
             // Activate
             if (aipedestrian != null)
