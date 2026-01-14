@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ZoneATrigger : MonoBehaviour
 {
+    public GameObject BreakZoneForStopping;
+
     [Header("Pedestrian that runs on the street")]
     public GameObject targetpedestrian;
 
@@ -39,7 +41,7 @@ public class ZoneATrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (targetpedestrian != null && other.gameObject.layer == LayerMask.NameToLayer("RCC"))
+        if (targetpedestrian != null && other.CompareTag("Player"))
         {
             // Activate
             if (aipedestrian != null)
@@ -48,7 +50,7 @@ public class ZoneATrigger : MonoBehaviour
                 animator.enabled = true;
 
             StartCoroutine(DespawnAfterTime(despawnTime));
-
+            StartCoroutine(DespawnBreakZone(7f));
             // Optional: Disable trigger so it doesn't activate again
             GetComponent<Collider>().enabled = false;
 
@@ -65,5 +67,13 @@ public class ZoneATrigger : MonoBehaviour
 
         Debug.Log("targetpedestrian despawned");
     }
+    private IEnumerator DespawnBreakZone(float time)
+    {
+        yield return new WaitForSeconds(time);
 
+        if (BreakZoneForStopping != null)
+            BreakZoneForStopping.SetActive(false);
+
+        Debug.Log("No more break zone!");
+    }
 }

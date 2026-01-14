@@ -45,7 +45,7 @@ public class TriggerTruckAScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (targetCar != null)
+        if (targetCar != null && other.CompareTag("Player"))
         {
             // Activate RCC Car Controller
             if (carController != null)
@@ -57,7 +57,7 @@ public class TriggerTruckAScript : MonoBehaviour
             // Start despawn countdown
             StartCoroutine(DespawnCarAfterTime(despawnTime));
             // Start despawn countdown
-            StartCoroutine(DespawnBreakZone(10f));
+            StartCoroutine(DespawnBreakZone(15f));
 
             // Optional: Disable trigger so it doesn't activate again
             GetComponent<Collider>().enabled = false;

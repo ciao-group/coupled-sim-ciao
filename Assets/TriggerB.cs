@@ -14,7 +14,7 @@ public class TriggerB : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("RCC"))
+        if (other.CompareTag("Player"))
         {
             StartCoroutine(DespawnAfterTime(11f));
             StartCoroutine(DespawnBreakZone(15f));

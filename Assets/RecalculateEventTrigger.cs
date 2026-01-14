@@ -25,7 +25,7 @@ public class RecalculateEventTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("RCC"))
+        if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(RecalculateRoute(timeWaypoints));
             StartCoroutine(DespawnBrakeZones(timeBrakeZone));
@@ -36,10 +36,10 @@ public class RecalculateEventTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        waypoint1.transform.position = new Vector3(-157.9356f, 0f, 177.0451f);
-        waypoint2.transform.position = new Vector3(-170.708f, 0f, 177.2885f);
-        waypoint3.transform.position = new Vector3(-190.4859f, 0f, 176.992f);
-        waypoint4.transform.position = new Vector3(-210.7999f, 0f, 177.4917f);
+        waypoint1.transform.position = newWaypoint1;
+        waypoint2.transform.position = newWaypoint2;
+        waypoint3.transform.position = newWaypoint3;
+        waypoint4.transform.position = newWaypoint4;
         Debug.Log("Moved Waypoints");
     }
 

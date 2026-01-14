@@ -481,6 +481,7 @@ public class RCC_AICarController : MonoBehaviour
 
                 if (inCrosswalkZone && stopLineTarget != null && (pedestrianDetected || mustStopForLight))
                 {
+                    if (CarController.CompareTag("EventTruck")) { return; }
                     // how far is the stop line?
                     float distanceToStopLine = mustStopForCar
                         ? 0f

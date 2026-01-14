@@ -45,7 +45,7 @@ public class TriggerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (targetCar != null)
+        if (targetCar != null && other.CompareTag("Player"))
         {
             // Activate RCC Car Controller
             if (carController != null)

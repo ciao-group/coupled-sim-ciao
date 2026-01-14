@@ -13,7 +13,7 @@ public class Event_PhantomBrake : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("RCC"))
+        if (other.CompareTag("Player"))
         {
             phantomMarker.SetActive(true);
 
