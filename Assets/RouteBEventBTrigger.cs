@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class RouteBEventBTrigger : MonoBehaviour
+public class Event_Bench : MonoBehaviour
 {
 
     [Header("Brakezones to simulate stopping behaviour (will deactivate)")]
-    public GameObject BrakeZoneforStopping1;
-    public GameObject BrakeZoneforStopping2;
+    public GameObject BrakeZoneForStopping1;
+    public GameObject BrakeZoneForStopping2;
 
     [Header("Waypoints to simulate recalculation of route")]
     public Transform Waypoint1;
@@ -37,10 +37,11 @@ public class RouteBEventBTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        if (BrakeZoneforStopping1 != null && BrakeZoneforStopping2 != null)
-            BrakeZoneforStopping1.SetActive(false);
-        BrakeZoneforStopping2.SetActive(false);
-
+        if (BrakeZoneForStopping1 != null && BrakeZoneForStopping2 != null)
+        {
+            BrakeZoneForStopping1.SetActive(false);
+            BrakeZoneForStopping2.SetActive(false);
+        }
         Debug.Log("Event B brake zones despawned");
     }
 }

@@ -26,15 +26,18 @@ public class DestinationReached : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Change sprite to ACTIVE
-        IvisLogic.agentImage.sprite = IvisLogic.activeSprite;
+        if (other.gameObject.tag == "Player")
+        {
+            // Change sprite to ACTIVE
+            IvisLogic.agentImage.sprite = IvisLogic.activeSprite;
 
-        // Update bubble text
-        IvisLogic.explanationText.text = explanationText;
+            // Update bubble text
+            IvisLogic.explanationText.text = explanationText;
 
-        IvisLogic.FadeInBubble();
-        StartCoroutine(DestinationReachedClip());
-        GetComponent<Collider>().enabled = false;
+            IvisLogic.FadeInBubble();
+            StartCoroutine(DestinationReachedClip());
+            GetComponent<Collider>().enabled = false;
+        }
     }
 
     IEnumerator DestinationReachedClip()

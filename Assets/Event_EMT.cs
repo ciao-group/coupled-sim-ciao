@@ -34,7 +34,7 @@ public class Event_EMT : MonoBehaviour
             emt.SetActive(true);
             //emt.GetComponent<RCC_AICarController>().enabled = true;
             //emt.GetComponent<RCC_CarControllerV3>().enabled = true;
-            DespawnAfterTime(20f);
+            StartCoroutine(DespawnAfterTime(35f));
         }
     }
 
@@ -43,21 +43,19 @@ public class Event_EMT : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         Waypoint1.transform.position = new Vector3(-263.5468f, 4f, -192.5f);
-        Waypoint2.transform.position = new Vector3(-281.7859f, 4f, -192.5f);
-        Waypoint3.transform.position = new Vector3(-304.321f, 5f, -192.5f);
-        Waypoint4.transform.position = new Vector3(-319.7604f, 4.7f, -192.5f);
-        Waypoint5.transform.position = new Vector3(-345.054f, 2.7f, -192.5f);
+        Waypoint2.transform.position = new Vector3(-281.7859f, 4f, -192.2f);
+        Waypoint3.transform.position = new Vector3(-304.321f, 5f, -192.2f);
+        Waypoint4.transform.position = new Vector3(-319.7604f, 4.7f, -192.2f);
+        Waypoint5.transform.position = new Vector3(-345.054f, 2.7f, -192.2f);
 
         Debug.Log("Moved Waypoints");
     }
     private IEnumerator DespawnAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
+        emt.SetActive(false);
 
-        if (emt != null)
-            emt.SetActive(false);
 
-        Debug.Log("emt despawned");
     }
 
 
