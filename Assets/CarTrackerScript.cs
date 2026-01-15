@@ -286,9 +286,12 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         //cameraHolder.localPosition = new Vector3(0.426f, 0f, 2.67f);
         //cameraHolder.localEulerAngles = new Vector3(0f, 85.5f, 0f);
         //cameraHolder.localPosition = new Vector3(-1.63f, 0.025f, 1.53f);
-        cameraHolder.localPosition = new Vector3(-1.79f, 0.026f, 1.374f);
+        //cameraHolder.localPosition = new Vector3(-1.79f, 0.026f, 1.374f);
+        cameraHolder.localPosition = new Vector3(-1.26f, 0.02f, 1.411f);
+        //cameraHolder.localPosition = new Vector3(-1.774f, 0.023f, 1.368f);
         //cameraHolder.localEulerAngles = new Vector3(0f, 16.54f, 0f); 
-        cameraHolder.localEulerAngles = new Vector3(0f, 21.451f, 0f);
+        //cameraHolder.localEulerAngles = new Vector3(0f, 21.451f, 0f);
+        cameraHolder.localEulerAngles = new Vector3(1.7f, 35.27f, 0f);
         //cameraHolder.localEulerAngles = new Vector3(0f, 0f, 0f);
 
         // new world
