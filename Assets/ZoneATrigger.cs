@@ -28,10 +28,10 @@ public class ZoneATrigger : MonoBehaviour
             else
                 aipedestrian.enabled = false;
 
-            if (animator == null)
-                Debug.LogWarning("No animator found on pedestrian");
-            else
-                animator.enabled = false;
+           // if (animator == null)
+               // Debug.LogWarning("No animator found on pedestrian");
+            //else
+                //animator.enabled = false;
         }
         else
         {

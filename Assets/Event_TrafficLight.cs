@@ -28,7 +28,7 @@ public class Event_TrafficLight : MonoBehaviour
             BrakeZoneForStopping1.SetActive(true);
             BrakeZoneForStopping2.SetActive(true);
 
-            StartCoroutine(DespawnBrakeZone(25f));
+            StartCoroutine(DespawnBrakeZone(27f));
         }
 
     }

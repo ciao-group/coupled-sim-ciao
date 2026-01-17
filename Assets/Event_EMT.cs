@@ -34,7 +34,7 @@ public class Event_EMT : MonoBehaviour
             emt.SetActive(true);
             //emt.GetComponent<RCC_AICarController>().enabled = true;
             //emt.GetComponent<RCC_CarControllerV3>().enabled = true;
-            StartCoroutine(DespawnAfterTime(35f));
+            StartCoroutine(DespawnAfterTime(38f));
         }
     }
 
