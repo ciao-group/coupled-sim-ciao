@@ -283,7 +283,7 @@ public class CarTrackerThreePhaseCalibratorCameraHolder : MonoBehaviour
         cameraHolder.SetParent(carRoot, false);
 
         //cameraHolder.localPosition = new Vector3(-1.28f, 0.02f, 1.411f);
-        cameraHolder.localPosition = new Vector3(-1.27f, 0.077f, 1.36f);
+        cameraHolder.localPosition = new Vector3(-1.27f, 0.09f, 1.36f);
         //cameraHolder.localEulerAngles = new Vector3(1.7f, 35.27f, 0f);
         cameraHolder.localEulerAngles = new Vector3(4f, 35.27f, 0f);
 

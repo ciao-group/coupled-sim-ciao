@@ -192,9 +192,9 @@ MonoBehaviour:
         m_Id: With3Levels
     lodBias:
       m_Values:
-      - 0.01
-      - 0.01
-      - 0.01
+      - 1
+      - 1
+      - 1
       m_SchemaId:
         m_Id: With3Levels
     lightingQualitySettings:

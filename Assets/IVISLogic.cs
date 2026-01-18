@@ -136,6 +136,7 @@ public class IVISLogic : MonoBehaviour
 
         foreach (GameObject car in aiCars)
         {
+            car.GetComponent<RCC_CarControllerV3>().enabled = true;
             car.GetComponent<RCC_AICarController>().enabled = true;
         }
 
@@ -160,9 +161,17 @@ public class IVISLogic : MonoBehaviour
     {
         if (Configs.isAutomated)
         {
-            StartCoroutine(StartAgent());
+            if (Configs.isTrialRoute)
+            {
+                StartCoroutine(StartTrialRun());
+            }
+            else
+            {
+                StartCoroutine(StartAgent());
+            }
         }
     }
+
     IEnumerator Speak(AudioClip clip, string text = null, bool fadeInBubble = false, float idlePause = 1f)
     {
         agentImage.sprite = activeSprite;
@@ -181,6 +190,35 @@ public class IVISLogic : MonoBehaviour
         agentImage.sprite = idleSprite;
         yield return new WaitForSeconds(idlePause);
     }
+
+    IEnumerator StartTrialRun()
+    {
+        GameObject[] aiCars = GameObject.FindGameObjectsWithTag("AICar");
+
+        foreach (GameObject car in aiCars)
+        {
+            car.GetComponent<RCC_CarControllerV3>().enabled = true;
+            car.GetComponent<RCC_AICarController>().enabled = true;
+        }
+
+        GameObject[] trafficLights = GameObject.FindGameObjectsWithTag("TrafficLight");
+
+        foreach (GameObject light in trafficLights)
+        {
+            light.GetComponent<HealthbarGames.TrafficLightManager>().enabled = true;
+        }
+
+        yield return new WaitForSeconds(5f);
+
+        if (aiCar != null)
+        {
+            aiCar.enabled = true;
+            aiCar.CarController.enabled = true;
+            aiCar.CarController.externalController = true;
+        }
+
+    }
+
     IEnumerator StartAgent()
     {
         agentImage.sprite = idleSprite;

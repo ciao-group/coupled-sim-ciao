@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3119278781154473343}
   - component: {fileID: 1538891076066788844}
   - component: {fileID: 2405237085485856775}
+  - component: {fileID: 7911731866520675171}
   m_Layer: 21
   m_Name: VehicleMarker
   m_TagString: Untagged
@@ -564,7 +565,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 200
+  m_VersionIndex: 203
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -641,3 +642,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!205 &7911731866520675171
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757321727712766712}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 1.6036308, y: 0.5, z: 0.8610014}
+  m_Size: 3.2072616
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.048712496
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3119278781154473343}
+  m_Enabled: 1

@@ -190,7 +190,7 @@ public class RCC_Light : RCC_Core {
             if (lightType == LightType.Indicator) {
 
                 if (!CarController.transform.Find("All Audio Sources/Indicator Sound AudioSource"))
-                    indicatorSound = NewAudioSource(RCC_Settings.Instance.audioMixer, CarController.gameObject, "Indicator Sound AudioSource", 1f, 3f, 1, IndicatorClip, false, false, false);
+                    indicatorSound = NewAudioSource(RCC_Settings.Instance.audioMixer, CarController.gameObject, "Indicator Sound AudioSource", 0.05f, 3f, 1, IndicatorClip, false, false, false);
                 else
                     indicatorSound = CarController.transform.Find("All Audio Sources/Indicator Sound AudioSource").GetComponent<AudioSource>();
 

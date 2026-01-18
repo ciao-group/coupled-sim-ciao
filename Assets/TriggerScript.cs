@@ -14,7 +14,6 @@ public class TriggerScript : MonoBehaviour
     [Header("Despawn Settings")]
     [Tooltip("Time in seconds before the car despawns")]
     public float despawnTime = 30f;
-    [SerializeField] private InputAction indicatorRightAction;
 
     private void Start()
     {
@@ -39,7 +38,6 @@ public class TriggerScript : MonoBehaviour
             Debug.LogWarning("Target car not assigned!");
         }
 
-        indicatorRightAction.WasPressedThisFrame();
     }
 
 

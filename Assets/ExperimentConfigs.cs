@@ -26,6 +26,7 @@ public class ExperimentConfigs : MonoBehaviour
 
     public bool isAutomated = true;
     public bool isLogging = true;
+    public bool isTrialRoute = false;
 
     public Vector3 startPosition;
     public Quaternion startRotation;
@@ -223,6 +224,7 @@ public class ExperimentConfigs : MonoBehaviour
                 startPosition = routeTStartPos;
                 startRotation = Quaternion.Euler(routeTStartRot);
                 PlayerCar.GetComponent<RCC_AICarController>().waypointsContainer = wpRouteT;
+                isTrialRoute = true;
                 break;
         }
     }

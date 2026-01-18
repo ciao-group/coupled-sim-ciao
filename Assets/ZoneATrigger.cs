@@ -13,7 +13,7 @@ public class ZoneATrigger : MonoBehaviour
 
     [Header("Despawn Settings")]
     [Tooltip("Time in seconds before the pedestrian despawns")]
-    public float despawnTime = 30f;
+    public float despawnTime = 45f;
 
     private void Start()
     {

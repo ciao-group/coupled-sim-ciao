@@ -13,8 +13,7 @@ public class TriggerTruckAScript : MonoBehaviour
 
     [Header("Despawn Settings")]
     [Tooltip("Time in seconds before the car despawns")]
-    public float despawnTime = 30f;
-    [SerializeField] private InputAction indicatorRightAction;
+    public float despawnTime = 16f;
 
     private void Start()
     {
@@ -38,8 +37,6 @@ public class TriggerTruckAScript : MonoBehaviour
         {
             Debug.LogWarning("Target car not assigned!");
         }
-
-        indicatorRightAction.WasPressedThisFrame();
     }
 
 
@@ -57,7 +54,7 @@ public class TriggerTruckAScript : MonoBehaviour
             // Start despawn countdown
             StartCoroutine(DespawnCarAfterTime(despawnTime));
             // Start despawn countdown
-            StartCoroutine(DespawnBreakZone(15f));
+            StartCoroutine(DespawnBreakZone(12f));
 
             // Optional: Disable trigger so it doesn't activate again
             GetComponent<Collider>().enabled = false;

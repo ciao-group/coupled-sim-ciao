@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8625505246728831382}
   - component: {fileID: 327749942374569988}
   - component: {fileID: 963987904387679728}
+  - component: {fileID: 4166166556630205889}
   m_Layer: 21
   m_Name: PedestrianMarker
   m_TagString: Untagged
@@ -83,3 +84,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!205 &4166166556630205889
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539703165150648210}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.000015318394, y: 0, z: -0.00000011920929}
+  m_Size: 2.0000005
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.019438418
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 963987904387679728}
+  m_Enabled: 1
