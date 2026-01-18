@@ -179,12 +179,12 @@ public class ExperimentConfigs : MonoBehaviour
                 AssignVoiceClips(introCoda1, introCoda2, introCoda3, introCoda4);
                 break;
             case ConditionType.Nevo:
-                AssignSprites(nevoIdleSprite, nevoActiveSprite, nevoAlertSprite, "Nevo", "#ffbd59");
+                AssignSprites(nevoIdleSprite, nevoActiveSprite, nevoAlertSprite, "Nelo", "#ffbd59");
                 AssignVoiceClips(introNelo1, introLumo2, introLumo3, introNelo4);
                 break;
         }
     }
-
+    
     public void ApplyRoute()
     {
         switch (route)

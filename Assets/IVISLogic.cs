@@ -426,8 +426,9 @@ public class IVISLogic : MonoBehaviour
 
         explanationText.text = currentZone.explanationText;
         voiceSource.clip = currentZone.voiceClip;
-
-        voiceSource.Play();
+        if (!currentZone.playedOnce)
+            voiceSource.Play();
+        currentZone.playedOnce = true;
         FadeInBubble();
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         fadeRoutine = StartCoroutine(FadeOutBubbleAfterDelay(voiceSource.clip.length));

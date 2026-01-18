@@ -19,6 +19,8 @@ public class ZoneTrigger : MonoBehaviour
     public AudioClip lumoClip;
     public AudioClip codaClip;
 
+    public bool playedOnce = false;
+
     public AudioClip voiceClip =>
         Configs.condition == ConditionType.Lumo ? lumoClip :
         Configs.condition == ConditionType.Coda ? codaClip :
@@ -28,7 +30,7 @@ public class ZoneTrigger : MonoBehaviour
 
     public void PlayEnterSound()
     {
-        if (zoneEnterSound != null)
+        if (zoneEnterSound != null && playedOnce == false)
         {
             zoneEnterSound.Play();
         }
