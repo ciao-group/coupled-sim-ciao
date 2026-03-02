@@ -1,5 +1,5 @@
 
-# CIAO's Mixed Reality Driving Simulator
+# MRDRive: An Open Source Mixed Reality Driving Simulator for Automotive User Research
 
 ## Mixed Reality Implementation Using Varjo XR-3 and HDRP in Unity
 
